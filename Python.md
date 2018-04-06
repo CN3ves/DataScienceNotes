@@ -8,13 +8,99 @@ Also, it is very easy to build packages in Python. Thougout time, more and more 
 Currently, there are two versions of Python, 2.X and 3.X. They are pretty similar appart from some syntactical differences, 
 but support for version 2 will fade overtime. Python 3 can be installed from [python.org](https://www.python.org/downloads)
 
+## Install/Start Python
+
 
 ## The Python Interface
 
-Python can be run interactively from the python shell. Apart from interactively, Python can also be run from python scripts,
-which are simply text files with the extention .py, where a list of python commands are written and from where they are executed.
+Python can be run interactively from the python shell by simply typing commands and hitting *Enter*. 
+Open python and run `print("Hello World")`
+
+Apart from interactively, Python can also be run from python scripts, which are simply text files with the extention .py, where a list of python commands are written and from where they are executed.
 Putting the code in Pyton scrips instead of manually typing it ineratively 
 will help to keep structure ansd avoid retyping everything if one change is required
 
 
-print()
+## Comments
+
+Before starting, it is important to be aware that **Comments** are important to any programming language. 
+Comments are used to make sure that the code is understandandable and transmissable, improving reproductibility and, very importantly, debugging!
+To add comments to a Python script,use the **#** tag. These comments are not run as Python code, 
+so they will not influence your result. As an example, take the comment on the right, 
+```
+# Just greeting the whole world  
+print("Hello World")
+```
+where *Just testing division* is completely ignored during execution, but makes the propose of the following code clear to anyone.
+
+## Python as a calculator
+One of the most basic used of Python is to do basic calculations. Apart from **addition (+)**, **subtraction(-)**, 
+**multiplication(\*)** and **division(/)**, there is also support for more advanced operations such as 
+**exponentiation (\*\*)**, **modulo (%)** and **integer division (//)**.
+```
+# Addition: 
+print(5 + 5)
+# Subtraction:
+print(5 - 5)
+# Multiplication:  
+print(3 * 5)
+# Division
+print(10 / 2)
+# Division (integer)
+print(11 // 2)
+# Exponentiation: This operator raises the number to its left to the power of the number to its right. 
+print(4 ** 2)
+# Modulo: This operator returns the remainder of the division of the number to the left by the number on its right
+print(18 % 7)
+```
+
+
+## Variables
+
+Fundamental to any programming languase is the concept of **variable**, which is a *"sotrage"* for values.
+A Python variable is declared (created) with a specific, case-sensitive name. By using a calling a variable it is possible to recall the stored value, simplifying the code and making it more reproducible. 
+As such, variables are used all the time in Python. To declare a variable, the assignment operator **=** can be used to assigned the value on the rght to the variable on the left. 
+```
+# Declaring a variable
+five = 5
+print(five)
+```
+Notice that the stored value can be changed, which allows for more complex computation to be performed without storing value
+```
+# Overwritting a variable value
+number = 2
+print(number)
+number = number + 1
+print(number)
+```
+
+
+## Basic types
+
+Every value and variable in Python has a type.
+The type of any variable can be checked usint the **type()** function.
+So far, most of the examples have used either numbers or text.
+There are two types of numbers in Python, **integers (int)** and **floats (float)**. Text values 
+are know as **strings (str)** in Python, There are also logical values know as **booleans (bool)**
+
+should comment on why there are integers and floats and their representation at some point...
+```
+# Integer: Number without a fractional (decimal) part
+type(5)
+# Float: Number with both an integer and a fractional (decimal)
+type(5.0)
+# String: Text value that has to be defined within quotes (either double "" or single '')
+type("Hello again")
+type('Hello again')
+# Boolean: Binary values (True or False) used for logical operations. 
+# Nota that, numerically, these values can be converted to 0 for False and 1 for True
+type(True)
+type(False)
+```
+Variable types are very important in Python as different types can show different bahaviour for the same operation. 
+```
+# Sum integers: + works as a mathematical operator 
+2 + 5
+# Sum strings: + works not as a mathematical operator but as a text paste operatior
+'ab' + 'cb'
+```
