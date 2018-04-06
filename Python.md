@@ -31,7 +31,7 @@ so they will not influence your result. As an example, take the comment on the r
 # Just greeting the whole world  
 print("Hello World")
 ```
-where *Just testing division* is completely ignored during execution, but makes the propose of the following code clear to anyone.
+where *Just testing division* is completely ignored during execution, but makes the propose of the following code clear to anyone. Note the use of the function **print()**. This function DOES SOMETIME I NEED TO DESCRIBE :)
 
 ## Python as a calculator
 One of the most basic used of Python is to do basic calculations. Apart from **addition (+)**, **subtraction(-)**, 
@@ -57,9 +57,10 @@ print(18 % 7)
 
 ## Variables
 
-Fundamental to any programming languase is the concept of **variable**, which is a *"sotrage"* for values.
+Fundamental to any programming languase is the concept of **variable**, which is a *"storage"* for values.
+A variable allows you to refer to a value with a name.
 A Python variable is declared (created) with a specific, case-sensitive name. By using a calling a variable it is possible to recall the stored value, simplifying the code and making it more reproducible. 
-As such, variables are used all the time in Python. To declare a variable, the assignment operator **=** can be used to assigned the value on the rght to the variable on the left. 
+As such, variables are used all the time in Python. To declare a variable, the assignment operator **=** (not equality!) can be used to assigned the value on the rght to the variable on the left. Once declared, a variable name com ve used instead of the value. This is fundamental when working with complex objects.
 ```
 # Declaring a variable
 five = 5
@@ -77,7 +78,7 @@ print(number)
 
 ## Basic types
 
-Every value and variable in Python has a type.
+Every object in Python has a type.
 The type of any variable can be checked usint the **type()** function.
 So far, most of the examples have used either numbers or text.
 There are two types of numbers in Python, **integers (int)** and **floats (float)**. Text values 
@@ -86,21 +87,56 @@ are know as **strings (str)** in Python, There are also logical values know as *
 should comment on why there are integers and floats and their representation at some point...
 ```
 # Integer: Number without a fractional (decimal) part
-type(5)
-# Float: Number with both an integer and a fractional (decimal)
-type(5.0)
-# String: Text value that has to be defined within quotes (either double "" or single '')
-type("Hello again")
-type('Hello again')
-# Boolean: Binary values (True or False) used for logical operations. 
-# Nota that, numerically, these values can be converted to 0 for False and 1 for True
-type(True)
-type(False)
+print(type(5))
+# Float: Number with both an integer and a fractional (decimal) separated by a point
+print(type(5.0))
+# String: Represents text values. Can be defined within using either double ("") or single ('') quotes
+print(type("Hello again"))
+print(type('Hello again'))
+# Boolean: Represents logical values (True or False). Numerically, these values can be converted to 0 for False and 1 for True
+print(type(True))
+print(type(False))
 ```
 Variable types are very important in Python as different types can show different bahaviour for the same operation. 
 ```
 # Sum integers: + works as a mathematical operator 
-2 + 5
+print(2 + 5)
 # Sum strings: + works not as a mathematical operator but as a text paste operatior
-'ab' + 'cb'
+print('ab' + 'cb')
+# Sum boolean: the booleans are converted to numerical values and + works as a mathematical operator operatior
+print(True + False)
+print(True + True + True)
 ```
+As suggested in the previous example of the sum of booleans, object can be coverted between different types. 
+
+```
+# Declare variable
+value = 5
+print(type(value), value)
+# Integer to float
+value = float(value)
+print(type(value), value)
+# Float to string
+value = str(value)
+print(type(value), value)
+# String to boolean
+value = bool(value)
+print(type(value), value)
+# Boolean to integer
+value = int(value)
+print(type(value), value)
+```
+
+Can Python handle everything?
+
+Now that you know something more about combining different sources of information, have a look at the four Python expressions below. Which one of these will throw an error? You can always copy and paste this code in the IPython Shell to find out!
+
+
+print("I started with $" + savings + " and now have $" + result + ". Awesome!")
+"I can add integers, like " + str(5) + " to strings."
+press 1
+"I said " + ("Hey " * 2) + "Hey!"
+press 2
+"The correct answer to this multiple choice exercise is answer number " + 2
+press 3
+True + False
