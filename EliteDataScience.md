@@ -108,7 +108,7 @@ At this point, it is important to make notes about potential fixes for the Data 
 ### Distributions of categorical features
 
 Categorical features cannot be visualized through histograms and are instead visualized with bar plots. These plots allow to quickly check the feature classes, that is, the possible unique values for a given categorical feature. In particular, look out for sparse classes, which are classes that have a very small number of observations. These classes tend to be problematic when building models. They don't influence the model much but they may, in the worse case, cause the model to be overfit. 
-Take note to combine or reassign some of these classes when doing the Feature Engineering.
+Take note to combine or reassign (maybe create a *others* class) some of these classes when doing the Feature Engineering.
 
 ### Segmentations
 
@@ -135,36 +135,61 @@ By the end of your Exploratory Analysis step, there should be a pretty good unde
 [Data Visualization with Python's Seaborn Library](https://elitedatascience.com/python-seaborn-tutorial)
 
 # Day 3
- Yesterday, you saw some quick data visualizations for "getting to know" your dataset…
+Proper data cleaning is a bit boring, so no one really talks about it. But the truth is that *garbage in gets you garbage out*, plain and simple! With a clean dataset, even simple algorithms can learn impressive insights from it! Different problems will require different methods but, for now, let’s at least ensure we know how to fix the most common issues.
 
-Today, you’ll learn how to clean it into tip-top shape.
+## [Data Cleaning](https://elitedatascience.com/data-cleaning)
+With the dataset "explored", it's time to get it into tip-top shape.
+ 
+### Introduction
+Proper data cleaning can make or break a project. Professional data scientists usually spend a very large portion of their time on this step because of a simple truth in machine learning: Better data beats fancier algorithms. Obviously, different types of data will require different types of cleaning. However, the systematic approach laid out in this lesson can always serve as a good starting point.
 
-You see, proper data cleaning is the “secret” sauce behind machine learning…
+### Unwanted observations
 
-Well, it’s not really a “secret”…
+The first step to data cleaning is removing unwanted observations from your dataset. This includes duplicate or irrelevant observations. **Duplicate observations** most frequently arise during data collection, such as when datasets are combined from multiple places, data is scraped or received from clients/other departments. **Irrelevant observations** are those that don’t actually fit the specific problem that you’re trying to solve. This includes data for variables or categories that were collected but are not related to the problem. This is also a great time to review the charts from Exploratory Analysis and look at the distribution for categorical features to see if there are any classes that shouldn’t be there. For example, if you were building a model for Single-Family homes only, you wouldn't want observations for Apartments in there. Checking for irrelevant observations before engineering features can save you many headaches down the road.
 
-...it’s just a bit boring, so no one really talks about it.
+### Structural errors
 
-But the truth is:
+Structural errors are those that arise during measurement, data transfer, or other types of "poor housekeeping", including typos or inconsistent capitalization. This is mostly a concern for categorical features, so review the bar plots from the Exploratory analysis to confirm there are no naming issues with the categorical values such as having simultaneously the classes *composition* and  *Composition* or *composition .* After correction typos and inconsistent capitalization, the class distribution becomes much cleaner. Finally, check for mislabeled classes, such as separate classes that should really be the same. For example, *N/A* and *Not Applicable* should be combined.
 
-Better data beats fancier algorithms…
+### Unwanted outliers
 
-Garbage in = Garbage out...
+Outliers can cause problems with certain types of models such as linear regression models, which are less robust to outliers than decision tree models. In general, **if there is a legitimate reason** to remove an outlier, it will help the model’s performance. However, outliers are innocent until proven guilty and should never be removed just because it’s a "big number." That big number could be very informative for your model. Tehre **has** to be a good reason for removing an outlier, such as suspicious measurements that are unlikely to be real data.
 
-Plain and Simple!
+### Missing data
+Missing data is a deceptively tricky issue in applied machine learning. Missing values cannot simply br ignored. They must handled in some way for the very practical reason that most algorithms do not accept missing values.
 
-If you have a clean dataset, even simple algorithms can learn impressive insights from it!
+"Common sense" is not sensible here. Unfortunately, from our experience, the 2 most commonly recommended ways of dealing with missing data actually suck. These are dropping observations that have missing values and imputing the missing values based on other observations. **Dropping missing values** is sub-optimal because when you drop observations, you drop information. Not only the fact that the value was missing may be informative in itself, in the real world, it is often required to make predictions on new data even if some of the features are missing! **Imputing missing values** is sub-optimal because the value was originally missing but you filled it in, which always leads to a loss in information, no matter how sophisticated your imputation method is.
+Again, "missingness" is almost always informative in itself, and you should tell your algorithm if a value was missing and imputing values, does not addi any real information, it simply reinforces the patterns already provided by other observations.
+In short, **always tell the algorithm that a value was missing because missingness is informative**. 
 
-(Even if you forget everything else from this course, please remember this point)
 
-Now, as you might imagine...
+Missing categorical data
 
-...Different problems will require different methods…
+The best way to handle missing data for categorical features is to simply label them as ’Missing’!
 
-For now though, let’s at least ensure we know how to fix the most common issues.
+    You’re essentially adding a new class for the feature.
+    This tells the algorithm that the value was missing.
+    This also gets around the technical requirement for no missing values.
 
-Here’s a checklist you can always use as a reliable starting point, regardless of your dataset:
-[Go to Lesson 3: Data Cleaning](https://elitedatascience.com/data-cleaning)
+
+Missing numeric data
+
+For missing numeric data, you should flag and fill the values.
+
+    Flag the observation with an indicator variable of missingness.
+    Then, fill the original missing value with 0 just to meet the technical requirement of no missing values.
+
+By using this technique of flagging and filling, you are essentially allowing the algorithm to estimate the optimal constant for missingness, instead of just filling it in with the mean.
+
+
+### Conclusion
+
+After properly completing the Data Cleaning step, the resulting dataset should be robust and avoids many of the most common pitfalls.This can really save a ton of headaches down the road, so  don't rush this step.
+
+### Additional Resources
+
+[How to Handle Imbalanced Classes in Machine Learning](elitedatascience.com/imbalanced-classes)
+[Datasets for Data Science and Machine Learning](https://elitedatascience.com/datasets)
 
 # Day 4
 Pretty nice, let's keep going...
