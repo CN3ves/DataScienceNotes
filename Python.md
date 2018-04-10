@@ -481,10 +481,10 @@ impor numpy as np
 2d_np = np.array(lst)
 2d_np.shape
 ```
-This way, a 2D arrsay is an improved list of lists. As such, subsetting can be done in a similar way. However, there is an alternative way, with a more intuitive (matematically) syntax. Instead of using square brakets for each list, the rows and columns of an 2D array can be defined within a single square bracket and separacted by a comma.
+This way, a 2D array is an improved list of lists. As such, subsetting can be done in a similar way. However, there is an alternative way, with a more intuitive (matematically) syntax. Instead of using square brakets for each list, the rows and columns of an 2D array can be defined within a single square bracket and separacted by a comma.
 ```
 # Define 2D array
-impor numpy as np
+import numpy as np
 2d_np = np.array([[1,2,3,4],[5,6,7,8], [9,10,11,12]])
 # Subset as list
 print(2d_np[1][2])
@@ -493,3 +493,44 @@ print(2d_np[1,2])
 print(2d_np[:1,2:3])
 print(2d_np[1,:])
 ```
+
+As with matrices, 2D NumPy arrays can be combined with single numbers, with vectors, and with other matrices, facilitating the implementation of a number of mathemetical calculations.
+```
+import numpy as np
+np_mat = np.array([[1, 2],
+                   [3, 4],
+                   [5, 6]])
+print(np_mat * 2)
+print(np_mat + np_mat)
+print(np_mat + np.array([10, 10]))
+print(np_mat + np.array([[10], [10]])) # ValueError
+```
+
+## Statistics with NumPy (maybe a different file?)
+
+A typical first step to analyse the data, is to get to know the data. With Big data, this may require to crunch millions or billions of numbers, so simply staring at the numbers like a zombie will not provide any insights. However, it is possible to generate summarizing statistics about the data. The summarizing statistics very useful to provide a "sanity check".
+OULIERS, DISTRIBUTIONS. NumPy includes some functions that are already in the basic Python distribution, such as sum and sort., but it provides an improved efficiency due to the optimized NumPy array data structure (made up of unique data types).
+
+
+```
+import numpy as np
+
+# Generate data from normal distribution (mean, std,number)
+height = np.round(np.random.normal(73.6, 2.3, 5000))
+height[50:500] = 50000 # Introduce outliers
+weight = np.round(np.random.normal(201.3, 20.8, 5000))
+
+# Make dataset by pasting the tuple of columns
+people = np.column_stack((height, weight))
+
+# Check mean and median of height (median more robust to outliers)
+print(np.mean(people[:,0])) # Absurd value
+print(np.sum(people) / people.shape[0])
+print(np.median(people[:,0]))
+
+# Check other statistics
+print(np.std(people[:,1]))
+print(np.corrcoef(people[:,0],people[:,1]))
+```
+
+
