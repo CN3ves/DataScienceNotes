@@ -74,26 +74,67 @@ In many ways, training a ML model is like growing a startup. There are too many 
 This lesson dives into the first step of the core machine learning workflow: Exploratory Analysis.a fancy term for “getting to know” the data. Doing this upfront is the best way to save time and avoid wild goose chases. Exploratory analysis is like sending your scouts ahead to learn where best to deploy your forces!
 
 ###  Introduction
-
-
-
 The purpose of exploratory analysis is to "get to know" the dataset. Doing so upfront will make the rest of the project much smoother, in 3 main ways:
 
-    You’ll gain valuable hints for Data Cleaning (which can make or break your models).
-    You’ll think of ideas for Feature Engineering (which can take your models from good to great).
-    You’ll get a "feel" for the dataset, which will help you communicate results and deliver greater impact.
+  1. Gaining valuable hints for Data Cleaning (which can make or break your models).
+  2. Thinking of ideas for Feature Engineering (which can take your models from good to great).
+  3. Gettting a "feel" for the dataset, which will help you communicate results and deliver greater impact.
 
-However, exploratory analysis for machine learning should be quick, efficient, and decisive... not long and drawn out!
+However, exploratory analysis for machine learning should be quick, efficient, and decisive. 
+There are infinite possible plots, charts, and tables, but only a handful are needed to "get to know" the data well enough to work with it.Don’t skip this step, but don’t get stuck on it either.
 
-Don’t skip this step, but don’t get stuck on it either.
+### Basic information
+Exploratory analysis starts by answering a set of basic questions about the dataset. It is important to display example observations from the dataset to get a "feel" for the values of each feature and check if everything makes sense. The purpose of displaying examples from the dataset is not to perform rigorous analysis but to get a qualitative "feel" for the dataset based on a quick eyeball test.
 
-You see, there are infinite possible plots, charts, and tables, but you only need a handful to "get to know" the data well enough to work with it.
+  * How many observations and features are there? 
+  * What are the features numeric or categorical? 
+  * Is there a target variable?
+  * Do the observations and their values make sense? 
+  * Are the values on the right scale?
+  * Is missing data going to be a big problem?
 
-In this lesson, we'll show you the visualizations that provide the biggest bang for your buck.
+### Distributions of numeric features
+It can be very enlightening to plot the distributions of your numeric features.
+Often, a quick and dirty grid of histograms is enough to understand the distributions.
 
+  * Distributions that are unexpected
+  * Potential outliers that don't make sense
+  * Features that should be binary (i.e. "wannabe indicator variables")
+  * Boundaries that don't make sense
+  * Potential measurement errors
 
- 
- # Day 3
+At this point, it is important to make notes about potential fixes for the Data Cleaning step. If something looks out of place, such as a potential outlier in one of your features, now is a good time to ask the client/key stakeholder, or to dig a bit deeper.
+
+### Distributions of categorical features
+
+Categorical features cannot be visualized through histograms and are instead visualized with bar plots. These plots allow to quickly check the feature classes, that is, the possible unique values for a given categorical feature. In particular, look out for sparse classes, which are classes that have a very small number of observations. These classes tend to be problematic when building models. They don't influence the model much but they may, in the worse case, cause the model to be overfit. 
+Take note to combine or reassign some of these classes when doing the Feature Engineering.
+
+### Segmentations
+
+Segmentations are powerful ways to observe the relationship between categorical features and numeric features and 
+can be done easily with Box plots. These provide a number of insights about the data. 
+
+  * Are the median values (middle vertical bar in the box) different between class.
+  * Are the min and max values different between the two classes.
+  * Are there any possible data truncation? Are the min and max value limited round-numbers? Data truncation can affect model generalizability.
+
+### Correlations
+
+Finally, correlations allow to find the relationships between numeric features. Correlation is a value between -1 and 1 that represents how closely two features move in unison. Positive correlation means that as one feature increases, the other increases, while a negative correlation means that as one feature increases, the other decreases. Correlations of -1 or 1 indicate a perfect relationship and correlation of 0 indicates no relationship. Correlation heatmaps help to visualize this information and to look for
+
+  * Which features are strongly correlated with the target variable?
+  * Are there interesting or unexpected strong correlations between other features?
+
+### Conclusion
+
+Again, the aim is to gain intuition about the data, which will help throughout the rest of the workflow.
+By the end of your Exploratory Analysis step, there should be a pretty good understanding of the dataset, some notes for data cleaning, and possibly some ideas for feature engineering.
+
+### Additional Resources
+[Data Visualization with Python's Seaborn Library](https://elitedatascience.com/python-seaborn-tutorial)
+
+# Day 3
  Yesterday, you saw some quick data visualizations for "getting to know" your dataset…
 
 Today, you’ll learn how to clean it into tip-top shape.
