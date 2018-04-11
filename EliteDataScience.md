@@ -160,27 +160,8 @@ Missing data is a deceptively tricky issue in applied machine learning. Missing 
 
 "Common sense" is not sensible here. Unfortunately, from our experience, the 2 most commonly recommended ways of dealing with missing data actually suck. These are dropping observations that have missing values and imputing the missing values based on other observations. **Dropping missing values** is sub-optimal because when you drop observations, you drop information. Not only the fact that the value was missing may be informative in itself, in the real world, it is often required to make predictions on new data even if some of the features are missing! **Imputing missing values** is sub-optimal because the value was originally missing but you filled it in, which always leads to a loss in information, no matter how sophisticated your imputation method is.
 Again, "missingness" is almost always informative in itself, and you should tell your algorithm if a value was missing and imputing values, does not addi any real information, it simply reinforces the patterns already provided by other observations.
-In short, **always tell the algorithm that a value was missing because missingness is informative**. 
-
-
-Missing categorical data
-
-The best way to handle missing data for categorical features is to simply label them as ’Missing’!
-
-    You’re essentially adding a new class for the feature.
-    This tells the algorithm that the value was missing.
-    This also gets around the technical requirement for no missing values.
-
-
-Missing numeric data
-
-For missing numeric data, you should flag and fill the values.
-
-    Flag the observation with an indicator variable of missingness.
-    Then, fill the original missing value with 0 just to meet the technical requirement of no missing values.
-
-By using this technique of flagging and filling, you are essentially allowing the algorithm to estimate the optimal constant for missingness, instead of just filling it in with the mean.
-
+In short, **always tell the algorithm that a value was missing because missingness is informative**. The best way to handle missing data for **categorical features** is to simply label them as *Missing*. This essential adds a new class for the feature, which tells the algorithm that the value was missing and also gets around the technical requirement for no missing values.
+For missing **numeric data**, glag the observation with an indicator variable of missingness and then fill the original missing value with 0 just to meet the technical requirement of no missing values. Using this technique of flagging and filling allows the algorithm to estimate the optimal constant for missingness, instead of just filling it in with the mean.
 
 ### Conclusion
 
@@ -192,107 +173,123 @@ After properly completing the Data Cleaning step, the resulting dataset should b
 [Datasets for Data Science and Machine Learning](https://elitedatascience.com/datasets)
 
 # Day 4
-Pretty nice, let's keep going...
+Feature engineering is the process of creating new features from your existing ones. 
+That doesn’t sounds like much, yet coming up with features is difficult, time-consuming and requires expert knowledge. 
+This is because feature engineering is very open-ended, with literally infinite options for new features to create.
+So domain knowledge is need to know which features add information instead of just more noise.
+This is a skill that develops naturally with time and practice, but having a framework in place can give good head start.
+A feature engineering framework simply consists of "heuristics" to rely on to spark ideas, wither to help knowing where to start looking or to help gettin unstuck.
 
-...lots of great stuff to get to in the second half!
+## [Feature Engineering](https://elitedatascience.com/feature-engineering)
 
-Yesterday, you learned a reliable framework for cleaning your dataset…
+### Introduction 
+Feature engineering is about creating new input features from your existing ones.
+As data cleaning can be tought of a process of subtraction, feature engineering is a process of addition.
+This is often one of the most valuable tasks a data scientist can do to improve model performance, for 3 big reasons:
 
-Today, in day 4 of our 7-day crash course, we're going to discuss “feature engineering.”
+  * It allows to isolate and highlight key information, which helps your algorithms "focus" on what’s important.
+  * It brings in your own domain expertise.
+  * Most importantly, once the "vocabulary" of feature engineering is understood, it ispossible to bring in other people’s domain expertise!
 
-In a nutshell, feature engineering is the process of creating new features from your existing ones.
+Here several heuristics are introduced to help spark new ideas, without being exhaustive compendium of all feature engineering possibilities.
 
-That doesn’t sounds like much…
+### Domain knowledge
+It is often possible to engineer informative features by tapping expertise about the domain and thinking of specific information might be worth isolating. Thes emay include creating **indicator variables**, which are binary variables that can be either 0 or 1 that indicate if an observation meets a certain condition. These are very useful for isolating key properties that specify the observation inrespect to possible confound factors (period of economic crisis, presence of treatment, indication of weather conditions, etc. "Domain knowledge" is very broad and open-ended but there are a few specific heuristics that can help spark more.
 
-…Yet Andrew Ng, former head of Baidu AI and Google Brain, said:
+### Interaction features
 
-“Coming up with features is difficult, time-consuming, requires expert knowledge.
-‘Applied machine learning’ is basically feature engineering.”
+Sometimes it makes sense to combine of two or more features, creating interaction features. Even tough interaction features can be products, sums or differences between any two features, but in some contexts, "interaction terms" must be products between two variables. A general tip is to look at each pair of features and assess if combining this information in any way might be more useful. This can occur when the taks in question requires a particular feature that is reflects in the combination of existing features. For example, if only the area and height are available, but the volume is expected to be more informative, then a new volume variable can be created as the product of area a height. Another example would be if distance and quality categorical variables were available, but is was suspected that those nearby observations having only high quality are particularly important. A new categorical variable distance_quality could be created by merging (pasting) both values.
 
-Wow!
+### Sparse classes
 
-Absolutely no pressure, right?
+Sparse classes (in categorical features) are those that have very few total observations. They can be problematic for certain machine learning algorithms, causing models to be overfit because there's no formal rule of how many observations each class needs, the proportions of which also depends on the size of the dataset and the number of other features available. As a rule of thumb, it is recommend combining classes until each one has at least ~50 observations (or at least more balanced categories).  
+To begin, group similar classes into a single class. Next, group the remaining sparse classes into a single 'Other' class, even if there's already an 'Other' class. After combining sparse classes, there are fewer unique classes, but each one has more observations. Often, an eyeball test is enough to decide if you want to group certain classes together.
 
-So why is it so difficult and time-consuming?
+### Dummy Variables
 
-To start, feature engineering is very open-ended. There are literally infinite options for new features to create.
+Most machine learning algorithms cannot directly handle categorical feature, specifically text values.
+Therefore, it is often needed to create dummy variables for the categorical features. Dummy variables are a set of binary (0 or 1) variables that each represent a single class from a categorical feature. The information represented is exactly the same, but this numeric representation allows you to pass the technical requirements for algorithms. This means that a new feature needs to be created for each category.
 
-Plus, you’ll need domain knowledge to add informative features instead of just more noise.
+### Remove unused
+Finally, remove unused or redundant features from the dataset. Unused features are those that don’t make sense to pass into our machine learning algorithms, like *ID columns*, features that wouldn't be available at the time of prediction and *"other"* text descriptions (note that "other" is the same as 0 for all dummy variables). Redundant features would typically be those that have been replaced by other features that you’ve added during feature engineering (*e.g* weight and height if BMI was created).
 
-This is a skill that you’ll develop naturally with time and practice, but you can give yourself a big head-start if you have a framework in place.
+### Conclusion
 
-A feature engineering framework simply consists of "heuristics" that you can rely on to spark ideas.
+After completing Data Cleaning and Feature Engineering,the raw dataset is transformed into an analytical base table (ABT), the data where the model will be build on.
 
-If you're a beginner, heuristics can help you know where to start looking... and if you're experienced, heuristics can help you get unstuck.
+Not all of the features engineered need to be winners and often many don’t improve your model. That’s fine because one highly predictive feature makes up for 10 duds. The key is choosing machine learning algorithms that can automatically select the best features among many options (built-in feature selection). This will allow you to avoid overfitting your model despite providing many input features.
 
-In today’s lesson, we’ve compiled our favorites:
-[Go to Lesson 4: Feature Engineering](https://elitedatascience.com/feature-engineering)
+### Additional Resources
+[Best Practices for Feature Engineering](https://elitedatascience.com/feature-engineering-best-practices)
 
 # Day 5
-Yesterday, you learned several different heuristics to inspire ideas for feature engineering.
+Once the ABT is ready, Algorithm Selection can be made. 
+Instead of providing a long list of algorithms, 5 very effective machine learning algorithms for regression will be introduced with the goal of explaining a few essential concepts (e.g. regularization, ensembling, automatic feature selection) that will explain why some algorithms tend to perform better than others. In applied machine learning, individual algorithms should be swapped in and out depending on which performs best for the problem and the dataset. Therefore, the focus will be on intuition and practical benefits over math and theory.
 
-Today, we're going to dive into Algorithm Selection.
+## [Algorithm Selection](https://elitedatascience.com/algorithm-selection)
 
-In this lesson, we'll introduce 5 very effective machine learning algorithms for regression.
 
-They each have classification counterparts as well.
+### Introduction
 
-And yes, just 5 for now!
+There are two main goals for this lesson: introduce powerful mechanisms in machine learning and to tour several algorithms that use those mechanisms. 5 machine learning algorithms for regression tasks will be introduced, wach of which has its classification counterparts as well.
 
-Instead of giving you a long list of algorithms...
+### Flaws of linear regression
 
-...our goal is to explain a few essential concepts (e.g. regularization, ensembling, automatic feature selection) that will teach you why some algorithms tend to perform better than others.
+To introduce the reasoning for some of the advanced algorithms, let's start by discussing basic linear regression. Linear regression models are very common, yet deeply flawed. Simple linear regression models fit a "straight line" (technically a hyperplane depending on the number of features, but it's the same idea). In practice, they rarely perform well, so they can be skipped altoghether. Their main advantage is that they are easy to interpret and understand. However, the the goal is not to study the data and write a research report, but to build a model that can make accurate predictions. In this regard, simple linear regression suffers from two major flaws: they are prone to overfit with many input features and they cannot easily express non-linear relationships.
 
-In applied machine learning, individual algorithms should be swapped in and out depending on which performs best for the problem and the dataset.
+### Regularization
 
-Therefore, we will focus on intuition and practical benefits over math and theory.
+This is the first "advanced" tactic for improving model performance. It’s considered pretty "advanced" in many ML courses, but it’s really pretty easy to understand and implement. The first flaw of linear models is that they are prone to be overfit with many input features, particularly if there are not many ovservations (in relation to the features). In such cases, the model can can perfectly "memorize" the training set by having each coefficient simply memorizing one observation. This would have perfect accuracy on the training data, but perform poorly on unseen data, thus ithe model doesn't learn the true underlying patterns; it  only memorizes the noise in the training data. Regularization is a technique used to prevent overfitting by artificially penalizing model coefficients. It can discourage large coefficients (by dampening them), remove features entirely (by setting their coefficients to 0) and the "strength" of the penalty is tunable.
 
-We have two main goals for this lesson:
+### Regularized regression
 
-    To Introduce Powerful Mechanisms in Modern Machine Learning
-    To Tour Several Algorithms That Use Those Mechanisms.
+There are 3 common types of regularized linear regression algorithms:
 
-So if you're ready to jump on this, click the link below now:
-[Go to Lesson 5: Algorithm Selection](https://elitedatascience.com/algorithm-selection)
+ * **Lasso Regression**: Lasso, or LASSO, stands for **L**east **A**bsolute **S**hrinkage and **S**election **O**perator. It penalizes the absolute size of coefficients, which practically leads to coefficients that can be exactly 0. As such, Lasso offers automatic feature selection because it can completely remove some features. The "strength" of the penalty should be tuned as stronger penalty leads to more coefficients pushed to zero.
+ * **Ridge Regression**: Ridge regression penalizes the squared size of coefficients, which practically leads to smaller coefficients, but it doesn't force them to 0. In other words, Ridge offers feature shrinkage. Again, the "strength" of the penalty should be tuned as stronger penalty leads to coefficients pushed closer to zero.
+ * **Elastic-Net**: Elastic-Net is a compromise between Lasso and Ridge, which penalises a mix of both absolute and squared size. The ratio of the two penalty types and the overall strengh should be tuned.
+
+The "best" type of penalty really depends on the dataset and the problem. Trying different algorithms that use a range of penalty strengths as part of the tuning process.
+
+
+### Decision trees
+
+The 3 regularisation algorithms that can protect linear regression from overfitting, but not from its difficulty in expressing non-linear relationships. To solve this prblem, we need to look further than linear models and bring in a new category of algorithms. Decision trees model data as a "tree" of hierarchical branches. They make branches until they reach "leaves" that represent predictions. Due to their branching structure, decision trees can easily model nonlinear relationships, such as reversal of correlation (higher value if one condition but lower if another), which is difficult for linear models to capture unless they explicitly include an interaction term (i.e. needs to be anticipated ahead of time). Decision trees can capture this relationship naturally as one decision depends on all previous decisions. Unfortunately, decision trees suffer from a major flaw as well. If they grow limitlessly, they can completely "memorize" the training data, just from creating more and more and more branches, meaning that individual unconstrained decision trees are very prone to being overfit.
+
+### Ensembles
+How can we take advantage of the flexibility of decision trees while preventing them from overfitting the training data? By taking the results of many decision trees! Ensembles are machine learning methods for combining predictions from multiple separate models. There are a few different methods for ensembling, but the two most common are:
+
+  * **Bagging** attempts to reduce the chance overfitting complex models by training a large number of "strong" learners, that is a relatively unconstrained model, in parallel. Bagging then combines all the strong learners together in order to "smooth out" their predictions. 
+ 
+  * **Boosting** attempts to improve the predictive flexibility of simple models by training a large number of "weak" learners, that is a constrained model (i.e.limit the max depth of each decision tree), in sequence. Each one in the sequence focuses on learning from the mistakes of the one before it and Boosting then combines all the weak learners into a single strong learner.
+
+While bagging and boosting are both ensemble methods, they approach the problem from opposite directions. Bagging uses complex base models and tries to "smooth out" their predictions, while boosting uses simple base models and tries to "boost" their aggregate complexity. Ensembling is a general term, but when the base models are decision trees, they have special names.
+
+  * **Random forests** train a large number of "strong" decision trees and combine their predictions through bagging. In addition, two sources of "randomness" for random forests are introduced for each learner by only allowing each tree to choose from a random subset of features to split on (leading to feature selection) and only training each tree on a random subset of observations (a process called resampling). In practice, random forests tend to perform very well right out of the box, often beatting many other models that take up to weeks to develop, without many complicated parameters to tune. As such, they are the perfect "swiss-army-knife" algorithm that almost always gets good results.
+  
+  * **Boosted trees**  train a sequence of "weak", constrained decision trees and combine their predictions through boosting. Each tree is allowed a maximum depth (which should be tuned) in sequence and tries to correct the prediction errors of the one before it. In practice, boosted trees tend to have the highest performance ceilings and often beat many other types of models after proper tuning. However, they are more complicated to tune than random forests.  
+
+### Conclusion
+The most effective algorithms typically offer a combination of regularization, automatic feature selection, ability to express nonlinear relationships, and/or ensembling. 
+
+## Additional Resources
+[Modern Machine Learning Algorithms: Strengths and Weaknesses](https://elitedatascience.com/machine-learning-algorithms)
+[Dimensionality Reduction Algorithms: Strengths and Weaknesses](https://elitedatascience.com/dimensionality-reduction-algorithms)
+[WTF is the Bias Variance Tradeoff?](https://elitedatascience.com/bias-variance-tradeoff)
+
 
 # Day 6
+This lesson will look at how to systematically train effective models, that is, how to build models.
+It might seem like it took us a while to get here, but professional data scientists actually spend the bulk of their time on the steps leading up to this one: Exploring the data, Cleaning the data and Engineering new features. Again, that’s because better data beats fancier algorithms.  
 
-Yesterday, we introduced 5 algorithms and their underlying mechanisms.
+## [Model Training](https://elitedatascience.com/model-training)
 
-Today, we'll look at how to systematically train effective models.
+### Introduction
+This lesson will focus on how to set up the entire modeling process to maximize performance while safeguarding against overfitting, on swaping algorithms in and out and automatically find the best parameters for each one.
 
-Yes, this is what you’ve been waiting for...
+### Split dataset
 
-...at last...
 
-...it’s time to build our models.
-
-It might seem like it took us a while to get here...
-
-...but professional data scientists actually spend the bulk of their time on the steps leading up to this one:
-
-    Exploring the data.
-    Cleaning the data.
-    Engineering new features.
-
-Again, that’s because better data beats fancier algorithms.
-
-In this lesson...
-
-...you'll learn how to maximize model performance while safeguarding against overfitting.
-
-Plus, you'll learn how to automatically find the best parameters for each algorithm.
-
-We'll walk through an overview of each of these steps:
-
-    Split dataset
-    Decide on hyperparameters
-    Set up cross-validation
-    Fit and tune models
-    And finally...Select a winner!
-
-See you inside the lesson:
-[Go to Lesson 6: Model Training](https://elitedatascience.com/model-training)
 
 # Day 7
 This is the very last day of the crash course!
