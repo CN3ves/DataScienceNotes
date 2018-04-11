@@ -289,25 +289,167 @@ This lesson will focus on how to set up the entire modeling process to maximize 
 
 ### Split dataset
 
+A crucial but sometimes overlooked step of model training is the decision of how to spending the data.
+**Training sets** are used to fit and tune the models and **Test sets** are put aside as "unseen" data to evaluate the models.
+If you evaluate your model on the same data you used to train it, your model could be very overfit and you wouldn’t even know! A model should be judged on its ability to predict new, unseen data. Therefore, you should have separate training and test subsets of your dataset. The data should always be split  before doing anything else to get reliable estimates of your models’ performance.  After splitting the data, don’t touch your test set until the final model is chosen! By comparing test vs. training performance overfitting can be avoided because if the model performs very well on the training data but poorly on the test data, then it’s overfit.
+
+### Hyperparameters
+
+There are two types of parameters in machine learning algorithms. The key distinction is that **model parameters** are learned attributes that define individual models (regression coefficients, decision tree split locations) and can be learned directly from the training data, while **hyperparameters** express "higher-level" structural settings for algorithms (strength of the penalty used in regularized regression, the number of trees to include in a random forest), which decided before fitting the model because they can't be learned from the data. Tuning the models requires specifically mean tuning hyperparameters, not model parameters, which are learned by the model.
+
+
+### Cross-validation
+
+One important concept that will help tune the models is cross-validation. 
+Cross-validation is a method for getting a reliable estimate of model performance using only your training data.
+There are several ways to cross-validate. The most common one, 10-fold cross-validation, breaks your training data into 10 equal parts (a.k.a. folds), essentially creating 10 miniature train/test splits. Cross-validation follows the steps:
+
+  1. Split the training data into equal parts, or "folds".
+  2. Leave one fold out and train the model on remaining data.
+  3. Evaluate the model on the 1 remaining "hold-out" fold.
+  4. Perform steps (2) and (3) each time holding out a different fold, until all fold were left out
+  5. Average the performance across all hold-out folds.
+
+The average performance across the hold-out folds is the final performance estimate, also called your cross-validated score. Because you created 10 mini train/test splits, this score is usually pretty reliable.
+
+### Fit and tune models
+
+Now that we've split our dataset into training and test sets, and we've learned about hyperparameters and cross-validation, we're ready fit and tune our models.
+
+Basically, all we need to do is perform the entire cross-validation loop detailed above on each set of hyperparameter values we'd like to try. The high-level pseudo-code looks like this:
+```
+For each algorithm (i.e. regularized regression, random forest, etc.):
+  For each set of hyperparameter values to try:
+    Perform cross-validation using the training set.
+    Calculate cross-validated score.
+```
+At the end of this process, there will be a cross-validated score for each set of hyperparameter values, for each algorithm.
+Then, the best set of hyperparameters within each algorithm is selected, so the best model for each algorithm is evaluated.
+```
+For each algorithm:
+  Keep the set of hyperparameter values with best cross-validated score.
+  Re-train the algorithm on the entire training set (without cross-validation).
+```
+### Select winner
+
+By now, there will be 1 "best" model for each algorithm that has been tuned through cross-validation. Most importantly, only used the training data was used so far. Tt’s time to evaluate each model and pick the best one.
+
+Because the test set was saved and kept as a truly unseen dataset, it can now be used to get a reliable estimate of each models' performance. There are a variety of performance metrics to could choose from. In general for regression tasks, Mean Squared Error (MSE) or Mean Absolute Error (MAE) are recommneded (Lower values are better), while for classification tasks, Area Under ROC Curve (AUROC) is recommended (Higher values are better). The process is very straightforward, for each models, make predictions on your test set and calculate performance metrics using those predictions and the "ground truth" target variable from the test set. Finally, pick the winning model by considering:
+
+ * Which model had the best performance on the test set? (performance)
+ * Does it perform well across various performance metrics? (robustness)
+ * Did it also have (one of) the best cross-validated scores from the training set? (consistency)
+ * Does it solve the original business problem? (win condition)
+
+## Additional Resources
+
+[Overfitting in Machine Learning: What It Is and How to Prevent It](https://elitedatascience.com/overfitting-in-machine-learning)
+[How to Handle Imbalanced Classes in ML](https://elitedatascience.com/imbalanced-classes)
+[The 5 Levels of Machine Learning Iteration](https://elitedatascience.com/machine-learning-iteration)
+[Fun Machine Learning Projects for Beginners](https://elitedatascience.com/machine-learning-projects-for-beginners)
+
 
 
 # Day 7
-This is the very last day of the crash course!
+This crash cours has finished. We'll give you our best recommendations for where to go from here including how to transform these concepts into invaluable, practical skills that can significantly impact your career.
+## [Next Steps](https://elitedatascience.com/next-steps)
 
-We've got a very special final installment especially for you.
+This step-by-step blueprint will give you a huge head-start. But strike while the iron is hot! Pick a topic, find a dataset, and start practicing. For tools, we strongly recommend the Python stack, including the following libraries:
 
-BTW, Nice job following along so far... we've really covered a lot of ground over the last week!
+ * NumPy for efficient numerical computations.
+ * Pandas for data management.
+ * Scikit-Learn for algorithms and model training.
+ * Seaborn for easy/common visualizations.
+ * Matplotlib to customize visualizations.
 
-    On day 1, you saw a bird's-eye view of the entire machine learning workflow.
-    Then, on day 2, you learned our framework for fast, efficient, and decisive exploratory analysis.
-    Day 3 was all about data cleaning, which is perhaps the most important step of all!
-    Next, on day 4, we shared our favorite heuristics for feature engineering.
-    On day 5, we discussed regularization and ensembles, and you learned about 5 algorithms that leverage those mechanisms.
-    And yesterday on day 6, we walked through a proven formula for training excellent models after the other steps have been completed correctly.
+After you've mastered the core workflow, you can use the rest of this lesson as guideposts for continued study.
+Our #1 tip for self-study is to skip the textbooks and jump into projects ASAP because it's much faster to learn in context, i.e. "learning by doing". Plus, it will be easier to stay motivated and continue progressing
 
-(Links all the lessons are included at the start of today's lesson)
+### Step 1: Learn Python
 
-Now, we'll give you our best recommendations for where to go from here...
+The first one is obvious. We couldn't include source code in this crash course because everyone comes from different experience levels. 
+
+ * Module 1: Python Basics
+ First, the basics of Python, including data types, operations, and variables.
  
-...including how to transform these concepts into invaluable, practical skills that can significantly impact your career.
-[Go to Lesson 7: Next Steps](https://elitedatascience.com/next-steps)
+ * Module 2: Data Structures:
+ Then, dive into data structures, Python objects that can store and organize other objects.
+ 
+ * Module 3: Flow and Functions
+ Next, cover flow control and functions. Flow control allows conditional logic and functions keep your code clean and modular.
+ 
+ * Module 4: NumPy
+ NumPy is the premier Python library for numerical computing and many other data science libraries are built on top of NumPy.
+ 
+ * Module 5: Pandas
+ Finally, learn all about Pandas, which will probably be your most used package because it helps you store, manipulate, and explore data.
+ 
+### Step 2: Clarify Essential Theory
+
+learn about Model Complexity, which is what we consider to be the "heart" of machine learning. This is perhaps the single most important concept that couldn't fit into this crash course, for the simple reason that it's best taught alongside illustrative code examples. In addition other essential concepts, including:
+
+  * Mapping functions as a surprisingly effective learning tool.
+  * Causes of overfitting and how to deal with it in diverse situations.
+  * Cost functions and how they tie into important mechanisms such as regularization.
+  * Classification algorithms and their key differences from their regression counterparts.
+  * Clustering algorithms and the additional step you should take before training them.
+    
+
+### Step 3: Master Core Skills
+
+practice the core machine learning workflow, including:
+
+  * Exploratory Analysis
+  * Data Cleaning
+  * Feature Engineering
+  * Algorithm Selection
+  * Model Training
+
+These are the fundamental building blocks you'll need for almost any project, and it's important to really master these skills.
+
+### Step 4: Build Situational Skills
+
+In this crash course, we've covered the 5 core steps of applied machine learning.
+However, there are also several important situational steps. When you master these steps, you'll open many more possibilities.
+For example, some of the most interesting applications require you to creatively restructure the data first (Data Wrangling).
+In addition, correctly transforming your features will boost your performance significantly (Preprocessing).
+How to package your model into a script that can be called from a command line or run on the cloud (Project Delivery).
+The 5 core steps glue everything together, and these situational steps will take your projects to the next level.
+
+### Step 5: Practice Making Decisions
+
+Applied machine learning requires dozens of decisions for each step (i.e. a skilled chef).
+
+  * When have you done enough exploratory analysis?
+  * How can you spot potential fixes you'll need to make?
+  * Do your visualizations suggest good features to engineer?
+  * What are the most impactful hyperparameters to tune?
+  * When should you pre-process your features?
+  * Which steps should go inside the cross-validation loop?
+  * Which performance metrics should you use?
+    
+
+### Step 6: Develop Advanced Skills
+
+To train professional-grade machine learning models in the shortest time possible, you'll need to master a few additional advanced skills, including:
+
+  * How to fit Multi-Step Preprocessing Pipelines into cross-validation loops to ensure robust results.
+  * How to deal with the Curse of Dimensionality.
+  * How to implement Principle Component Analysis (PCA) and how to interpret your components.
+  * How to deal with Unbalanced Classes.
+  * How to use Probability Thresholds and ROC Curves to improve your classification models.
+  * How to perform Multi-Layer Groupbys for data wrangling.
+  * How to make Advanced Visualizations for presentations and reports.
+  
+### Step 7: Reinforce Key Concepts
+
+By now, you'll have learned concepts for data science and machine learning.
+
+You'll have a great understanding of where each piece fits into the big picture, and you'll have developed very valuable, practical skills.
+
+This is a great time to circle back and review all that you've learned, truly solidifying all these skills and making them truly your own.
+
+### Conclusion
+
+By the way, even if you decide not to join the masterclass, you can use the list above as guideposts for further studying. You've learned the core blueprint, so you now have a very strong foundation to go forward.
+
