@@ -5,7 +5,7 @@ algorithms and systems to extract knowledge or insights from data in various for
 
 ### Computer Science:
 
-  * [Python programming](pages/python)
+  * [Python programming](pages/python.md)
   * R programming
   
 ### Mathmatics:
@@ -16,7 +16,7 @@ algorithms and systems to extract knowledge or insights from data in various for
 
 ### Data Science
 
-  * [Overview](pages/flow)
+  * [Overview](pages/flow.md)
   * Exploratory Analysis
   * Data Cleaning
   * Feature Engineering
