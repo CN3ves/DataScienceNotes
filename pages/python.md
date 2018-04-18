@@ -9,11 +9,14 @@ Python is one of the most common programming tools used for Data Analysis.
  
 ## Why Python?
 
-Python was conceived by Guid Van Rosson. What started as an hobby project, soon became a general purpose programming language. 
+Python was conceived by Guido Van Rosson. What started as an hobby project, soon became a general purpose programming language. Even though Python is associated with the snake motif, it turns out that Python was not named after a snake. Instead, it was after the Monty Python's Flying Circus commedy. In the 80s, when Python started, most programming languages were very serious and very complex. They were difficult to figure out and required a lot of math. Guido thought he could probably write a programming language that wouldn't be that hard, would be enjoyable to use, but woould also be both powerful and enjoyable. It was meant to be fun to use, thus the name. It turns out that's why Python is such a perfect language to use as a first programming language: it's designed to be easy but it's also powerful.  
+
 Nowadays, Python can be used to buold practically any piece of software. This happaned because Python is open Source and Free! 
 Also, it is very easy to build packages in Python. Thougout time, more and more of these packages were specifically build for data science.
 Currently, there are two versions of Python, 2.X and 3.X. They are pretty similar appart from some syntactical differences, 
 but support for version 2 will fade overtime. Python 3 can be installed from [python.org](https://www.python.org/downloads)
+
+Welcome to being a Pythonista.
 
 ## Install/Start Python
 
@@ -39,6 +42,12 @@ command2
 ```
 
 HOW TO RUN SCRIPTS ?
+
+## Errors 
+
+At the begining, Python may seem to be difficult and it is very common to get a Syntax Error thrown back when running a script.
+Even tought it may be demotivating at first, it is important to keep in mind that *Syntax error* means Python is lost, it does not reconise an instruction. THIS MAY HAPPEN BECAUSE
+
 ## Comments
 
 Before starting, it is important to be aware that **Comments** are important to any programming language. 
