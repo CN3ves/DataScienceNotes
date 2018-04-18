@@ -5,6 +5,7 @@ algorithms and systems to extract knowledge or insights from data in various for
 
 ### Computer Science:
 
+  * [Computer architecture](pages/hardware.md)
   * [Python programming](pages/python.md)
   * R programming
   
