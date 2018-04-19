@@ -19,7 +19,7 @@ but support for version 2 will fade overtime. Python 3 can be installed from [py
 Welcome to being a Pythonista.
 
 ## Install/Start Python
-
+If you install Python using the Anaconda distribution, which also includes many science and data analysis libraries, you can use the Spyder development environment to edit and run your Python programs
 
 ## The Python Interface
 
