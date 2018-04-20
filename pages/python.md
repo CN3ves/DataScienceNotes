@@ -11,37 +11,24 @@ Python is one of the most common programming tools used for Data Analysis.
 
 Python was conceived by Guido Van Rosson. What started as an hobby project, soon became a general purpose programming language. Even though Python is associated with the snake motif, it turns out that Python was not named after a snake. Instead, it was after the Monty Python's Flying Circus commedy. In the 80s, when Python started, most programming languages were very serious and very complex. They were difficult to figure out and required a lot of math. Guido thought he could probably write a programming language that wouldn't be that hard, would be enjoyable to use, but woould also be both powerful and enjoyable. It was meant to be fun to use, thus the name. It turns out that's why Python is such a perfect language to use as a first programming language: it's designed to be easy but it's also powerful.  
 
-Nowadays, Python can be used to buold practically any piece of software. This happaned because Python is open Source and Free! 
+Nowadays, Python can be used to build practically any piece of software. This happaned because Python is open Source and Free! 
 Also, it is very easy to build packages in Python. Thougout time, more and more of these packages were specifically build for data science.
-Currently, there are two versions of Python, 2.X and 3.X. They are pretty similar appart from some syntactical differences, 
-but support for version 2 will fade overtime. Python 3 can be installed from [python.org](https://www.python.org/downloads)
 
 Welcome to being a Pythonista.
 
 ## Install/Start Python
-If you install Python using the Anaconda distribution, which also includes many science and data analysis libraries, you can use the Spyder development environment to edit and run your Python programs
+Currently, there are two versions of Python, 2.X and 3.X. They are pretty similar appart from some syntactical differences, 
+but support for version 2 will fade overtime. Python 3 can be installed from [python.org](https://www.python.org/downloads)
+In adidtion, there a number of Python distibutions that may be relevant, like the Anaconda distribution, which includes many science and data analysis libraries. OTHERS ?
+
+Once installed, Python files will be reconise by their extension *.py*. There are many ways to  to run Python. The pasic Python distribution already provides the IDLE Python Shell and other integrated development environments (IDE) such as Spyder (included with the Anaconda distribution) can be obtained. However, the basic way to use Python is by running the command line (see [command line](pages/bash.md) to learn how to use it). Python files can be run by entering `python3 file_name.py` (simply python for Python2). The Python will be run, if it is in the current directory, otherwise, it will not be found. On Windows, typing the file name on it's own will also run Python, as all files with .py are expected to be Python and it knows the Python interpreter where to run. . To check the Python version, enter `python3 --version`.
+
+Besides Python itself, it is important to have a text editor. The classical text editors come with the operating systems, like Word or Text Edit will not do for more complex programming. Editors with syntax highlight, automatic identing and other useful options can make programming a much simplers exerience. There are a number of editors that cn be used, including Notepad Plus, jEdit, Atom or Sublime.
 
 ## The Python Interface
 
-Python can be run interactively from the python shell by simply typing commands and hitting *Enter*. 
-Open python and run `print("Hello World")`
-
-Apart from interactively, Python can also be run from python scripts, which are simply text files with the extention .py, where a list of python commands are written and from where they are executed.
-Putting the code in Pyton scrips instead of manually typing it ineratively 
-will help to keep structure ansd avoid retyping everything if one change is required
-
-command as written one per line but 
-The ; sign is used to place commands on the same line. The following two code chunks are equivalent:
-```
-# Same line
-command1; command2
-
-# Separate lines
-command1
-command2
-```
-
-HOW TO RUN SCRIPTS ?
+Python can be run interactively by entering `python3` on the command line. This opens the Python shell which has a chevron prompt, where commands can be entered (not that IDEs may have the shell inbedded already). Typing `print("Hello World")`) 
+in the prompt and then *Enter* will run the Python command. To exit the Pythom promp, type `exit()`. So a series of statements can be typed in Python and processed interactively and it is possible to write entire programs interactively. However, this would require that it is typed perfectly from beginning to end. Once a program gets beyond a couple of lines of Python, it's much more common use a programming text editor and put all the code in a file. We call this a script or a Python program. Scripts are stored sets of instruction in text files that Python can run. Python scripts are identified by having an extention *.py*. Putting the code in Pyton scrips instead of manually typing it ineratively helps to keep structure ansd avoid retyping everything if one change is required
 
 ## Errors 
 
@@ -58,11 +45,29 @@ so they will not influence your result. As an example, take the comment on the r
 # Just greeting the whole world  
 print("Hello World")
 ```
-where *Just testing division* is completely ignored during execution, but makes the propose of the following code clear to anyone. Note the use of the function **print()**. This function DOES SOMETIME I NEED TO DESCRIBE :)
+where *Just greeting the whole world* is completely ignored during execution, but makes the propose of the following code clear to anyone. Note the use of the function **print()**. This function DOES SOMETIME I NEED TO DESCRIBE :)
+
+## Sentences 
+SENTENCES OR STATMENTS ?
+Sentences are the lines of code written on the script. A program is composed of a text file with sentence after sentence,
+constructing paragraphs out of a series of lines. Sentenced are usually separated by a new line (break), but an 
+alternative way, used for simple sentences, is to use semi-colon (;) sign is used to place sentences on the same line. So, the following two code chunks are equivalent:
+```
+# Same line
+print('Hello'); print('World')
+
+# Separate lines
+print('Hello')
+print('World')
+```
+
+## Operators 
+we're using operators, this plus is what's called an operator, the equal sign is what's called an operator.
+EXTEND
 
 ## Variables
 
-Fundamental to any programming languase is the concept of **variable**, which is a *"storage"* for values.
+Fundamental to any programming languase is the concept of **variable**, which is a *"storage"* for values in the memory.
 A variable allows you to refer to a value with a name.
 A Python variable is declared (created) with a specific, case-sensitive name. By using a calling a variable it is possible to recall the stored value, simplifying the code and making it more reproducible. 
 As such, variables are used all the time in Python. To declare a variable, the assignment operator **=** (not equality!) can be used to assigned the value on the rght to the variable on the left. Once declared, a variable name com ve used instead of the value. This is fundamental when working with complex objects.
@@ -79,7 +84,48 @@ print(number)
 number = number + 1
 print(number)
 ```
-COMMENT ON VARIABLE NAMING: do not name variables with function names. WHAT ARE THE BEST PRACTICES?
+
+COMMENT ON VARIABLE NAMING: do not name variables with reserved names. WHAT ARE THE BEST PRACTICES?
+
+## Contants
+## Reserved words
+
+Every programming language has specific group of words that are associate with a specific meaning. These are know as reserved words and shouldn't be used for anything else but their original purpose. There are a number of reserved words in Python that are important to know. As they are fundamental building blocks of the Python syntax they can be introduced as required.
+
+Reserved words in Python include: 
+  * False
+  * True
+  * None
+  * and
+  * as 
+  * assert
+  * break
+  * class
+  * if
+  * def
+  * del
+  * elif
+  * else
+  * except
+  * return
+  * for
+  * from
+  * global
+  * try
+  * import
+  * in
+  * is
+  * lambda
+  * while
+  * not
+  * or
+  * pass
+  * raise
+  * finally
+  * continue
+  * nonlocal
+  * with
+  * yield
 
 # Basic types
 ## Numbers
@@ -300,6 +346,52 @@ print(x); print(y); print(z)
 ## Dictionaries
 
 # Flow control
+
+## Sequential
+There are a couple of basic patterns that can be used for a program. The most basic pattern is what's called sequential. This is simply a coding pattern where statements follow one after the other in a sequence of commands that Python will obligatiry execute in order.
+```
+# Sequential pattern
+number = 3
+number += 2
+print(number)
+```
+
+## Conditional
+For more complex program, running sequential code is not enough. It may be important to have some type of decision where the data is analysed and depending on it one thing or another is done. These are called conditional steps and it defines optional parts of the code that may or may not run. If a given **condition** is true, then the statement is run; if it is false, then the statement is skiped. 
+```
+# Conditional step
+number = 3
+if number > 5:
+  print('Too big')
+elif number < 0:
+  print('Too small')
+else:
+  print('That's a good number')
+```
+
+Conditional steps always start with the *if* reserved word followed by a condition that must evaluate to True or False and a colon (:). After the colon, the (sequential) conditional statements are in an indented block, which tells Python they are part of the conditional step. To finish the conditional, de-indent the code. SAY MORE
+
+## Repeat 
+
+**NOT DONE**
+The real power of computers comes when a series of steps that need to be repeated. 
+
+Now the most exciting pattern is the repeat. And it looks a little more busy because 
+we can do more stuff with it. So the basic idea is there are a couple of different looping keywords, reserved words - the while and the for. The while loop basically says - it functions kind of like an if statement in that there's a question in it. It doesn't hurt n; n doesn't get changed by this, it just looks at n and asks the question is n greater than zero? If it is true, it runs this code. So just like an if. So up to here, it looks like an if - 
+if n is true, n greater than zero is true, it runs this code. Now this is a little sequential bit. When you're done with this, what do you do? Oh, we just fall onto the next one. And you'll notice that this is indented at 
+the same level as the print statement. And that's how we have repeating or even ifs 
+with more than one statement in it. And then when it de-indents, that's the end of the loop. And what happens is it runs this and it runs that, but then what does it do? Well, it's at the end of the loop, so it actually goes back up to the top of the loop. So it goes back up to the while statement. And we actually printed n out, which was 5. And then n became 4 and then it reevaluates 
+this question - is 4 greater than zero? 
+So n becomes - is not greater than zero. So this switches from a true to a false. And false, it leaves - goes out and exits the loop. So over here, it goes 5, 4, 3, 2, 1 - and then out she comes. Okay? And as soon as this becomes false, then this loop exits. And so that's the way we tell a program that - you know, we tell the computer that we want it to keep going 
+until something has happened. Some - we have achieved something. So loops have this notion of iteration variables to make sure that they are not infinite loops. And this variable n is carefully constructed to start and be checked and then be changed each time through the loop. And that's how we make sure this loop only runs 
+five times and not forever. Because you can construct what we call infinite loops that run forever, but it's not too practical; you just run out of battery or whatever after awhile.
+
+Now the for is another of the reserved words that a loop - so this has a colon and it says that's an indented block and there turns out to be a for within a for. This is called nesting. We'll get to that. And then this loop ends and it runs for awhile. And then there's more sequential stuff. There is a for, which is repeated code. And then there's an if nested within that for; that's conditional code. 
+
+Because both conditional and loops require indentation, sequential code is easyly identifyed by not being indented in Python.
+
+## Store and retrive 
+And then the fourth pattern is the store and retrieve pattern.
 
 
 # Functions
