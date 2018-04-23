@@ -47,50 +47,80 @@ print("Hello World")
 ```
 where *Just greeting the whole world* is completely ignored during execution, but makes the propose of the following code clear to anyone. Note the use of the function **print()**. This function DOES SOMETIME I NEED TO DESCRIBE :)
 
-## Sentences 
-SENTENCES OR STATMENTS ?
-Sentences are the lines of code written on the script. A program is composed of a text file with sentence after sentence,
-constructing paragraphs out of a series of lines. Sentenced are usually separated by a new line (break), but an 
-alternative way, used for simple sentences, is to use semi-colon (;) sign is used to place sentences on the same line. So, the following two code chunks are equivalent:
-```
-# Same line
-print('Hello'); print('World')
+## Syntax
+A big part of any programming language is the syntax.
 
-# Separate lines
-print('Hello')
-print('World')
-```
+### Contants
+Constants are fixed values that don't change their values, and thus are constant for all the program. There are different types of 
+constants, which are related to basic object types ([see later](#Basic types)) 
+such as numeric (integer and float) and text (string) constants.
 
-## Operators 
+
+### Operators 
 we're using operators, this plus is what's called an operator, the equal sign is what's called an operator.
-EXTEND
+EXTEND SAY SOMETHING AS OPERATOR DO OPERATIONS ON VALUES AS TO INTRUDUCE THE ASSIGNMENT OPERATOR FOR VARABLES
 
-## Variables
+
+### Variables
 
 Fundamental to any programming languase is the concept of **variable**, which is a *"storage"* for values in the memory.
-A variable allows you to refer to a value with a name.
-A Python variable is declared (created) with a specific, case-sensitive name. By using a calling a variable it is possible to recall the stored value, simplifying the code and making it more reproducible. 
-As such, variables are used all the time in Python. To declare a variable, the assignment operator **=** (not equality!) can be used to assigned the value on the rght to the variable on the left. Once declared, a variable name com ve used instead of the value. This is fundamental when working with complex objects.
+A Python variable is declared (created) with a specific, case-sensitive name. Variable declaration allocates a value to a bit of memory and "labels" it with a name. Once assigned to the memory, the computer can "remember" the value and Python retrive it by using a calling a variable that *points* to the stored value. This takes advantage of the great memory capacity of computers to simplifying the code and make it more reproducible and readable. 
+As such, variables are used all the time in Python. To declare a variable, the assignment operator **=** can be used to assigned the value on the right to the variable on the left. Note that, even though programming logic is rooting on mathmatics, programming notation may not strictly match mathematical notation. The assignment statement do not mean equality.  Once declared, a variable name can be used instead of the value. This is fundamental when working with complex objects.
+
+
 ```
 # Declaring a variable
-five = 5
-print(five)
+x = 5
+print(x)
 ```
-Notice that the stored value can be changed, which allows for more complex computation to be performed without storing value
+There are some **naming rules** for variables. Variable names can start variable names with letters
+or underscores, folowed by any combination of letters, numbers, and underscores. In addition, variable names are 
+case sensitive. Simply ensuring that variable names are valid, leads to a number of confunsing possiblilities. As such, 
+standard *good practice* numenclature are used: 
+  
+  * Avoid starting variable names with underscores. These variables are reserved for specific uses, particular for Python (*e.g.*  methods) internal purposes.
+  * Generally, the variable names are lower case, with upper case being used to signal specific types of varibles (*e.g.* classes). 
+  * Some applications use what's called CamelCase, which uses a mixture of cases, with upper case being used to separate words in the variabe name. Generally, these words are separated with underscores. 
+  * Above all, use distinct, mnemoric, non-redundant names. Even though Python doesn't care (or interpret) what name is given to a variable, using sensible human-readable names will improve code readability and thus, code debugging and code sharing and review. Variable naming is not intended to communicate any additional information to Python, but it is fundamental to clealy communicate the purpose of the code to a reader. Generally, names should be reader-friendly and communitate their purpose.
+  
+
 ```
+# Not valid names (syntax error)
+1one = 1
+number.one = 1
+# Valid names
+_x5yY8w = 5
+# Good names
+number_five = 5
+n_five = 5
+NumberFive = 5
+```
+Variable assignment follows two steps:
+
+  1. Evalute the expression on the right side to a value
+  2. Store the value to the memory and create a pointer to that value
+
+This means that it's possible to have the same variable on both sides of the assignment.  
+The variable on the expression is evaluated and then its value is replaced (name points to a different value).
+Again, note that this can lead to mathematically incorrect expressions, that are programmatically common place.
+
+```
+n = 2
+print(number)
 # Overwritting a variable value
-number = 2
+n = 5
 print(number)
-number = number + 1
-print(number)
+# Incrementing a number (same operation)
+n = n + 1
+n += n
+print(n)
+# n = n + 1 is not an equality (and is mathematically non-sense)
 ```
 
-COMMENT ON VARIABLE NAMING: do not name variables with reserved names. WHAT ARE THE BEST PRACTICES?
 
-## Contants
-## Reserved words
+### Reserved words
 
-Every programming language has specific group of words that are associate with a specific meaning. These are know as reserved words and shouldn't be used for anything else but their original purpose. There are a number of reserved words in Python that are important to know. As they are fundamental building blocks of the Python syntax they can be introduced as required.
+Every programming language has specific group of words that are associate with a specific meaning and are expected to have a sepecific function. These are know as reserved words and shouldn't be used for anything else but their original purpose. As such, reversed words can not and should not be used to name variables! There are a number of reserved words in Python that are important to know. As they are fundamental building blocks of the Python syntax they can be introduced as required.
 
 Reserved words in Python include: 
   * False
@@ -126,6 +156,27 @@ Reserved words in Python include:
   * nonlocal
   * with
   * yield
+
+### Sentences 
+
+Now we lead these things into 
+sentences or lines. And so these things. This is just another sequence of code, and it shows how you can also use
+the variable on the right-hand side. 
+
+
+SENTENCES OR STATMENTS ?
+Sentences are the lines of code written on the script. A program is composed of a text file with sentence after sentence,
+constructing paragraphs out of a series of lines. Sentenced are usually separated by a new line (break), but an 
+alternative way, used for simple sentences, is to use semi-colon (;) sign is used to place sentences on the same line. So, the following two code chunks are equivalent:
+```
+# Same line
+print('Hello'); print('World')
+
+# Separate lines
+print('Hello')
+print('World')
+```
+
 
 # Basic types
 ## Numbers
