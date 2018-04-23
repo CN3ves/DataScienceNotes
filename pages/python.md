@@ -372,27 +372,19 @@ else:
 Conditional steps always start with the *if* reserved word followed by a condition that must evaluate to True or False and a colon (:). After the colon, the (sequential) conditional statements are in an indented block, which tells Python they are part of the conditional step. To finish the conditional, de-indent the code. SAY MORE
 
 ## Repeat 
+The real power of computers comes when a series of steps that need to be repeated. There are two reserved key words that can be used to start a loop (repetition): while and for. A loop is created similarly to a conditional step, starting with the key work, follwed by and expression and a colon (:) which marks the beggining of indented code.
 
-**NOT DONE**
-The real power of computers comes when a series of steps that need to be repeated. 
+The **while** loop functions like an if statement where it evaluates a conditional statmente and, if it is *True*, it runs the indented code. Once the loop ends (de-indented code), the program goes back and re-evaluates the conditional, reapeating these steps until the conditional evaluates it will not stop. So, constructing while loops require a particular care to avoid situations were infinite loops occurs, blocking the program. 
 
-Now the most exciting pattern is the repeat. And it looks a little more busy because 
-we can do more stuff with it. So the basic idea is there are a couple of different looping keywords, reserved words - the while and the for. The while loop basically says - it functions kind of like an if statement in that there's a question in it. It doesn't hurt n; n doesn't get changed by this, it just looks at n and asks the question is n greater than zero? If it is true, it runs this code. So just like an if. So up to here, it looks like an if - 
-if n is true, n greater than zero is true, it runs this code. Now this is a little sequential bit. When you're done with this, what do you do? Oh, we just fall onto the next one. And you'll notice that this is indented at 
-the same level as the print statement. And that's how we have repeating or even ifs 
-with more than one statement in it. And then when it de-indents, that's the end of the loop. And what happens is it runs this and it runs that, but then what does it do? Well, it's at the end of the loop, so it actually goes back up to the top of the loop. So it goes back up to the while statement. And we actually printed n out, which was 5. And then n became 4 and then it reevaluates 
-this question - is 4 greater than zero? 
-So n becomes - is not greater than zero. So this switches from a true to a false. And false, it leaves - goes out and exits the loop. So over here, it goes 5, 4, 3, 2, 1 - and then out she comes. Okay? And as soon as this becomes false, then this loop exits. And so that's the way we tell a program that - you know, we tell the computer that we want it to keep going 
-until something has happened. Some - we have achieved something. So loops have this notion of iteration variables to make sure that they are not infinite loops. And this variable n is carefully constructed to start and be checked and then be changed each time through the loop. And that's how we make sure this loop only runs 
-five times and not forever. Because you can construct what we call infinite loops that run forever, but it's not too practical; you just run out of battery or whatever after awhile.
+The **for** loop does not evaluate a conditional, but instead evaluates the idented code using a group of values provided. These values are directly assigned one by one to an **iterator variable** that changes at each run (iteration) of the loop, until all values have been used. Iterator variables may also be defined for while loop indirectly in order to contro the number iterations and ensure that infinite loops are not created. 
 
-Now the for is another of the reserved words that a loop - so this has a colon and it says that's an indented block and there turns out to be a for within a for. This is called nesting. We'll get to that. And then this loop ends and it runs for awhile. And then there's more sequential stuff. There is a for, which is repeated code. And then there's an if nested within that for; that's conditional code. 
+Loop can be defined within other loops, which is called nesting, and also with conditionals. Each nesting level requires a new indentation. Because both conditional and loops require indentation, sequential code is easily identifyed by not being indented in Python.
 
-Because both conditional and loops require indentation, sequential code is easyly identifyed by not being indented in Python.
 
 ## Store and retrive 
 And then the fourth pattern is the store and retrieve pattern.
 
+## Random?
 
 # Functions
 
