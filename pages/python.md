@@ -27,7 +27,7 @@ Besides Python itself, it is important to have a text editor. The classical text
 
 ## The Python Interface
 
-Python can be run interactively by entering `python3` on the command line. This opens the Python shell which has a chevron prompt, where commands can be entered (not that IDEs may have the shell inbedded already). Typing `print("Hello World")`) 
+Python can be run interactively by entering `python3` on the command line. This opens the Python shell which has a chevron (>>>) prompt, where commands can be entered (not that IDEs may have the shell inbedded already). Typing `print("Hello World")`) 
 in the prompt and then *Enter* will run the Python command. To exit the Pythom promp, type `exit()`. So a series of statements can be typed in Python and processed interactively and it is possible to write entire programs interactively. However, this would require that it is typed perfectly from beginning to end. Once a program gets beyond a couple of lines of Python, it's much more common use a programming text editor and put all the code in a file. We call this a script or a Python program. Scripts are stored sets of instruction in text files that Python can run. Python scripts are identified by having an extention *.py*. Putting the code in Pyton scrips instead of manually typing it ineratively helps to keep structure ansd avoid retyping everything if one change is required
 
 ## Errors 
