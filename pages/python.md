@@ -30,10 +30,7 @@ Besides Python itself, it is important to have a text editor. The classical text
 Python can be run interactively by entering `python3` on the command line. This opens the Python shell which has a chevron (>>>) prompt, where commands can be entered (not that IDEs may have the shell inbedded already). Typing `print("Hello World")`) 
 in the prompt and then *Enter* will run the Python command. To exit the Pythom promp, type `exit()` or `quit()`. So a series of statements can be typed in Python and processed interactively and it is possible to write entire programs interactively. However, this would require that it is typed perfectly from beginning to end. Once a program gets beyond a couple of lines of Python, it's much more common use a programming text editor and put all the code in a file. We call this a script or a Python program. Scripts are stored sets of instruction in text files that Python can run. Python scripts are identified by having an extention *.py*. Putting the code in Pyton scrips instead of manually typing it ineratively helps to keep structure ansd avoid retyping everything if one change is required
 
-## Errors 
 
-At the begining, Python may seem to be difficult and it is very common to get a Syntax Error thrown back when running a script.
-Even tought it may be demotivating at first, it is important to keep in mind that *Syntax error* means Python is lost, it does not reconise an instruction. THIS MAY HAPPEN BECAUSE
 
 ## Comments
 
@@ -46,9 +43,23 @@ so they will not influence your result. As an example, take the comment on the r
 print("Hello World")
 ```
 where *Just greeting the whole world* is completely ignored during execution, but makes the propose of the following code clear to anyone. Note the use of the function **print()**. This function DOES SOMETIME I NEED TO DESCRIBE :)
+The print function can be used with multiple values separated by commas, but every comma adds a space between the different values. This is the most common requirement however, if spaces are not required between the values, they need to be concatenated with +.
+
+```
+# Playing with print
+print("Hello", "World")
+print("Hello" + "World")
+```
 
 ## Syntax
 A big part of any programming language is the syntax.
+
+### Syntax error 
+
+At the begining, Python may seem to be difficult and it is very common to get a Syntax Error thrown back when running a script.
+Even tought it may be demotivating at first, it is important to keep in mind that *Syntax error* means Python is lost, it does not reconise an instruction. When Python finds (*throws*) an error, the program stops and an error messages is displayed. 
+This message tries to explain the problem and identify where (code and line) and why (error type) it occurs.
+
 
 ### Contants
 Constants are fixed values that don't change their values, and thus are constant for all the program. There are different types of 
@@ -57,8 +68,19 @@ such as numeric (integer and float) and text (string) constants.
 
 
 ### Operators 
-we're using operators, this plus is what's called an operator, the equal sign is what's called an operator.
-EXTEND SAY SOMETHING AS OPERATOR DO OPERATIONS ON VALUES AS TO INTRUDUCE THE ASSIGNMENT OPERATOR FOR VARABLES
+All programming languages have various operators. These operators historically come
+from the kind of characters that were on computers keyboards in the 1960s, literally. 
+These things called Teletypes, from the end of World War II, had key punches or rudimentary terminals 
+with a certain set of characters which just couldn't represent the mathematical ccharacters. 
+So these had to be mappped mathematical formulas and functions: 
+
+  * Sum maps to +
+  * Subtraction maps to -
+  * Multiplication maps to *
+  * Exponentiation maps to **
+  * Division maps to /
+  * Modulo maps to %
+
 
 
 ### Variables
@@ -180,6 +202,25 @@ print('World')
 
 # Basic types
 ## Numbers
+
+
+Every object in Python has a type.
+The type of any variable can be checked usint the **type()** function.
+So far, most of the examples have used either numbers or text.
+There are two types of numbers in Python, **integers (int)** and **floats (float)**. 
+Values that don't have decimal places are integers and values that have decimal
+places are called floating points. The main diference id their internal representation. 
+Floating point numbers have a greater range than integer numbers, but they're not always as
+precise as integer numbers. For these reason, floating points cannot be always used. For example, to represent money (or quantities that have to be precise) only integers should be used, has binary representation has dificulties representing decimals and will result in errors for large calculations. 
+
+```
+# Floating points representation is less precise
+print(1.03-0.42)
+print(103-42)
+```
+
+
+
 ```
 # Integer: Number without a fractional (decimal) part
 print(type(5))
@@ -187,9 +228,15 @@ print(type(5))
 print(type(5.0))
 ```
 
+
+
+
 One of the most basic used of Python is to do basic calculations. Apart from **addition (+)**, **subtraction(-)**, 
 **multiplication(\*)** and **division(/)**, there is also support for more advanced operations such as 
-**exponentiation (\*\*)**, **modulo (%)** and **integer division (//)**.
+**exponentiation (\*\*)**, **modulo (%)** and **integer division (//)**.  Like for mathematics, these opperators have
+an order of evaluation, where parentheses override everything, followed by exponentiation,
+multiplication and division/modulo and addition and subtraction for last. For similar priority operations, 
+they are evaluated from left to right. 
 ```
 # Addition: 
 print(5 + 5)
@@ -207,11 +254,23 @@ print(4 ** 2)
 print(18 % 7)
 ```
 
-HOW DO THE OPERATORS WORK. ADD EXAMPLES IN MORE DETAIL: 10/2 is different than 10/2.0
-Every object in Python has a type.
-The type of any variable can be checked usint the **type()** function.
-So far, most of the examples have used either numbers or text.
-There are two types of numbers in Python, **integers (int)** and **floats (float)**. 
+
+Integer division is actually one of the biggest non-upwards-compatible changes between Python 2 and Python 3. In Python 3 
+**/** can result in a floating point. To force an integer division, **//** has to be used.
+
+```
+#examples of divisions
+
+```
+
+The modulo (remainder) operator is something that's not typically on calculators, but it's really important for computers. 
+The modulo is the remainder of the integer division instead of giving the quotient. This is particularly usefull for cicling between a numeric range, such as cards (n % 52) or dice (n % 6), because the resulting remainder will reset to 0 as soon as tha multiple of the divisor is found. It is also a fundamnetal operator for testing an odd number
+an even number (n %2) as even number do not have a remained when divided by 2 and odd number have a remainder of 1.
+
+```
+# example of modulos
+```
+
 
 
 ## Text
@@ -230,6 +289,25 @@ print(type(False))
 
 
 ## Convertion between types 
+
+Python carefully tracks not only what the value in a variable is but what kind of a value it is. 
+Variable types are very important in Python as different types can show different behaviour for the same operation, so it is important to be aware of what type each value is.
+
+
+
+```
+# Sum integers: + works as a mathematical operator 
+print(2 + 5)
+# Sum strings: + works not as a mathematical operator but as a text paste (concatenaotr) operator
+print('ab' + 'cb')
+# Sum boolean: the booleans are converted to numerical values and + works as a mathematical operator operatior
+print(True + False)
+print(True + True + True)
+```
+As suggested in the previous example of the sum of booleans, object can be coverted between different types. 
+
+
+
 ```
 # Declare variable
 value = 5
@@ -260,21 +338,44 @@ print(float("5.5") * 2)
 # Converts boolean to integers
 print(int(True)
 ```
+### Type error
+
+TypeError is ...
 
 
-## Note on type behaviours
+. So, this works pretty well unless
+the string that in question has no digits. So, if there's no digits,
+it's going to blow up, it's like, whoa. Now, let's read it. Traceback means, I quit. Where? Line 1, it's always line 1 because
+we're in this interactive environment. 
 
-Variable types are very important in Python as different types can show different bahaviour for the same operation. 
-```
-# Sum integers: + works as a mathematical operator 
-print(2 + 5)
-# Sum strings: + works not as a mathematical operator but as a text paste operatior
-print('ab' + 'cb')
-# Sum boolean: the booleans are converted to numerical values and + works as a mathematical operator operatior
-print(True + False)
-print(True + True + True)
-```
-As suggested in the previous example of the sum of booleans, object can be coverted between different types. 
+Can't convert an int object
+to string implicitly
+
+### User input 
+Okay, string conversions. So if we read data,
+which we're going to see in a second, from the outside world
+it comes in as strings. Whether we're reading it from a network or
+from a database, we tend to get these things as strings. 
+. But what if we know that inside of this
+string are actually digits, and we want to get an integer representation, or
+a floating point representation of that? Well, in that case we can
+call the int function, or the float function, passing in a string and
+getting back an integer. 
+
+
+Now,
+how do we get data from the outside world? So, this is the keyboard, eventually we'll
+talk to networks and databases and files. But right now, we want to take
+the keys from the keyboard, and get it into a variable. So, we have another function,
+a special function, the input function. And when Python comes running in here,
+it starts the input function, and the parameter to the input function
+is what's called a prompt. 
+ And so, this program at this
+point pauses until we type, and we hit the Enter key, and then it takes
+that line of input including spaces, whatever I type, and
+puts it in that variable. And then the program continues. A
+
+
 
 
 # Compound types
