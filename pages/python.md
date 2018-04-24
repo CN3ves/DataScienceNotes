@@ -31,18 +31,27 @@ Python can be run interactively by entering `python3` on the command line. This 
 in the prompt and then *Enter* will run the Python command. To exit the Pythom promp, type `exit()` or `quit()`. So a series of statements can be typed in Python and processed interactively and it is possible to write entire programs interactively. However, this would require that it is typed perfectly from beginning to end. Once a program gets beyond a couple of lines of Python, it's much more common use a programming text editor and put all the code in a file. We call this a script or a Python program. Scripts are stored sets of instruction in text files that Python can run. Python scripts are identified by having an extention *.py*. Putting the code in Pyton scrips instead of manually typing it ineratively helps to keep structure ansd avoid retyping everything if one change is required
 
 
+## Syntax
+A big part of any programming language is the syntax.
 
 ## Comments
 
 Before starting, it is important to be aware that **Comments** are important to any programming language. 
 Comments are used to make sure that the code is understandandable and transmissable, improving reproductibility and, very importantly, debugging!
-To add comments to a Python script,use the **#** tag. These comments are not run as Python code, 
-so they will not influence your result. As an example, take the comment on the right, 
+To add comments to a Python script,use the pound (**#**) sign. Any code after # will be ignored by Python, 
+so it is a good way to add human-readable information to document the code. Comments are used to:
+
+  * Describe particular parts of the code, introducing it and what it is expected to do.
+  * Document who wrote the code, when it was written, the code version or any other ancilliary information
+  * Turn off lines of code, for example, resuable debbuging code that is only temporarily needed.
+ 
+Documenting the code properly is extremely important. Overtime, the details of the code will be forgotten and documented code will help figuring out the code. This will help understand, sharing, debbuging and up-dating the code after it has been written. As such, comments are used for future use. 
+
 ```
 # Just greeting the whole world  
 print("Hello World")
 ```
-where *Just greeting the whole world* is completely ignored during execution, but makes the propose of the following code clear to anyone. Note the use of the function **print()**. This function DOES SOMETIME I NEED TO DESCRIBE :)
+*Just greeting the whole world* is completely ignored during execution, but makes the propose of the following code clear to anyone. Note the use of the function **print()**. This function DOES SOMETIME I NEED TO DESCRIBE :)
 The print function can be used with multiple values separated by commas, but every comma adds a space between the different values. This is the most common requirement however, if spaces are not required between the values, they need to be concatenated with +.
 
 ```
@@ -50,16 +59,6 @@ The print function can be used with multiple values separated by commas, but eve
 print("Hello", "World")
 print("Hello" + "World")
 ```
-
-## Syntax
-A big part of any programming language is the syntax.
-
-### Syntax error 
-
-At the begining, Python may seem to be difficult and it is very common to get a Syntax Error thrown back when running a script.
-Even tought it may be demotivating at first, it is important to keep in mind that *Syntax error* means Python is lost, it does not reconise an instruction. When Python finds (*throws*) an error, the program stops and an error messages is displayed. 
-This message tries to explain the problem and identify where (code and line) and why (error type) it occurs.
-
 
 ### Contants
 Constants are fixed values that don't change their values, and thus are constant for all the program. There are different types of 
@@ -198,6 +197,12 @@ print('Hello'); print('World')
 print('Hello')
 print('World')
 ```
+
+### Syntax error 
+
+At the begining, Python may seem to be difficult and it is very common to get a Syntax Error thrown back when running a script.
+Even tought it may be demotivating at first, it is important to keep in mind that *Syntax error* means Python is lost, it does not reconise an instruction. When Python finds (*throws*) an error, the program stops and an error messages is displayed. 
+This message tries to explain the problem and identify where (code and line) and why (error type) it occurs.
 
 
 # Basic types
@@ -352,31 +357,24 @@ Can't convert an int object
 to string implicitly
 
 ### User input 
-Okay, string conversions. So if we read data,
-which we're going to see in a second, from the outside world
-it comes in as strings. Whether we're reading it from a network or
-from a database, we tend to get these things as strings. 
-. But what if we know that inside of this
-string are actually digits, and we want to get an integer representation, or
-a floating point representation of that? Well, in that case we can
-call the int function, or the float function, passing in a string and
-getting back an integer. 
 
+Data read from *outside* of Python (from user input, a file, a network, a database) comes in as strings. , we tend to get these things as strings. TO get user input in Python 3, the function **input()** (raw_input() for Python 2) can be used. 
+The parameter to the input function is what's called a prompt.
 
-Now,
-how do we get data from the outside world? So, this is the keyboard, eventually we'll
-talk to networks and databases and files. But right now, we want to take
-the keys from the keyboard, and get it into a variable. So, we have another function,
-a special function, the input function. And when Python comes running in here,
-it starts the input function, and the parameter to the input function
-is what's called a prompt. 
- And so, this program at this
-point pauses until we type, and we hit the Enter key, and then it takes
-that line of input including spaces, whatever I type, and
-puts it in that variable. And then the program continues. A
+Input is an essential part of a program pattern. This pattern is usually input, processing and output, which are the 
+essential functions of computers: gather some input, do some work to it, and then produce something (*In-work-out*). The work is the hard part usually.  
 
+```
+# Convert elevator floors
+# Europe ground floor is 0 but in US is 1
+inp = input('Europe floor') # In
+usf = int(inp) + 1          # Work
+print('US floor', usf)      # Out
+```
 
-
+### ValueError
+Note that, if the input given to this code is not a number (specifically, cannot be converted to integer). 
+ValueError
 
 # Compound types
 ## List
