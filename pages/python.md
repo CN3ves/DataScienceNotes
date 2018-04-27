@@ -506,23 +506,117 @@ number += 2
 print(number)
 ```
 
-## Conditional
-For more complex program, running sequential code is not enough. It may be important to have some type of decision where the data is analysed and depending on it one thing or another is done. These are called conditional steps and it defines optional parts of the code that may or may not run. If a given **condition** is true, then the statement is run; if it is false, then the statement is skiped. 
+## Conditional step
+For more complex program, running sequential code is not enough. It may be important to have some type of decision where the data is analysed and depending on it one thing or another is done. These are called conditional steps and it defines optional parts of the code that may or may not run. If a given **condition** is true, then the statement is run; if it is false, then the statement is skiped. So depending on the result of an expression, the code will either execute or not execute that is, depending on a condition the code may run. This is why it is called conditional.
+
+One important concept for conditional steps is that of **comparison operators**. As with the mathematical operators before, the conditional operator symbol were defined around the limitations of the keyboards when most of programming languages were designed. Comparison operators can be used on boolean expression to compared two values to return a boolean value. These values can then be used as the condition for a conditional step. The comparison operator are
+  
+  * <: less than
+  * >: greater than
+  * ==: equal to
+  * <=: less of equal to
+  * >=: greater of equal to
+  * !=: not equal to
+
+Note that equality is not represented by *=*, which is the assignement operator. Also, the exclamation (bang) mark is used as a negation symbol, so that *!=* (bang equal!) is the negation of equality and thus, inequality.
+
+```
+print(3 > 5)
+print('Hello' == 'hello')
+print(3<=3)
+print('Equal' != 'Not Equal)
+```
+
+Conditional steps always start with the *if* reserved word followed by a condition that must evaluate to True or False and a colon (:). After the colon, the (sequential) conditional statements are in an indented block, which tells Python they are part of the conditional step. To finish the conditional, de-indent the code. 
+
 ```
 # Conditional step
-number = 3
-if number > 5:
+number = 11
+if number > 50:
+  print('Too big')
+print('Checked number')
+```
+The *if* statment can be used for simple one-way decisions. However, it is very common that a two-way decision is required, that is, the program should either run one part of the code or the other. The reversed word *else* work as a catch-all step at the end of the conditional block. So, if all the previous conditions evaluates to *False*, the *else* statment always evaluated to *True* running as long as nothing else runs. 
+
+```
+# If-then-else block: note that else must be de-indented to the level of if
+number = 11
+if number > 50:
+  print('Too big')
+else:
+  print('That's a good number')
+print('Checked number')
+```
+In addition, a conditional block of code can be defined by multiple sequential comparisons using the reverved word *elif* (else if). It is important to keep in mind that only one condition will run, regardeless of how many would evaluated to *True*. The conditions are checked sequentially (not in parallel) and, as soon as one evaluates to *True*, Python exits the conditional block. A conditional block (started by a *if*) will trigger, at most, once.
+A multi-comparison conditional block starts with a *if*. If other conditions are to be tested after the first, then the *elif* word is used to indicate that these conditionals depend of the previous that is, will one be checked if and only if the previous evaluated to *False*. Note that both *elif* and *else* are optional and that *elif* can be used multiple times.
+
+```
+# Conditional step
+number = 11
+if number > 50:
   print('Too big')
 elif number < 0:
+  print('That's a negative number"!')
+elif number < 5:
   print('Too small')
 else:
   print('That's a good number')
 ```
+  
+  
+### Identation
 
-Conditional steps always start with the *if* reserved word followed by a condition that must evaluate to True or False and a colon (:). After the colon, the (sequential) conditional statements are in an indented block, which tells Python they are part of the conditional step. To finish the conditional, de-indent the code. SAY MORE
+Indentation is an important part of the Python syntax. Not a lot of languages make the indenting of lines a syntactically meaningful thing, but that is how Python works. In other languages, like JavaScript, Java or C, the actual spacing doesn't matter. Indentation is used to visually keep track of blocks of text and make the code more human-readable and the program does not consider it. However, if an indentation is missing, Python will throw and **IndentationError** and quit. In Python, the spacing does matter and indentation is an integral part of Python. Indentation is more important in Python than in almost any other programming language. Indenting, de-indenting or maintaining indentation is a way of defining the start, end or body of a block of code, respectively. The common practice is to use a four space indentation for Python scripts. *Tabs* are strongly disencouradged as Python may not interpret them properly and trow an error. So, even tough it looks the same, using *spaces* is much more stable. The idea is not to put tabs in the code. For this reason, it is important to set the text editor options to auto-indent using spaced instead of tabs.
+
+```
+number = 3
+
+# Indent: Start block
+if number == 3:
+    print('number x is 3!')
+# De-indent: End block
+# Note: Indentation is not required for one line code 
+if number == 3: print('number is 3!')
+# but indentation is fundamental for multi-line blocks
+# and to distinguish sequential conditionals
+
+# Indent: Start block
+if number >= 3: 
+    # Maintain: Body of the block
+    print('x is greater 3!')
+    print('Wait! Maybe x is just equal to 3...')
+# De-indent: End if step (not conditinal block!)
+elif number == 3:
+    print('number was 3 after all...')
+# De-indent: End conditional block (made of multiple conditional steps)
+```
+
+### Try-except
+
+The last conditional code is what's called the try and except structure. This is a more advanced conditional concept, usually associated with *catching errors* instead of flow control. However, it is in essence a speciallised if-the-else structure. 
+Try and except structure is important to *catch* code that might fail (throw and error), setting up and alternative 
+code to run. It is a structure equivalent to run this code if it does not throw an error, else run this other. This is fundamental to *catch* predictable tracebacks (errors), handling them and prevent Python from quitting. 
+
+```
+# Try-except
+number = input('Enter a word')
+try:
+    number = float(number)
+except:
+    print('Oops, I meant a number!')
+    number = -1
+print('The numebr is', number)
+```
+One important think to keep in mind is that the try/except block should be kept to a minimun size. If big blocks of code are included in the try statment, the reason for the traceback to occurs is not obvious and, if there is a traceback, it is actually important to know about. Small Try-except blocks are more informative and thus more useful. These blocks allow, for example, for specific information to be given back to the user without crushing the program or to print specific warnings associated with the traceback generated. 
 
 ## Repeat 
 The real power of computers comes when a series of steps that need to be repeated. There are two reserved key words that can be used to start a loop (repetition): while and for. A loop is created similarly to a conditional step, starting with the key work, follwed by and expression and a colon (:) which marks the beggining of indented code.
+
+
+### Nested code
+
+And if we continue down, we haven't talked about loops yet but the for keyword is a loop and this is telling it to run this thing five times, and it ends in a colon. And then you go in and then you have some sequential code, then you have an if, this is called nested. That's a block within a block.
+
 
 The **while** loop functions like an if statement where it evaluates a conditional statmente and, if it is *True*, it runs the indented code. Once the loop ends (de-indented code), the program goes back and re-evaluates the conditional, reapeating these steps until the conditional evaluates it will not stop. So, constructing while loops require a particular care to avoid situations were infinite loops occurs, blocking the program. 
 
