@@ -347,14 +347,13 @@ print(int(True)
 
 TypeError is ...
 
-
-. So, this works pretty well unless
+So, this works pretty well unless
 the string that in question has no digits. So, if there's no digits,
 it's going to blow up, it's like, whoa. Now, let's read it. Traceback means, I quit. Where? Line 1, it's always line 1 because
 we're in this interactive environment. 
 
 Can't convert an int object
-to string implicitly
+to string implicitly, but an int is implicitly converted to a float.
 
 ### User input 
 
@@ -496,7 +495,7 @@ print(x); print(y); print(z)
 ## Dictionaries
 
 # Flow control
-
+##### (Patterns for code)
 ## Sequential
 There are a couple of basic patterns that can be used for a program. The most basic pattern is what's called sequential. This is simply a coding pattern where statements follow one after the other in a sequence of commands that Python will obligatiry execute in order.
 ```
@@ -626,7 +625,56 @@ Loop can be defined within other loops, which is called nesting, and also with c
 
 
 ## Store and retrive 
-And then the fourth pattern is the store and retrieve pattern.
+For long programs, some lines of code need to be used many times in different places. Repetition of code makes it longer and more difficult to debugg and thus maintain as if one error is found in a piece of repeated code, it has to be manually changed everytime it occurs in the code. It is generally a good programming practice to avoid repetition (D-R-Y: don't repeat yourself). this is the basic essence of the store and reuse pattern, pecenting repeated code. In order to do this, some parts of the code can be stored as a **function** and then reused as required. So a function is a bit of reusable code.
+
+To define a function, the reserved keyword *def* (definition) is used, followed by a number of function arguments (parameters in this case?) in brackets and a colon. The lines of code to be reused are then indented on the function definition block. One key feature of the function definition block is that its code is not executed. During the function definition, Python simply parses the code and stores it, creating a new function that can be called (invoked). So,  there's a side effect *def*, but it doesn't actually run the code. To call a function, the name of the function need to be followed by parentheses and any compulsory arguments associated with it. This is exactly as when using the built-in functions *print()* or *input()*. By defining functions, Python's capacities are extended, and these functions can be thought as new reserves or function names. The naming conventions for function names is the same as for variables and it must still avoid reserved words. 
+
+```
+# Define fucntion
+def greet(lang):
+ if lang == 'es': 
+  print('Hola')
+ elif lang == 'fr':
+  print('Bonjour')
+ else:
+  print('Hello')
+  
+# Invoke function
+print(greet('fr'), 'person!')
+```
+
+The **function parameters** are defined during the call definition. These parameters are just placeholders for the values passed to the function during the invocation and are not real variables, as they do not have an associated piece of memory. These parameters used in the fucntiondefinition will take up (point to) the value sof the **arguments** that are passed during the function call. Arguments are the function inputs, and allow for different function results, while parameters are the *alias* for the arguments used in the function definition.
+
+
+In terms of program flow, when a function is called in Python, it pauses the execution, runs (jumps back to) the previous coded stored as a function and then continues from where the function was called. In addition, more than one parameter used in the functon definition, and the number of arguments on the function call need to match the number and order of these parameters (unless they are optional or named).
+
+```
+# Function with two parameters
+def sum2numbers(a,b):
+ try: 
+  print(int(a)+int(b))
+ except:
+  print('were those numbers?')
+  
+# Invoke function
+sum2numbers(2,3)
+```
+
+Often a function will take its arguments, do some computation and return a value to be used as the result of the calling expression, for example, by assigning it to a variable. These functions are known as "fruitful" functions as they produce  results (or return value). In Python, the reserved word *return* stops the function execution and "sends back" the results of the function, replacing the original function call by this residual value. In opposition, non-fruitful functions do not return a value and are used for their side-effect.
+
+```
+# Fruitful version of sum2numbers
+def sum2numbers(a,b):
+ try: 
+  retunr(int(a)+int(b))
+ except:
+  print('were those numbers?')
+  
+# Invoke function
+s = sum2numbers(2,3)
+print(s+4)
+```
+
 
 ## Random?
 
@@ -639,7 +687,7 @@ any returned value (output) can be assigned durring the function call `output = 
 
 There are a huge number of functions that can be used. The easiest way to find a function for a specific purpose it to use tin internet, including simply googling it, searching stackoverfolw AND OTHER STUFF. To consult the documentation of a function in Python (interactively), the function `help(function_name)` can be used.
 
-DEFINE ARGUMENT AND PARAMETERS
+
 
 ## Built-in functions
 
