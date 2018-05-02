@@ -608,23 +608,56 @@ print('The numebr is', number)
 ```
 One important think to keep in mind is that the try/except block should be kept to a minimun size. If big blocks of code are included in the try statment, the reason for the traceback to occurs is not obvious and, if there is a traceback, it is actually important to know about. Small Try-except blocks are more informative and thus more useful. These blocks allow, for example, for specific information to be given back to the user without crushing the program or to print specific warnings associated with the traceback generated. 
 
-## Repeat 
-The real power of computers comes when a series of steps that need to be repeated. There are two reserved key words that can be used to start a loop (repetition): while and for. A loop is created similarly to a conditional step, starting with the key work, follwed by and expression and a colon (:) which marks the beggining of indented code.
+## Repeat (Iteration)
+The real power and the real benefit of computers comes when a series of steps needs to be repeated. This repeating code is called a loop or iteration. Loop blocks define parts of the code where a repetitive task is required. In Python, there are two keywords to define a loop: the **while** keyword and the **for** keyword. . A loop is created similarly to a conditional step, starting with the key work, follwed by and expression and a colon (:) which marks the beggining of indented code.
+
+### Indefinite loops
+
+The **while** loop functions like an if statement where it evaluates a conditional statment. As for conditional steps, if the statment evaluetes to *True*, the indented code is run, if it evalutates to *False* it is skipped. However, once the loop ends (de-indented code), the program goes back and re-evaluates the conditional statement, instead of terminating the while block, reapeating the code until the conditional evaluates to *False*. Indefinitife loops do not define the number of iterations to do at their start, depending solely on the evaluation of the conditional statment. If this statment neve evaluates to *False*, then the loop does not terminat. This is an **infinite loop**, which will run forever blocking (crashing) program until it is forced to quit. To prevent this from happening, **iteration variables** are used to ensure that the loop will evaluate to false.  These are variables that change with each iteration (repetition) of a loop. Iteration variables are used to control how long the iterations run and when the iterations stop, often corresponding to a sequence of numbers (count down to end). So an infinite loop is generally generated when the iteration vriable is not set up (updating) correctly. As opposed to the the infinite loops, 
+**zero-trip loops** are those loops when the conditional statment always evaluates to *False* and so if will never run. 
+
+```
+# Infinite loop
+n = 5
+while n > 0:
+    print ('Help me, I'm stuck!')
+    
+# Zero-trip loop
+while n < 0:
+    print ('Will I ever get my change?')
+```
+
+Infinite loops can be important (even if dangerous!) for programms that keep running until the user decidess to quit (a clear example is a [game loop](https://en.wikipedia.org/wiki/Game_programming#Game_structure)). In Python, the **break** reserved word is used to quit any loop, regardeless of the iteration variable. When this executable statement runs it ends the current loop and jumps to immediatly to the code following the loop. And as soon as the break executes, the loop is done. Even though the loop may be infinite, usually the break statment will be in a conditional block, effectively defining an *end condition* to the loop. As break can be used multiple times within a loop, it also can be used to define alternative *end conditions*, as *while* only defines one *end condition*. 
+
+Similar to *break*, the **continue** reserved word can also be used to skip step in a loop. However, while *break* ends the loop, *continue* ends the current iteration and continues the loop on the next iteration. 
+
+```
+# Break and continue
+
+n = 0 # Set up iteration variable 
+while True: # infinite loop
+    if n % 2 == 1: 
+        continue
+    if n > 10: 
+        break
+    print(n)
+```
+
+### Definite loops
+Sometimes it's a little tricky to make sure that the loop will terminate. 
+
+
+The **for** loop does not evaluate a conditional, but instead evaluates the idented code using a group of values provided. These values are directly assigned one by one to an **iterator variable** that changes at each run (iteration) of the loop, until all values have been used. Iterator variables may also be defined for while loop indirectly in order to contro the number iterations and ensure that infinite loops are not created. 
 
 
 ### Nested code
 
 And if we continue down, we haven't talked about loops yet but the for keyword is a loop and this is telling it to run this thing five times, and it ends in a colon. And then you go in and then you have some sequential code, then you have an if, this is called nested. That's a block within a block.
 
-
-The **while** loop functions like an if statement where it evaluates a conditional statmente and, if it is *True*, it runs the indented code. Once the loop ends (de-indented code), the program goes back and re-evaluates the conditional, reapeating these steps until the conditional evaluates it will not stop. So, constructing while loops require a particular care to avoid situations were infinite loops occurs, blocking the program. 
-
-The **for** loop does not evaluate a conditional, but instead evaluates the idented code using a group of values provided. These values are directly assigned one by one to an **iterator variable** that changes at each run (iteration) of the loop, until all values have been used. Iterator variables may also be defined for while loop indirectly in order to contro the number iterations and ensure that infinite loops are not created. 
-
 Loop can be defined within other loops, which is called nesting, and also with conditionals. Each nesting level requires a new indentation. Because both conditional and loops require indentation, sequential code is easily identifyed by not being indented in Python.
 
 
-## Store and retrive 
+## Store and retrive (Functions)
 For long programs, some lines of code need to be used many times in different places. Repetition of code makes it longer and more difficult to debugg and thus maintain as if one error is found in a piece of repeated code, it has to be manually changed everytime it occurs in the code. It is generally a good programming practice to avoid repetition (D-R-Y: don't repeat yourself). this is the basic essence of the store and reuse pattern, pecenting repeated code. In order to do this, some parts of the code can be stored as a **function** and then reused as required. So a function is a bit of reusable code.
 
 To define a function, the reserved keyword *def* (definition) is used, followed by a number of function arguments (parameters in this case?) in brackets and a colon. The lines of code to be reused are then indented on the function definition block. One key feature of the function definition block is that its code is not executed. During the function definition, Python simply parses the code and stores it, creating a new function that can be called (invoked). So,  there's a side effect *def*, but it doesn't actually run the code. To call a function, the name of the function need to be followed by parentheses and any compulsory arguments associated with it. This is exactly as when using the built-in functions *print()* or *input()*. By defining functions, Python's capacities are extended, and these functions can be thought as new reserves or function names. The naming conventions for function names is the same as for variables and it must still avoid reserved words. 
