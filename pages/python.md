@@ -644,10 +644,28 @@ while True: # infinite loop
 ```
 
 ### Definite loops
-Sometimes it's a little tricky to make sure that the loop will terminate. 
+Sometimes it's a little tricky to make sure that the while loop will terminate, because these are indefinite loops. Definite loop, efined by the **for** reserved word explicetely define how many times the loop will run, not being dependent on the evaluatio of a conditional statmente. The *for loop* does not evaluate a conditional, but instead evaluates the idented code using a group of values provided (collection). These values are directly assigned one by one to an **iterator variable** that changes at each run (iteration) of the loop, until all values have been used. Definite loops have explicit iteration variables as parte of the syntax. to define the iteration variable, the reserved word **in** is used. The *for loop* will assigned each value of the collection to the iteration variable in order and run the loop. Unlike *while loops*, a *for loop* controls when to stop and what the value of the iteration variabe is automatically. However, any loop can be written as a definite or indefinite loop, as there are equivalent versions of both types. 
+
+```
+# Definite loops 
+for i in [1,5,3,2,4]: # i stands for integer
+    print(i)
+
+# Using a variable
+friends = ['Joseph', 'Gleen', 'Sally']
+for friend in friends:
+    print('Hello', friend)
+
+# Equivalent Indefinite loop
+i = 0
+while i < len(friends):
+    print('Hello', friends[i])
+    i += 1
+```
+
+### Loop idioms
 
 
-The **for** loop does not evaluate a conditional, but instead evaluates the idented code using a group of values provided. These values are directly assigned one by one to an **iterator variable** that changes at each run (iteration) of the loop, until all values have been used. Iterator variables may also be defined for while loop indirectly in order to contro the number iterations and ensure that infinite loops are not created. 
 
 
 ### Nested code
