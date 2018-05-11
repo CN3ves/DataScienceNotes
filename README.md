@@ -8,7 +8,8 @@ So far, these notes were taken from:
  
  * Coursera's Learning Path: Become a Data Scientist
  Python for Everybody Specialization
-   1. Programming for Everybody (Getting Started with Python)
+   1. [Python for Everybody Specialization](https://www.coursera.org/learn/python)
+     * Programming for Everybody (Getting Started with Python)
    
  * Elite Data Science [7-days crash course](https://elitedatascience.com/)
  
