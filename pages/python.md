@@ -375,6 +375,9 @@ print('US floor', usf)      # Out
 Note that, if the input given to this code is not a number (specifically, cannot be converted to integer). 
 ValueError
 
+## None
+None type value representes the absence of a value.
+
 # Compound types
 ## List
 ### Definition
@@ -664,6 +667,110 @@ while i < len(friends):
 ```
 
 ### Loop idioms
+What if we're looking for the largest value or checking to see if 42 is a member of a set or something? Or looking for the largest letter, like the max function? And so we're going to construct loops sort of with an idea of doing something to each value in the set that we're iterating through. And then coming up with some kind of result. And the pattern that we're going to do is we're going to write a for loop. And actually, in this next two segments, I'm going to do the exact same for loop. But we're going to do something before the loop starts, set some variables to initial values. And then we're going to do something to every one of the values in our list. And then, we don't know what the largest value is while the loop is running. And our goal is, when the loop finally finishes, that we have something. Whether it's the maximum, the minimum, the average, the total, how many things there are, how many things match. And so, the iterations are getting us closer to knowing the answer. But they don't instantly know the answer, so we we have to work towards the answer. By setting something and then sort of checking it a bunch of times. And then we have sort of have absolute, the truth comes out at the bottom. 
+
+the trick is "knowing" something about the whole loop when you are stuck writing code that only sees one entry at a time
+
+1. set some initial value
+2. for thing in data:
+3. look for something or do something to each entry separately updating a variable
+4. look at the variables
+
+
+
+But what would be the precise technique that you'd use? And so here are the numbers. Now actually as a human, we love looking at these numbers. Like oh, 74 . But then you ask, like how did your mind exactly find them, right? Our minds go, like [SOUND] there's 74. Our mind doesn't look at them the way a computer looks at them. It just kind of zooms in on 74 and just kind of [SOUND]. But that's not how a computer looks them. A computer has to look at them as 3, 41, 12, 9, 74, 15. I conclude at the very end that 74 is the largest number, right? But a human's just [SOUND] 74. So humans think about this differently. And so we have to realize, the purpose of that last little exercise, was to think when we construct loops how computers are going to attack this kind of a problem. They attack it sequentially. They don't attack it magically the way we humans do. And the way that you do it is you create in your head, and you probably did it, some notion of what is the largest number I've seen so far. Like a variable. 
+So what happens is at the end of the loop, the only thing we knew was the largest we saw so far and when I tell you we're all done. Then the largest we saw so far, like just poof, it is the largest, right? because it's all that we're ever going to see. So that's how you have to construct these loops in Python. So here's a bit of code that does this logical bit here, okay? And so I'm going to make a variable. 
+
+
+largest_so_far = -1 # set up a flag value indicating no numbers were seen yet
+print('Before', largest_so_far)
+for n in [9,4,12,3,74,15]:
+    if n > largest_so_far:
+        largest_so_far = n
+    print(largest_so_far, n)
+print('After', largest_so_far)
+
+
+
+We set something up before, we do something to each value, and then at the end we kind of get the payoff of what we were looking for in the first place. So up next we're going to talk about more of these loop idioms and how to find the smallest, and how to count things, and how to do averages and sums and stuff like that.
+
+we make a variable that contains the largest number we have seen so far. if the current number we are looking at is larger, it is the new largest value we have seen so far
+
+to count how many types we execute a loop, we introduce a counter variable that starts at 0 and we add one to it each time through the loop
+
+counter = 0 
+print('Before', counter)
+for n in [9,4,12,3,74,15]:
+    counter += 1
+    print(counter, n)
+print('After', counter)
+
+
+to add up a value we encounter in a loop, we introduce a sum variable that starts at 0 and we add the value to the sum each time through the loop
+
+sum = 0 
+print('Before', sum)
+for n in [9,4,12,3,74,15]:
+    sum += n
+    print(sum, n)
+print('After', sum)
+
+the difference between the counter and the sum is only one line!
+
+
+an average just combines the counting and sum patterns and divided when the loop is done
+
+counter = 0 
+sum = 0 
+print('Before', counter, sum)
+for n in [9,4,12,3,74,15]:
+    sum += n
+    counter += 1
+    print(counter, sum, n)
+print('After', counter, sum, sum / counter)
+
+
+filtering pattern
+we use an if statmente in the loop to catch / filter the values we are looking for
+
+
+print('Before')
+for n in [9,4,12,3,74,15]:
+    if n > 20:
+        print('Large number', n)
+print('After')
+
+search using a boolean variable
+if we just want to search and know if a value was found, we use a variable that starts at False and is set to True as soons as we find what we are looking for
+
+
+
+found = FALSE  
+print('Before', found)
+for n in [9,4,12,3,74,15]:
+    if n ==3:
+        found = TRUE
+        break #once it is found, not need to search more
+    print(found, n)
+print('After', found)
+
+
+find smallest value
+
+smallest = None # Flag value
+print('Before', smallest)
+for n in [9,4,12,3,74,15]:
+    if smallest is None: # is is more strigt than ==, and implies "is the same as". It has to be the same value on memory, not just a equivalent value (?). (generally used for True, False and None) There is also is not
+       smallest = n # prime (getting started)
+    elif n < smallest:
+        smallest = n
+    print(smallest, n)
+print('After', smallest)
+
+
+
+
+
 
 
 
