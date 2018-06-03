@@ -44,4 +44,4 @@ This problem can be broken down into three main questions:
    3. Compute the next `n-2` values by summing the previous two values.
    4. Stop when the sequence has `n` numbers
  
- [implementation](pages/fibonacci.py)
+ [implementation](pages/fibonacci.md)
