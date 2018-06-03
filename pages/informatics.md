@@ -20,6 +20,8 @@ When programming,
 sometimes new algorithms need to be invented, other times simply implemented those already existing. 
 Most of the time, you're doing a bit of both.
 
+The code itself is simply a sequence of stored instructions that are given to the computer. It is important to keep in mind that, unlike a human being, who has adapted to 
+operate in an error-filled world, the computer is not tolerant to error. While the human brain automatically fix errors in the environment, some of which so efficiently that are unprecepive, a computer does not have any filtering mechanist and will simple stop. The computer is just not that smart, but it has a lot of flexibility in that, if given give it the right instructions, it can do "intelligent" things. So, the programmer is an intermediate between the hardware and the end user. 
 
 ### The Fibonacci series example
 
