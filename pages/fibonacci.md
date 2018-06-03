@@ -1,3 +1,4 @@
+```
 def get_fib_list_length():
 
     # We're stubbing this function, which means having it return a
@@ -69,4 +70,4 @@ def main():
 # function, which in turn runs the other three functions we
 # defined.
 main()
-
+```
