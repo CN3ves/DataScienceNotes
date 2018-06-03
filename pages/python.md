@@ -1,25 +1,61 @@
 # Introduction to Python
 
-A data scientist needs to have the programming skills to be able to acquire and manage large data sets, the statistical skills to extract value from those data, and the business skills to effectively present that value to an audience.
-As such, one of the first steps to become a Data Scientists is to become a programmer. A Data Scientist needs to use compotatuional tools efficiently, writing code that intereact with the data. The code itself is simply a sequence of stored instructions that are given to the computer. It is important to keep in mind that, unlike a human being, who has adapted to 
-operate in an error-filled world, the computer is not tolerant to error. While the human brain automatically fix errors in the environment, some of which so efficiently that are unprecepive, a computer does not have any filtering mechanist and will simple stop. The computer is just not that smart, but it has a lot of flexibility in that, if given give it the right instructions, it can do "intelligent" things. So, the programmer is an intermediate between the hardware and the end user. 
+One of the first steps to become a Data Scientists is to become a programmer. A Data Scientist needs to use computational tools efficiently, writing code that intereact with the data. 
 
 
 Python is one of the most common programming tools used for Data Analysis.
 
- 
+## History
+
+Part of being literate in a programming language is knowing a bit about its history and culture.
+An overview of [Python history](https://en.wikipedia.org/wiki/Python_%28programming_language%29)
+
+Python was conceived by Guido Van Rosson, a Dutch programmer, in the late 1980's. In the 80s, when Python started, most programming languages were very serious and very complex. They were difficult to figure out and required a lot of math. Guido thought he could probably write a programming language that wouldn't be that hard, would be enjoyable to use, but woould also be both powerful. Python's version 1.0 was released in 1994. What started as an hobby project, soon became a general purpose programming language. Even though Python is associated with the snake motif, it turns out that Python was not named after a snake. Instead, it was in honer of the [Monty Python's Flying Circus](https://www.youtube.com/watch?v=iV2ViNJFZC8) commedy. 
+It was meant to be fun to use, thus the name. It turns out that's why Python is such a perfect language to use as a first programming language: it's designed to be easy but it's also powerful.  The Python community continues these values of irreverence and lightheartedness over stuffy formalism. For instance, the Zen of Python, a poem including guiding Python development principles, is built into the Python interpreter:
+```
+# Click the "play" button above and see the output on the right.
+import this
+``` 
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+
 ## Why Python?
-
-Python was conceived by Guido Van Rosson. What started as an hobby project, soon became a general purpose programming language. Even though Python is associated with the snake motif, it turns out that Python was not named after a snake. Instead, it was after the Monty Python's Flying Circus commedy. In the 80s, when Python started, most programming languages were very serious and very complex. They were difficult to figure out and required a lot of math. Guido thought he could probably write a programming language that wouldn't be that hard, would be enjoyable to use, but woould also be both powerful and enjoyable. It was meant to be fun to use, thus the name. It turns out that's why Python is such a perfect language to use as a first programming language: it's designed to be easy but it's also powerful.  
-
 Nowadays, Python can be used to build practically any piece of software. This happaned because Python is open Source and Free! 
 Also, it is very easy to build packages in Python. Thougout time, more and more of these packages were specifically build for data science.
 
+Python is one of many programming languages. It's popular in part because of its clear, English-like syntax and because of the enormous ecosystem of open source Python tools for almost any aspect of scientific computing. Simply stated, Python is currently [eating other languages' lunch](http://www.talyarkoni.org/blog/2013/11/18/the-homogenization-of-scientific-computing-or-why-python-is-steadily-eating-other-languages-lunch/).
+
 Welcome to being a Pythonista.
 
+## Python Enhancement Proposal
+
+The Zen of Python, poem comes from [PEP 20](https://www.python.org/dev/peps/pep-0020/). The "PEP", or "Python Enhancement Proposal", process is how the Python language continues to be developed. Tbout that process his process is described in 
+[PEP 1](https://www.python.org/dev/peps/pep-0001/). Another good PEP to be aware of is 
+[PEP 8](https://www.python.org/dev/peps/pep-0008/), the definitive style guide for Python that describes stylistic conventions adopted by the community. In addition to the nine PEP Editors (including Chris Angelico) Guido retains final say over language development as "Benevolent Dictator For Life".
+
+Each PEP as well as the [Python documentation](https://docs.python.org/3.5/library/) is hosted on python.org. For the last several years the Python development community has been moving over from Python 2 to Python 3. There's still a lot of Python 2 in production so it's good to be aware that it's around. As such, there are two versions of Python, [2.7](https://docs.python.org/2.7/library/) and 3.5. They are pretty similar appart from some syntactical differences, and support for version 2 will fade overtime. 
+
 ## Install/Start Python
-Currently, there are two versions of Python, 2.X and 3.X. They are pretty similar appart from some syntactical differences, 
-but support for version 2 will fade overtime. Python 3 can be installed from [python.org](https://www.python.org/downloads)
+ Python 3 can be installed from [python.org](https://www.python.org/downloads)
 In adidtion, there a number of Python distibutions that may be relevant, like the Anaconda distribution, which includes many science and data analysis libraries. OTHERS ?
 
 Once installed, Python files will be reconise by their extension *.py*. There are many ways to  to run Python. The pasic Python distribution already provides the IDLE Python Shell and other integrated development environments (IDE) such as Spyder (included with the Anaconda distribution) can be obtained. However, the basic way to use Python is by running the command line (see [command line](pages/bash.md) to learn how to use it). Python files can be run by entering `python3 file_name.py` (simply python for Python2). The Python will be run, if it is in the current directory, otherwise, it will not be found. On Windows, typing the file name on it's own will also run Python, as all files with .py are expected to be Python and it knows the Python interpreter where to run. . To check the Python version, enter `python3 --version`.
