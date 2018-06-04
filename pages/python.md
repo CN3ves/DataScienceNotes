@@ -487,6 +487,11 @@ should comment on why there are integers and floats and their representation at 
 Textual data are known as **strings (str)** in Python. These data are defined by delineating quotes,either single or double quotes, as long as both the opening and the closing quote are the same kind.
 
 Words, names, book chapters, emails, text files, all of these are textual data and can be represented by strings. 
+As a programmer you'll frequently work with strings. Here are some common scenarios where you need to understand strings:
+
+  * dealing with any textual data
+  * handling and presenting output from your program
+  * files like CSV's are basically one large string
 
 
 ```
@@ -529,6 +534,166 @@ demand = "Bring me {} shrubberies, {}!"
 print(demand.format(cost, name))
 ```
 
+### What is a string?
+A string is a sequence of characters. In Python, we can assign string values to variables by using either single or double quotes around our sequence of characters. Either single or double quotes are fine. The key is that the outermost quote delimiters must both be either single or double.
+
+```
+>>> spam = "Spam!"
+>>> eggs = 'Eggs!'
+>>> print(spam)
+'Spam!'
+>>> print(eggs)
+'Eggs!'
+```
+You can also use triple quotes ''' to create big multi-line strings:
+```
+book_of_armaments = '''
+And the Lord spake, saying, "First shalt thou take out the Holy Pin.
+Then shalt thou count to three, no more, no less.
+Three shall be the number thou shalt count, and the number of the counting shall be three.
+Four shalt thou not count, neither count thou two, excepting that thou then proceed to three.
+Five is right out.
+'''
+```
+Strings are used to represent text. Python 3 handles strings much better than Python 2, which is one of Python 3's great strengths. Python should be able to handle just about any Unicode that you throw at it, so strings like "passé" and "schöne" and "ねこ" are all fair game.
+```
+Strings are used to represent text. Python 3 handles strings much better than Python 2, which is one of Python 3's great strengths. Python should be able to handle just about any Unicode that you throw at it, so strings like "passé" and "schöne" and "ねこ" are all fair game.
+```
+
+### Special Characters and Escaping
+
+Some characters can be tricky to use. Let's say you want to use the " character inside of a string. Maybe you want to use double quotes to represent a quotation. One way to do that is to wrap your string in single quotes ', but what if that isn't an option? Or what if your string also includes an apostrophe?
+
+This is a case where we need to use a \ backslash in order to escape a character. In other contexts, the backslash is used to indicate special characters, such as a line break (\n) or a tab (\t) character. For instance, 'name:\tJohn' would give us a string with "name:" and "John" separated by a tab.
+
+```
+# Internal quotation marks can really mess up your strings if you
+# don't escape them with a backslash.
+
+line = "He said, \"Sure, let's rock!\"";
+print(line)
+
+# You can also escape special characters like \n for newline
+# and \t for tab.
+employees = 'FIRST\tLAST\njohn\tcleese\neric\tidle'
+print(employees)
+```
+
+### Concatenating and Repeating Strings
+
+Python lets us use the + operator to concatenate — which just means "connect" — two strings into a bigger one.
+
+You can also use the * operator to repeat a string.
+```
+# Use the `+` operator to concatenate.
+beginning = 'The quick brown fox '
+end = 'jumps over the lazy dog.'
+full_sentence = beginning + end
+print(full_sentence)
+
+# Use the `*` operator to repeat.
+print('Na' * 16 + " Batman!")
+
+# Remember that strings aren't numbers, even when they may look like
+# numbers, so trying to do math with them won't work the way you
+# expect.
+print("12" + "3")
+print("100" * 2)
+```
+### Indexes and Slicing
+
+Each character of a string has an index, starting at 0 for the first character. You can access each character in a string by index using bracket notation. You can also access larger chunks of a string using slicing. While using a single index will give you a single character, using two indexes separated by a colon : will give you a substring. The character at the start index is always included in the substring you get back, and the character at the end index is always excluded.
+When slicing strings you can omit one of the indexes and Python will assume you want to start from the beginning or go all the way to the end, depending on which index you omit. You can also use negative numbers as indexes. When using negative numbers you start counting from the end, beginning with -1 as the last character in a string.
+
+```
+>>> 'Hello'[0]
+'H'
+>>> 'Hello'[4]
+'o'
+>>>'Monty Python'[0:5]
+'Monty'
+>>> 'Monty Python'[6:8]
+'Py'
+>>> 'Monty Python'[:5]
+"Monty"
+>>> 'Monty Python'[6:]
+"Python"
+>>>'Monty Python'[-1]
+'n'
+>>> 'Monty Python'[-3]
+'h'
+```
+
+### Comparing Strings
+
+You can use the == operator to compare two strings to see if they're identical. 
+
+
+```
+>>> food = 'eggs';
+>>> breakfast = 'eggs';
+>>> lunch = 'spam';
+
+>>> food == breakfast
+True
+>>> breakfast == lunch
+False
+```
+
+
+### String methods
+
+All strings in Python share a number of [built-in methods](https://docs.python.org/3.5/library/stdtypes.html#string-methods). 
+ Methods are called by following the string with a . , then the name of the method, and then parentheses ( ) surrounding arguments, if any, that you're passing in to the method. 
+ 
+```
+# Return a new string with a capitalized first character.
+'hello'.capitalize()
+
+# As you read through these make a guess about what the result
+# will be, then check your guess by `print()`ing each statement
+# and running the code.
+print('hello'.capitalize())
+
+# Return a new string where all characters are lower case
+'Hello'.lower()
+'WORLD'.lower()
+
+# Check whether all characters are numeric.
+'1337'.isdecimal()
+'p2p'.isdecimal()
+
+# Check whether all characters are alpha.
+'hello'.isalpha()
+'p2p'.isalpha()
+
+# Find the index of the first occurance of a substring. 
+'hello'.find('l')
+'world'.find('l')
+
+# Check the end of a string.
+'hello'.endswith('o')
+'world'.endswith('o')
+'world'.endswith('rld')
+
+# Split a string into a list of strings at each instance of a
+# substring.
+'The-quick-brown-fox'.split('-')
+
+# Join a list of strings into one single string. Try passing a
+# different string into this method.
+'_'.join(['The', 'quick', 'brown', 'fox'])
+
+# "Format" a string by replacing `{}` with the arguments you
+# supply to the function.
+'Player {} has {} hit points remaining'.format(1, 42)
+'My favorite drink is {} with {} dashes of {}'.format('whiskey', 3, 'bitters')
+
+# Use the space below to play around with these methods and print
+#different things out.
+```
+
+ 
 ## Booleans
 
 There are also logical values known as **booleans (bool)**
@@ -966,7 +1131,10 @@ else:
   
 ### Identation
 
+This style of indentation is best practice in most programming languages because it makes programs easier to read, but in Python indentation isn't just a good idea. It's the law. In Python indentation has semantic meaning. 
 Indentation is an important part of the Python syntax. Not a lot of languages make the indenting of lines a syntactically meaningful thing, but that is how Python works. In other languages, like JavaScript, Java or C, the actual spacing doesn't matter. Indentation is used to visually keep track of blocks of text and make the code more human-readable and the program does not consider it. However, if an indentation is missing, Python will throw and **IndentationError** and quit. In Python, the spacing does matter and indentation is an integral part of Python. Indentation is more important in Python than in almost any other programming language. Indenting, de-indenting or maintaining indentation is a way of defining the start, end or body of a block of code, respectively. The common practice is to use a four space indentation for Python scripts. *Tabs* are strongly disencouradged as Python may not interpret them properly and trow an error. So, even tough it looks the same, using *spaces* is much more stable. The idea is not to put tabs in the code. For this reason, it is important to set the text editor options to auto-indent using spaced instead of tabs.
+
+It may seem that assigning semantic meaning to indentation whitespace is an odd decision, particularly for programmer experienced working in other programming languages that are designed differently. The advantage of giving indentation semantic meaning, though, is that there is no need to use characters like ; to end statements or { and } characters surrounding code blocks to tell the interpreter where a code block starts and ends. Indentation should be used properly anyway, so Python enforces proper indentation and uses that indentation to allow the code to looks more like English.
 
 ```
 number = 3
@@ -1181,9 +1349,28 @@ Loop can be defined within other loops, which is called nesting, and also with c
 
 
 ## Store and retrive (Functions)
-For long programs, some lines of code need to be used many times in different places. Repetition of code makes it longer and more difficult to debugg and thus maintain as if one error is found in a piece of repeated code, it has to be manually changed everytime it occurs in the code. It is generally a good programming practice to avoid repetition (D-R-Y: don't repeat yourself). this is the basic essence of the store and reuse pattern, pecenting repeated code. In order to do this, some parts of the code can be stored as a **function** and then reused as required. So a function is a bit of reusable code.
+For long programs, some lines of code need to be used many times in different places. Repetition of code makes it longer and more difficult to debugg and thus maintain as if one error is found in a piece of repeated code, it has to be manually changed everytime it occurs in the code. It is generally a good programming practice to avoid repetition (D-R-Y: don't repeat yourself). this is the basic essence of the store and reuse pattern, pecenting repeated code. In order to do this, some parts of the code can be stored as a **function** and then reused as required. 
+Functions are one of the most important concepts in programming. A function describes a repeatable process or behavior. It is a set of instructions (behaviour) that is defined once, and can then be run and re-run as many times as needed. That's where functions shine: write code once and run it as many times as you like by simply calling the function.
 
-To define a function, the reserved keyword *def* (definition) is used, followed by a number of function arguments (parameters in this case?) in brackets and a colon. The lines of code to be reused are then indented on the function definition block. One key feature of the function definition block is that its code is not executed. During the function definition, Python simply parses the code and stores it, creating a new function that can be called (invoked). So,  there's a side effect *def*, but it doesn't actually run the code. To call a function, the name of the function need to be followed by parentheses and any compulsory arguments associated with it. This is exactly as when using the built-in functions *print()* or *input()*. By defining functions, Python's capacities are extended, and these functions can be thought as new reserves or function names. The naming conventions for function names is the same as for variables and it must still avoid reserved words. 
+There are two distinct moments to consider when working with functions: the initial definition of a function and the execution (or "call") of a function that has already been defined.
+
+To define a function, the reserved keyword *def* (definition) is used, followed by a list of the function's parameters in brackets and a colon. This forms the header of the function. The lines of code to be reused are then indented on the function definition block, which is the main body of the function. One key feature of the function definition block is that its code is not executed. During the function definition, Python simply parses the code and stores it, creating a new function that can be called (invoked). So, there's a side effect *def*, but it doesn't actually run the code. Once you've defined a function you have a named block of code that you can execute when you call the function by name. To call a function, the name of the function need to be followed by parentheses and any compulsory arguments associated with it. This is exactly as when using the built-in functions *print()* or *input()*. By defining functions, Python's capacities are extended, and these functions can be thought as new reserves or function names. The naming conventions for function names is the same as for variables and it must still avoid reserved words. 
+
+```
+# Here's a function that calculates and returns the variance of
+# a list of numbers. There's a lot going on here. Don't sweat the
+# details.
+
+def variance(numbers):
+    length = len(numbers)
+    mean = sum(numbers) / length
+    square_differences_from_mean = []
+    for number in numbers:
+        square_differences_from_mean.append((number - mean) ** 2)
+    sum_of_square_differences = sum(square_differences_from_mean)
+    variance = sum_of_square_differences / length
+    return variance
+```
 
 ```
 # Define fucntion
@@ -1197,9 +1384,13 @@ def greet(lang):
   
 # Invoke function
 print(greet('fr'), 'person!')
+
+# Zero parameter function
+def hello():
+  print('Hello!')
 ```
 
-The **function parameters** are defined during the call definition. These parameters are just placeholders for the values passed to the function during the invocation and are not real variables, as they do not have an associated piece of memory. These parameters used in the fucntiondefinition will take up (point to) the value sof the **arguments** that are passed during the function call. Arguments are the function inputs, and allow for different function results, while parameters are the *alias* for the arguments used in the function definition.
+The **function parameters** are defined during the call definition and the function will expect them to be passed inside to the main body of the function when the function is called. However, these parameters are just placeholders for the values passed to the function during the invocation and are not real variables, as they do not have an associated piece of memory. These parameters used in the fucntion definition will take up (point to) the values of the **arguments** that are passed during the function call. Arguments are the function inputs (the values that is passed into the function) , and allow for different function results, while parameters are the *alias* for the arguments used in the function definition. So, , an argument is a value that gets passed to the function and assigned to a corresponding parameter, which is used inside the function.
 
 
 In terms of program flow, when a function is called in Python, it pauses the execution, runs (jumps back to) the previous coded stored as a function and then continues from where the function was called. In addition, more than one parameter used in the functon definition, and the number of arguments on the function call need to match the number and order of these parameters (unless they are optional or named).
@@ -1216,13 +1407,13 @@ def sum2numbers(a,b):
 sum2numbers(2,3)
 ```
 
-Often a function will take its arguments, do some computation and return a value to be used as the result of the calling expression, for example, by assigning it to a variable. These functions are known as "fruitful" functions as they produce  results (or return value). In Python, the reserved word *return* stops the function execution and "sends back" the results of the function, replacing the original function call by this residual value. In opposition, non-fruitful functions do not return a value and are used for their side-effect.
+Often a function will take its arguments, do some computation and return a value to be used as the result of the calling expression, for example, by assigning it to a variable. These functions are known as "fruitful" functions as they produce  results (or return value). In Python, the reserved word *return* stops the function execution and "sends back" the results of the function, replacing the original function call by this residual value. Return statements tell your function that its job is done and will end the execution of the instructions in your function body. That means any code coming after your return statement inside the function body won't be executed. In opposition, non-fruitful functions do not return a value and are used for their side-effect.
 
 ```
 # Fruitful version of sum2numbers
 def sum2numbers(a,b):
  try: 
-  retunr(int(a)+int(b))
+  return(int(a)+int(b))
  except:
   print('were those numbers?')
   
@@ -1230,11 +1421,94 @@ def sum2numbers(a,b):
 s = sum2numbers(2,3)
 print(s+4)
 ```
+```
+Return statements tell your function that its job is done and will end the execution of the instructions in your function body. That means any code coming after your return statement inside the function body won't be executed.
+```
+### Functions: programming vs. mathematics
+In math, a function is a way to map each input onto a single output. The math function f(x) = 2x, for example, maps the input 3 onto the output 6 and the input 1337 onto the output 2674. Python functions, however, are a defined set of instructions that you can call and execute. You can write that set of instructions to behave like a math function and map arguments onto a return value, but that isn't necessary. In fact, Python functions don't even need to have input or output values at all. The print() function is an example: it displays a message to you but doesn't return any value at all.
 
+In programming, functions that have this mathematical property of mapping arguments onto exactly one return value are called "determinate" functions. Using determinate functions makes your code easier to reason about because you don't need to keep the state of the rest of your program in mind in order to know how the function will act.
+```
+# Here is an example of a determinate function. It takes an input
+# and maps it onto a single return value. Every time you call this
+# function with the same input you'll get the same output.
+
+def double(num):
+    return num * 2
+    
+print(double(6))
+
+# Here is an example of a function that isn't  determinate. It
+# looks at data beyond the argument passed in and outputs a
+# different value depending on what's happening' with an unrelated
+# variable. 
+secret_number = 100
+def multiply_by_secret(num):
+    return num * secret_number
+
+# Here we'll call and print `multiply_by_secret`.
+print(multiply_by_secret(13))
+
+# Here we'll call it again but first change the value of
+# `secret_number`. Note how line 19 and line 25 are identical but
+# produce different output.
+secret_number = 2
+print(multiply_by_secret(13))
+
+# Functions like this that can return a different value when
+# called with the same argument are not "determinate" functions.
+
+```
+Speaking of state, if the state of your program affecting the output of your function means your function isn't determinate, what about the reverse case where your function affects the state of your program? In math that isn't possible, but since Python functions are just a collection of instructions it is possible to modify state of your program. A function that modifies the state of your program is said to have side effects. In general it's better to write your functions so they don't have unneeded side effects. In fact, Python intentionally makes it difficult to modify variables outside a function's scope (more on "scope" later) by requiring you to explicitly declare you want to do that with the global keyword as we did in the example above.
+A Python function that is both determinate and has no side effects works essentially like a function in mathematics. Python functions with each of these two properties are called "pure functions".
+
+```
+# This global variable keeps track of the state of our program.
+customer_count = 0
+
+# This function has a side effect: it changes the state of the
+# program  when it's called. Note that it doesn't even have a real
+# return value.
+def add_customers(n):
+    global customer_count
+    customer_count = customer_count + n
+    print("Added {} new customers".format(n))
+    return None
+    
+# First let's print the state of our program before changing it.
+print(customer_count)
+
+# Now let's call our function and see what happens.
+add_customers(10)
+add_customers(3)
+print(customer_count)
+
+# Here is a much better approach.
+sale_count = 0
+
+def add_sale(n, sale_count):
+    return n + sale_count
+
+sale_count = add_sale(40, sale_count)
+sale_count = add_sale(2, sale_count)
+print(sale_count)
+
+# Stretch goal: Can you think of a way to rewrite the
+# `add_customers()` function so that it doesn't rely on side
+# effects and instead makes use of the function's return value?
+# Hint: you'll also want to change the way you call the function
+# once you use it.
+```
+
+### nomenclature
+
+The name print() is well chosen. Just knowing the name of the function gives us a good sense of what it does. As with variables, a well chosen function name can make clear what might otherwise require multiple lines of comments to explain.
+
+Well crafted functions like print() have a single responsibility. This means that they are designed to do one thing and do it well. print()'s sole responsibility is to display information to the user. When you are writing functions strive to keep each one as simple and focused as possible. If you have a big function doing lots of different things it might be time to split your function up into multiple smaller functions.
 
 ## Random?
 
-# Functions
+# Functions (repeated)
 
 A function is a piece of reusable code aimed at solving a particular task. For example, the function type() can be used to return the type of a variable. instead of writting the code everytime, functions can be called. THIS IS GOOD BECAUSE I SHOULD HAVE  DISCUSSED WHY REUSING CODE IS GOOD. Functions work like a black box where inputs are given the ouputs are generated without haveing to think about the computational steps involved, which makes the code easier to understand and cleaner.
 
