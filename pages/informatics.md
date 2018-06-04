@@ -16,6 +16,8 @@ computer can understand and execute your solution.
 Programmers by definition must master at least one programming languages, 
 but the ability to move from high level language, to a clear set of instructions, 
 to implementing the instructions using clean code is the key skill of any the programmer.
+Thus a programmer must be able to efficiently implement instructions that solve some problem, 
+a problem which might be as simple as trimming unnecessary white space from data or as complex as modeling the stock market.
 When programming, 
 sometimes new algorithms need to be invented, other times simply implemented those already existing. 
 Most of the time, you're doing a bit of both.
