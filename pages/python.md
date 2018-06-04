@@ -531,7 +531,7 @@ print(demand.format(cost, name))
 
 ## Booleans
 
-There are also logical values know as **booleans (bool)**
+There are also logical values known as **booleans (bool)**
 Booleans signify truth and falsity. A boolean has just two possible values: True and False.
 
 ```
@@ -688,10 +688,20 @@ ValueError
 
 
 
-# Compound types
+# Compound types (collections)
+
+The basic Python types allow for the storage of one single value. For scripts requiring a large number of values to be stored, it is inconvinient to create a new variable for each value. It would be impossible to assign a value to meaningfull and distinct names to each variable, making the code would be unreadable.
+Storing a single value in a variable is not enough for higher complexity programs. 
+More often, several related values are needed and defining a variable of each would be 
+unfeasable. As such, compounded data types allow for storing collections of values on one single variable, 
+generating  of values. 
+Python gives you several great built-in data structures such as lists, dictionaries and tuples.
+
+
 ## List
 ### Definition
-The basic Python types allow for the storage of one single value. For scripts requiring a large number of values to be stored, it is inconvinient to create a new variable for each value. It would be impossible to assign a value to meaningfull and distinct names to each variable, making the code would be unreadable. A **list** one compound data type which is used to group values together, storing them in a single varaible. Lists can store values (elements) of any type, including any of the basic data types, other lists and even more advanced types, whithin the same variable. Lists instances can be initiated using the **list()** function or, more commonly, square brackets **[]**.
+
+A **list** is a ordered collection of data which is used to group values together, storing them in a single varaible. Lists can store values (elements) of any type, including any of the basic data types, other lists and even more advanced types, whithin the same variable. Lists instances can be initiated using the **list()** function or, more commonly, square brackets **[]**.
 
 ```
 # Declaring list with list()
@@ -702,6 +712,38 @@ lst = ['a',1, True]
 lst = [[1, 2, 3], [4, 5, 7]]
 lst = [1 + 2, "a" * 5, 3]
 print(type(lst))
+```
+
+You can put any value into a list that you like, even another list. Just like the characters in a string, the elements in a list are ordered and can be accessed by index with bracket notation.
+
+```
+# Start by assigning some lists to variables.
+inventory = ["beans", "coin", "tome"]
+tome_dimensions = [8.5, 11, 2]
+
+# Lists in lists...
+random_stuff = [True, 3.14, ["pie", "pizza", "automobile"]]
+battleship_board = [[1, 1, 0], [1, 0, 1], [0, 0, 1]]
+
+# Just like with strings you can access list elements by index
+# with bracket notation. We start counting at zero:
+print(inventory[0])
+print(random_stuff[2])
+
+# With nested lists you can continue digging down with additional
+# indexes:
+print(random_stuff[2][0])
+
+# Lists have a particular length.
+inventory_size = len(inventory)
+print("You have {} items in your inventory".format(inventory_size))
+
+# Lists are easy to modify. We'll cover this in more detail later.
+inventory.append("magic sword")
+print(inventory)
+
+# Can you think of a way to print 3.14 solely by referencing the
+# variables above?
 ```
 
 Note that a list of lists can be though of as a 2 dimentional matrix. The matrix is represented by the outer lists and each inner list is a row of values. The index in each row is consequently the column of the matrix. EXPLAIN WHAT A MATRIX IS?
@@ -806,6 +848,52 @@ print(x); print(y); print(z)
 ## Tuples
 
 ## Dictionaries
+Dictionaries are another way to collect several pieces of data together.
+While a list stores that data as an ordered sequence, dictionaries store that data as an unordered 
+collection of key-value pairs.
+
+To create a dictionary, wrap key-value pairs in curly braces, with each key is separated from its value by a colon :, and each key-value pair is separated from other pairs with a comma ,.
+```
+adventurer = {"name": "grae", "profession": "magician"}
+```
+Just like lists, you can use bracket notation to access the data in a dictionary. Unlike lists, where you use an index number, with dictionaries you look up data using a particular key.
+
+```
+# Here's a super simple dictionary:
+person = {"name": "grae", "profession": "magician"}
+
+# Dictionaries are great for grouping related data together.
+# Let's make a dictionary with more data.
+
+# Note how we split each key-value pair onto a new line. This
+# can make dictionaries much easier to read.
+hero = {
+    "name": None,
+    "species": "Human",
+    "strength": 4,
+    "magic": 5,
+    "profession": None,
+}
+
+# Let's check the hero's name again. Just like lists, we use
+# bracket notation.
+if hero["name"] is None:
+    # We modify dictionary values just like we access them.
+    hero["name"] = input("What is your name?")
+    print("Fantastic, thanks {}".format(hero["name"]))
+
+# You can also add a new key-value pairs using the same bracket
+# notation syntax.
+hero["favorite_color"] = "Octarine"
+print(hero["favorite_color"])
+
+# Try inserting a line of code below this comment that changes
+# the hero's `profession` from `None` to another value so the next
+# print statement works well.
+
+print("Ok {}, you are a {} {}.".format(hero["name"], hero["species"], hero["profession"]))
+```
+
 
 # Flow control
 ##### (Patterns for code)
