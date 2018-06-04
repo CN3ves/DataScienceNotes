@@ -18,24 +18,24 @@ import this
 ``` 
 The Zen of Python, by Tim Peters
 
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren't special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you're Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it's a bad idea.
-If the implementation is easy to explain, it may be a good idea.
+Beautiful is better than ugly.  
+Explicit is better than implicit.  
+Simple is better than complex.  
+Complex is better than complicated.  
+Flat is better than nested.  
+Sparse is better than dense.  
+Readability counts.  
+Special cases aren't special enough to break the rules.  
+Although practicality beats purity.  
+Errors should never pass silently.  
+Unless explicitly silenced.  
+In the face of ambiguity, refuse the temptation to guess.  
+There should be one-- and preferably only one --obvious way to do it.  
+Although that way may not be obvious at first unless you're Dutch.  
+Now is better than never.  
+Although never is often better than *right* now.  
+If the implementation is hard to explain, it's a bad idea.  
+If the implementation is easy to explain, it may be a good idea.  
 Namespaces are one honking great idea -- let's do more of those!
 
 ## Why Python?
@@ -102,6 +102,7 @@ Constants are fixed values that don't change their values, and thus are constant
 constants, which are related to basic object types ([see later](#Basic types)) 
 such as numeric (integer and float) and text (string) constants.
 
+**are these constants or literals?**
 
 ### Operators 
 All programming languages have various operators. These operators historically come
@@ -121,26 +122,134 @@ So these had to be mappped mathematical formulas and functions:
 
 ### Variables
 
-Fundamental to any programming languase is the concept of **variable**, which is a *"storage"* for values in the memory.
-A Python variable is declared (created) with a specific, case-sensitive name. Variable declaration allocates a value to a bit of memory and "labels" it with a name. Once assigned to the memory, the computer can "remember" the value and Python retrive it by using a calling a variable that *points* to the stored value. This takes advantage of the great memory capacity of computers to simplifying the code and make it more reproducible and readable. 
-As such, variables are used all the time in Python. To declare a variable, the assignment operator **=** can be used to assigned the value on the right to the variable on the left. Note that, even though programming logic is rooting on mathmatics, programming notation may not strictly match mathematical notation. The assignment statement do not mean equality.  Once declared, a variable name can be used instead of the value. This is fundamental when working with complex objects.
+Fundamental to any programming languase is the concept of **variable**, which is a named *"storage"* for values in the memory.
+A Python variable is declared (created) with a specific, case-sensitive name. Variable declaration allocates a value to a bit of memory and "labels" it with a name. Once assigned to the memory, the computer can "remember" the value and Python retrive it by using a calling a variable that *points* to the stored value. This takes advantage of the great memory capacity of computers to simplifying the code and make it more reproducible and readable. As such, variables are used all the time in Python. 
 
+There are two distinct moments when working with variables in Python: assigning a value to a variable, and retrieving the value from a variable. To declare a variable, the assignment operator **=** can be used to assigned the value on the right to the variable on the left. Note that, even though programming logic is rooting on mathmatics, programming notation may not strictly match mathematical notation. The assignment statement do not mean equality.  Once declared, a variable name can be used instead of the value. This is fundamental when working with complex objects. To access the value in a variable, you simply refer to the variable in your code. 
 
 ```
-# Declaring a variable
+# Declaring variables
 x = 5
+my_name = "Guido van Rossum"
+
+# Retrieving variables
 print(x)
+print("Hello world, my name is " + my_name + ".")
+
+
 ```
-There are some **naming rules** for variables. Variable names can start variable names with letters
-or underscores, folowed by any combination of letters, numbers, and underscores. In addition, variable names are 
-case sensitive. Simply ensuring that variable names are valid, leads to a number of confunsing possiblilities. As such, 
-standard *good practice* numenclature are used: 
+It's important to note that the = operator is assigning a value to a variable, not asserting that two different values are equal. When you see the = character in mathematical statements it's an "equals sign", and means that the value on both sides are equal. For example: 2 + 2 = 4 is a perfectly reasonable mathematical statement. But that's not how = works in Python. 
+
+Variables open up two possibilities for programmers: 
+
+  1. Provide a shorthand way to refer to values created elsewhere in a program. Once declared and defined, a variable can be used to passe a value around without having to rewrite the value each time.
+
+```
+# This URL is long. Let's write it just once and store it in a
+# variable to use later.
+base_url = "thinkful-students.slack.com/messages/"
+
+# We're going to use newlines ("\n") to format things nicely.
+empty_line = "\n"
+
+print("The Thinkful Slack community is a great place to get help or share your work.")
+print(empty_line)
+
+print("#general-discussion is where everyone can chat about whatever they like")
+print("You can get there by going to:")
+
+# Now we're going to start using our `base_url` variable multiple
+# times.
+print(base_url + "general-discussion")
+print(empty_line)
+
+print("Data science specific conversation is good for #data-science, at:")
+print(base_url + 'data-science')
+print(empty_line)
+
+print("There's also a #careers channel dedicated to job-hunting:")
+print(base_url + "careers")
+print(empty_line)
+
+print("Be sure to find your mentor on Slack and introduce yourself to the community.")
+
+# Be sure to click the "run" button at the top of this trinket if
+# you haven't yet.
+```
+  2. Provide a way to manage the state in a program. The state is the abstract representation of values, wich may persiste or be modified values over time. Each set of values at a specific time (part of the code) defines a program a *state*.
+
+```
+# Ask the user for input and store the result in a variable.
+bottle_count = int(input("How many bottles of beer are on the wall?"))
+
+print("There are {} bottles of beer on the wall.".format(bottle_count))
+
+if input("Would you like to take any down?") == "yes":
+    removed_bottles = int(input("Ok, how many?"))
+    bottle_count = bottle_count - removed_bottles
+    print("There are now {} bottles on the wall".format(bottle_count))
+else:
+    print("Ok, there are still {} bottles on the wall.".format(bottle_count))
+
+# Click "Run" above to run this program. If you break it just click
+# "Run" again or choose "Reset" from the menu at the top left.
+```
+
+#### Naming rules
+
+The names choosen for variables are important. There are some syntax **naming rules** for variables that must be followed in order for the Python interpreter to recognize them as variables. Python will only accept variable 
+names: 
+
+  * Starting with a letter or an underscores
+  * Comtaining only a combination of letters, numbers, and underscores. 
+  * Not a reversed word
+
+```
+# Valid variables
+name = "Guido"
+favorite_painter = "Mondrian"
+__password__ = "hunter7"
+job1 = "Programmer"
+job2 = "Benevolent Dictator"
+
+# Variable name doesn't start with a letter or underscore:
+1st_name = "Guido"
+
+# Variable name includes a disallowed character: `-`:
+my-password = "hunter2"
+
+# Variable names can't be keywords like `else`:
+else = 1
+```
+
+In addition, variable names are case sensitive, so variables python; Python and PyThOn are all different.
+```
+#Case sensitive naming 
+python = 'Snake'
+Python = 'Language'
+PyThOn = 3
+python = 'Snake 2'
+
+print(python)
+print(Python)
+print(PyThOn)
+```
+
+Simply ensuring that variable names are valid, leads to a number of confunsing possibilities, such 
+as *PyThOn*. As such, there are stylistic conventions about how variables should be named which 
+are taken as the standard *good practice* nomenclature. These best practices should be followed,  
+not because the code would otherwise break, but because it will make the code look more familiar to 
+other *Pythonistas*, thus clearer, more understandable and easier to maintain. 
+[PEP 8](https://www.python.org/dev/peps/pep-0008/) contains most of the relevant Python style recommendations.
   
+  * Python developers generally use lower_case_with_underscores ("snake case") for variable names. 
+  A Python variable name should have lower case letter throughout with words separated by an underscore _ character. 
+  * Upper case is used to signal specific types of varibles, in particular ALLCAPS for [constants](https://www.python.org/dev/peps/pep-0008/#constants). 
+  * CamelCase, which uses a mixture of cases, with upper case being used to separate words in the variabe name, 
+  instead of underscores, can be used for [classes](https://www.python.org/dev/peps/pep-0008/#class-names)
   * Avoid starting variable names with underscores. These variables are reserved for specific uses, particular for Python (*e.g.*  methods) internal purposes.
-  * Generally, the variable names are lower case, with upper case being used to signal specific types of varibles (*e.g.* classes). 
-  * Some applications use what's called CamelCase, which uses a mixture of cases, with upper case being used to separate words in the variabe name. Generally, these words are separated with underscores. 
-  * Above all, use distinct, mnemoric, non-redundant names. Even though Python doesn't care (or interpret) what name is given to a variable, using sensible human-readable names will improve code readability and thus, code debugging and code sharing and review. Variable naming is not intended to communicate any additional information to Python, but it is fundamental to clealy communicate the purpose of the code to a reader. Generally, names should be reader-friendly and communitate their purpose.
-  
+  * Above all, use distinct, mnemoric, non-redundant names. Even though Python doesn't care (or interpret) what name is given to a variable, using sensible human-readable names that describe the underlying value and reflect how the variable gets used
+will improve code readability and thus, code debugging and code sharing and review. Variable naming is not intended to communicate any additional information to Python, but it is fundamental to clealy communicate the purpose of the code to a reader. Generally, names should be reader-friendly and communitate their purpose. A well chosen variable name can help other people reading the code to understand how the variable is intended to be used. For example, full words are generally better than single characters or abbreviations.
 
 ```
 # Not valid names (syntax error)
@@ -152,7 +261,19 @@ _x5yY8w = 5
 number_five = 5
 n_five = 5
 NumberFive = 5
+
+# Bad:
+p = 0
+n = "Guido van Rossum"
+b_btls = 99
+# Good:
+position = 0
+name = "Guido van Rossum"
+beer_bottles = 99
 ```
+
+Naming variables is [more of an art than a science](https://medium.com/@drb/pep-8-beautiful-code-and-the-tyranny-of-guidelines-f96499f5ac17), but as a general rule of thumb, the more the code reads like an English sentence the better chosen are the variable names.
+
 Variable assignment follows two steps:
 
   1. Evalute the expression on the right side to a value
@@ -177,6 +298,9 @@ print(n)
 
 
 ### Reserved words
+
+Reserved words are a special category of words that you're not allowed to use as variable names in a given programming language. For instance, in Python, you can't reassign the name True or the word def to a new value. See the documentation for the full list of [33 reserved words](https://docs.python.org/3.5/reference/lexical_analysis.html#keywords).
+
 
 Every programming language has specific group of words that are associate with a specific meaning and are expected to have a sepecific function. These are know as reserved words and shouldn't be used for anything else but their original purpose. As such, reversed words can not and should not be used to name variables! There are a number of reserved words in Python that are important to know. As they are fundamental building blocks of the Python syntax they can be introduced as required.
 
@@ -243,25 +367,38 @@ This message tries to explain the problem and identify where (code and line) and
 
 
 # Basic types
+
+Variables can represent different types of values. For example, words and numbers are different types of data. A variable could refer to the number 42 or it could refer to the words "forty two". You can do math with the first one, but trying to subtract 5 from "forty two" in Python isn't going to fly.
+Every object in Python has a type.
+The type of any variable can be checked usint the **type()** function.
+
+Python has many built-in data types, including "strings", "numbers" (including integers and floats)", "booleans", 
+and "None". 
+
 ## Numbers
 
 
-Every object in Python has a type.
-The type of any variable can be checked usint the **type()** function.
 So far, most of the examples have used either numbers or text.
-There are two types of numbers in Python, **integers (int)** and **floats (float)**. 
-Values that don't have decimal places are integers and values that have decimal
-places are called floating points. The main diference id their internal representation. 
+There are two types of numbers in Python, **integers (int)** and **floating point numbers (float)**. 
+Whole numbers that aren't written as a fraction or with a decimal point are integers. 
+There is no maximum integer size: Python 3 can handle integers that are arbitrarily large (unlike many other languages).
+On the other hand, numbers that do have decimal places are floating point numbers.
+
+The main diference between these number representation is their internal representation. 
+Floats in computer science are a fun topic.
 Floating point numbers have a greater range than integer numbers, but they're not always as
-precise as integer numbers. For these reason, floating points cannot be always used. For example, to represent money (or quantities that have to be precise) only integers should be used, has binary representation has dificulties representing decimals and will result in errors for large calculations. 
+precise as integer numbers. This is because computers represent everything internally in binary, and since it's impossible to precisely represent many decimal fractions in binary, it's easy to end up with 
+[floating point issues](https://docs.python.org/3.5/tutorial/floatingpoint.html). 
+That said, doing arithmetic with floats is asking for trouble. 
+For example, to represent money (or quantities that have to be precise) only integers should be used, has binary representation has dificulties representing decimals and will result in errors for large calculations. 
 
 ```
 # Floating points representation is less precise
 print(1.03-0.42)
 print(103-42)
+print(.2 + .4)
+# 0.6000000000000001
 ```
-
-
 
 ```
 # Integer: Number without a fractional (decimal) part
@@ -272,6 +409,38 @@ print(type(5.0))
 
 
 
+Unlike strings, you can do math with numbers!
+```
+# Start by assigning some numbers to our variables.
+count = 3
+pi = 3.14
+
+# Let's see what the built-in `type()`function does.
+type_of_count = type(count)
+type_of_pi = type(pi)
+print(type_of_count)
+print(type_of_pi)
+
+# We can do math with numbers. The `%` operator is modulo.
+print(count + 2)
+print(count * 10 )
+print(count / 2)
+print(1337 % 2)
+
+# Putting an int and a float together will give you a float.
+print(count * pi)
+
+# Be careful with floating point math.
+print(.2 + .4)
+
+# Numbers are *not* strings, even if they look similar.
+print(10 == "10")
+
+# Thankfully it's easy to convert numbers to strings when you
+# need to:
+
+print("Bring me " + str(count) + " shrubberies!")
+```
 
 One of the most basic used of Python is to do basic calculations. Apart from **addition (+)**, **subtraction(-)**, 
 **multiplication(\*)** and **division(/)**, there is also support for more advanced operations such as 
@@ -312,13 +481,14 @@ an even number (n %2) as even number do not have a remained when divided by 2 an
 ```
 # example of modulos
 ```
-
-
+should comment on why there are integers and floats and their representation at some point...
 
 ## Text
-Text values are know as **strings (str)** in Python, There are also logical values know as **booleans (bool)**
+Textual data are known as **strings (str)** in Python. These data are defined by delineating quotes,either single or double quotes, as long as both the opening and the closing quote are the same kind.
 
-should comment on why there are integers and floats and their representation at some point...
+Words, names, book chapters, emails, text files, all of these are textual data and can be represented by strings. 
+
+
 ```
 # String: Represents text values. Can be defined within using either double ("") or single ('') quotes
 print(type("Hello again"))
@@ -327,7 +497,103 @@ print(type('Hello again'))
 print(type(True))
 print(type(False))
 ```
+
+```
+# Start by assigning a string to our variable.
+food = "ham"
+
+# Let's see what the built-in `type()`function does.
+type_of_food = type(food)
+print(type_of_food)
+
+# We can access the characters of a string by index with bracket
+# notation, starting at index zero.
+first_letter = food[0]
+second_letter = food[1]
+print("The first letter is " + first_letter)
+print("The second letter is " + second_letter)
+
+# We can use the built-in `len()` function to get a string's
+# "length", or the number of characters it contains.
+print(len(food))
+
+# We can concatenate two strings together into one string with
+# the `+` operator.
+superfood = food + " and eggs"
+print("I like " + superfood)
+
+# We can fill in strings using the `.format()` string method.
+name = "Guido"
+cost = 3
+demand = "Bring me {} shrubberies, {}!"
+print(demand.format(cost, name))
+```
+
 ## Booleans
+
+There are also logical values know as **booleans (bool)**
+Booleans signify truth and falsity. A boolean has just two possible values: True and False.
+
+```
+# Here we're assigning the boolean `True` to the variable
+# `logged_in`. Try running this code, then changing True to False
+# to see how that changes the program. (Note the capital "F" and
+# lack of quotation marks.)
+# What happens if you change the value of `logged_in` to a number
+# or string instead of a boolean True or False?
+logged_in = True
+
+username = "Guido"
+
+# These are conditional statements. We'll cover these later, but
+# you might be able to make out how they're working here.
+if logged_in == True:
+    print("Welcome " + username + ", loading launch codes.")
+elif logged_in == False:
+    print("Sorry, I can't load the launch codes unless you log in.")
+else:
+    print("Hey pal, no trying to hack the mainframe login.")
+```
+Booleans are used for application logic.
+
+## None
+None type value representes the absence of a value.
+Strings, numbers, and booleans are useful for representing actual things, but sometimes you want to represent nothing. That is, you want to represent the absence of any value. For that Python gives us None.
+
+You could have a deep philosophical debate about when it's appropriate to use None instead of False or 0 or an empty string "" or so on. We won't have that debate here. Just know that None is around to use when you want to represent the lack of a value.
+
+```
+# Let's assign some variables to start with, including `None`
+# in a couple places.
+ 
+name = None
+species = "Human"
+strength = 4
+magic = 5
+favorite_color = "Octarine"
+profession = None
+
+# Hm, maybe we haven't assigned a name yet...
+if name is None:
+    name = input("What is your name?")
+    print("Fantastic, thanks {}".format(name))
+
+# Every adventurer needs a profession.
+if profession is None:
+    print("{}, you are a {} who needs a profession".format(name, species))
+    print("Your strength is {} and magic is {},".format(strength, magic))
+    print("and your favorite color is {}".format(favorite_color))
+    profession = input("What profession would you like?")
+
+print("Welcome, {}. You are a {} {}.".format(name, species, profession))
+
+# Once you've run the program go back and tweak your starting
+# variables. Does that change the program's behavior?
+
+# As a stretch goal, try setting `favorite_color` to None and
+# getting user input by copying the logic for `name` and
+# `profession`.
+```
 
 
 ## Convertion between types 
@@ -348,8 +614,6 @@ print(True + True + True)
 ```
 As suggested in the previous example of the sum of booleans, object can be coverted between different types. 
 
-
-
 ```
 # Declare variable
 value = 5
@@ -367,8 +631,8 @@ print(type(value), value)
 value = int(value)
 print(type(value), value)
 ```
-Converting types can be very useful for combining different sources of information. For example, integers can be converted to str for reporting as string can be converted to floats to allow calculations on user inputs
-
+Converting types can be very useful for combining different sources of information. For example, integers can be converted to str for reporting as string can be converted to floats to allow calculations on user inputs 
+using the buil-in functions [str](https://docs.python.org/3.5/library/functions.html#func-str), [int](https://docs.python.org/3.5/library/functions.html#int) and [float](https://docs.python.org/3.5/library/functions.html#float)
 ``` 
 # Gives a TypeError 
 "I can add integers, like " + 5 + " to strings."
@@ -380,7 +644,17 @@ print(float("5.5") * 2)
 # Converts boolean to integers
 print(int(True)
 ```
+
 ### Type error
+In Python, if you try to perform an operation that expects a number on a string you'll get an error. For example, if you try to subtract the string "10" from the number 42 you'll get an error.
+```
+>>> 42 - "10"
+TypeError: unsupported operand type(s) for -: 'int' and 'str'1
+
+>>> "Number of magic beans: " + 42
+TypeError: Can't convert 'int' object to str implicitly
+```
+That TypeError is telling you that you're trying to use data of a particular type (a string) that the - operator doesn't support. 
 
 TypeError is ...
 
@@ -412,8 +686,7 @@ print('US floor', usf)      # Out
 Note that, if the input given to this code is not a number (specifically, cannot be converted to integer). 
 ValueError
 
-## None
-None type value representes the absence of a value.
+
 
 # Compound types
 ## List
