@@ -138,7 +138,8 @@ Test.assert_equals(color_probability('yellow', 'smooth'), '0.33')
 ```
 
 ### Drill 5: Hacking p-hackers
-As a member of the editorial board of the prestigous scientific Journal Proceedings of the National Academy of Sciences, you've decided to go back and review how well old articles you've published stand up to modern publication best practices. Specifically, you'd like to re-evaluate old findings in light of recent literature about "researcher degrees of freedom".
+As a member of the editorial board of the prestigous scientific Journal Proceedings of the National Academy of Sciences, you've decided to go back and review how well old articles you've published stand up to modern publication best practices. Specifically, you'd like to re-evaluate old findings in light of recent literature about 
+"[researcher degrees of freedom](http://journals.sagepub.com/doi/full/10.1177/0956797611417632)".
 
 You want to categorize all the old articles into three groups: "Fine", "Needs review" and "Pants on fire".
 
