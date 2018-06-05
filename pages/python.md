@@ -304,40 +304,19 @@ Reserved words are a special category of words that you're not allowed to use as
 
 Every programming language has specific group of words that are associate with a specific meaning and are expected to have a sepecific function. These are know as reserved words and shouldn't be used for anything else but their original purpose. As such, reversed words can not and should not be used to name variables! There are a number of reserved words in Python that are important to know. As they are fundamental building blocks of the Python syntax they can be introduced as required.
 
-Reserved words in Python include: 
-  * False
-  * True
-  * None
-  * and
-  * as 
-  * assert
-  * break
-  * class
-  * if
-  * def
-  * del
-  * elif
-  * else
-  * except
-  * return
-  * for
-  * from
-  * global
-  * try
-  * import
-  * in
-  * is
-  * lambda
-  * while
-  * not
-  * or
-  * pass
-  * raise
-  * finally
-  * continue
-  * nonlocal
-  * with
-  * yield
+Reserved words in Python include:
+
+ | Col | Col | Col | Col |
+ | --- | --- | --- | --- |
+ | False | True | None | and | 
+ | as | assert | break | class |
+ | if | def | del | elif |
+ | else | except | return | for |
+ | from | global | try | import |
+ | in | is | lambda | while |
+ | not | or | pass | raise |
+ | finally | continue | nonlocal | with | 
+ | yield |  |  | 
 
 ### Sentences 
 
@@ -379,25 +358,28 @@ and "None".
 
 
 So far, most of the examples have used either numbers or text.
-There are two types of numbers in Python, **integers (int)** and **floating point numbers (float)**. 
+In Python there are two primary data types for representing numbersn, **integers (int)** and **floating point numbers (float)**. 
 Whole numbers that aren't written as a fraction or with a decimal point are integers. 
-There is no maximum integer size: Python 3 can handle integers that are arbitrarily large (unlike many other languages).
-On the other hand, numbers that do have decimal places are floating point numbers.
+On the other hand, numbers that do have decimal places (represent decimal fractions)  are floating point numbers.
 
 The main diference between these number representation is their internal representation. 
+Python 3 can represent integers up to any size. here is no maximum integer size: Python 3 can handle integers that are arbitrarily large (unlike many other languages). Floats, however, are limited on how precisely they can be represented. Floats in Python are "double precision" binary floating-point numbers that will represent decimal fractions as precisely as possible with the [52 bits](https://en.wikipedia.org/wiki/Double-precision_floating-point_format#IEEE_754_double-precision_binary_floating-point_format:_binary64). 
+
 Floats in computer science are a fun topic.
 Floating point numbers have a greater range than integer numbers, but they're not always as
 precise as integer numbers. This is because computers represent everything internally in binary, and since it's impossible to precisely represent many decimal fractions in binary, it's easy to end up with 
 [floating point issues](https://docs.python.org/3.5/tutorial/floatingpoint.html). 
-That said, doing arithmetic with floats is asking for trouble. 
+That said, doing arithmetic with floats is asking for trouble. This imprecision makes math a bad idea when you need precise comparisons
 For example, to represent money (or quantities that have to be precise) only integers should be used, has binary representation has dificulties representing decimals and will result in errors for large calculations. 
-
+Even if you don't need complete precision floating point errors can quickly compound with one another, so be careful when using floats and know that they have significant limitations.
 ```
 # Floating points representation is less precise
 print(1.03-0.42)
 print(103-42)
 print(.2 + .4)
 # 0.6000000000000001
+>>> 0.2 + 0.4 == 0.6
+False
 ```
 
 ```
@@ -406,9 +388,41 @@ print(type(5))
 # Float: Number with both an integer and a fractional (decimal) separated by a point. A Real  number
 print(type(5.0))
 ```
+```
+# We can use Python as a calculator to do arithmetic. Let's do
+# some simple math with numbers and assign the results to
+# variables.
+four_plus_two = 4 + 2
+nine_minus_three = 9 - 3
+three_times_four = 3 * 4
 
+# You have two types of division: "true division" and
+# "floor division"
+true_division = 5 / 2
+floor_division = 5 // 2
 
+# The modulo operator `%` in action to get a remainder.
+remainder = 5 % 2
 
+# One way to do exponentiation is with the `**` operator.
+five_squared = 5 ** 2
+twenty_seven = 3 ** 3
+
+# You can use the built-in `type()` function to see what kind of
+# data you're dealing with. This is useful when you aren't sure
+# whether you have an int or a float.
+answer = 40 + 2
+print(type(answer))
+
+score = 6 / 2
+print(type(score))
+
+# Take a few minutes to add print statements throughout to see
+# what values are being assigned to the variables above, then
+# tinker with the numbers to see what happens.
+```
+
+### Arithmetic operators
 Unlike strings, you can do math with numbers!
 ```
 # Start by assigning some numbers to our variables.
@@ -443,11 +457,16 @@ print("Bring me " + str(count) + " shrubberies!")
 ```
 
 One of the most basic used of Python is to do basic calculations. Apart from **addition (+)**, **subtraction(-)**, 
-**multiplication(\*)** and **division(/)**, there is also support for more advanced operations such as 
-**exponentiation (\*\*)**, **modulo (%)** and **integer division (//)**.  Like for mathematics, these opperators have
-an order of evaluation, where parentheses override everything, followed by exponentiation,
+**multiplication(\*)** and **(true) division(/)**, there is also support for more advanced operations such as 
+**exponentiation (\*\*)**, **modulo/modulus (remainder) (%)** and **integer (floor) division (//)**.  Like for mathematics, These opperators have
+an order of evaluation.
+Operations can be grouped, as in Algebra, with parentheses, where parentheses override all other operations, 
+follwed by exponentiation,
 multiplication and division/modulo and addition and subtraction for last. For similar priority operations, 
 they are evaluated from left to right. 
+
+Python handles order of operations, or [operator precedence](https://docs.python.org/3.5/reference/expressions.html#operator-precedence), via PEMDAS: parentheses, exponents, multiplication/division, addition/subtraction.
+
 ```
 # Addition: 
 print(5 + 5)
@@ -463,8 +482,9 @@ print(11 // 2)
 print(4 ** 2)
 # Modulo: This operator returns the remainder of the division of the number to the left by the number on its right
 print(18 % 7)
+#precedence
+print(6 / 2 * (1 + 2))
 ```
-
 
 Integer division is actually one of the biggest non-upwards-compatible changes between Python 2 and Python 3. In Python 3 
 **/** can result in a floating point. To force an integer division, **//** has to be used.
@@ -481,7 +501,68 @@ an even number (n %2) as even number do not have a remained when divided by 2 an
 ```
 # example of modulos
 ```
-should comment on why there are integers and floats and their representation at some point...
+
+### Assignment operators
+
+It's very common to perform arithmetic with numbers assigned to variables and to then want to store the result back in the variable. One way to accomplish that is to use the syntax where we assign a new value to the variable based on a statement including current value of that variable. That might seem weird if you're coming from a math background. For instance, a math formula saying `x = x + 1` is just nonsense. So why does it work in programming? Because the = operator here is assigning a value to a variable, not comparing one value to another, as = does in math formulas. Reassigning values like this is incredibly common, so Python gives us compound assignment operators that will perform an operation and assign the result back to the variable all at once. Here are the assignment operators:
+
+  * = add and assign
+  * -= subtract and assign
+  * *= multiply and assign
+  * /= "true" divide and assign
+  * //= "floor" divide and assign
+  * %= modulo and assign
+  * \*\*= exponentiate and assign
+
+Unlike many other languages, Python does not have prefix and postfix operators like ++ and --. The more "Pythonic" way to increment and decrement numbers is to use the += and -= assignment operators.
+```
+# Let's demo different ways to work with numbers and assign the
+# results back to a variable. here are some numbers to start with.
+score = 99
+hit_points = 99
+level = 2
+
+# These two methods are equivalent. They both increase the value
+# assigned to the variable by one.
+score = score + 1
+hit_points += 1
+
+# Jackpot! Triple our score.
+score *= 3
+
+# Oof, got hit for twenty damage.
+hit_points -= 20
+
+# Advance a level.
+level += 1
+
+# Think about what the values assigned above should be and insert
+# print statements at different parts of the program to confirm
+# your guesses.
+```
+
+### Comparing numbers
+
+Numbers can be compared using the following comparison operators:
+
+  * < less than
+  * <= less than or equal to
+  * > greater than
+  * >= greater than or equal to
+  * == equal
+  * != not equal
+  
+The result of a comparison will be a boolean: True or False depending on how the comparison evaluates. Note that the == comparison operator works like the equals sign in math formulas like 2 + 2 = 4. That math formula is true, and the equivalent Python comparison 2 + 2 == 4 evaluates to True.
+```
+# Using comparson operators with numbers.
+print(1 < 2)
+print(1 <= 2)
+print(2 <= 2)
+print(3 <= 2)
+print(1 == 1)
+print(1 == 2)
+print(1 != 2)
+```
 
 ## Text
 Textual data are known as **strings (str)** in Python. These data are defined by delineating quotes,either single or double quotes, as long as both the opening and the closing quote are the same kind.
@@ -1630,6 +1711,11 @@ math.radians(12)
 # Import the function inv(), which is in the linalg subpackage of the scipy package.  
 from scipy.linalg import inv as my_inv
 ```
+# Built-in Math Methods
+
+We won't cover it here, but you should know that the Python standard library includes a robust math module that will give you common functions like math.floor() and math.sqrt() and constants like math.pi and math.e. 
+You can read more in the [math module docs](https://docs.python.org/3.5/library/math.html).
+
 
 # NumPy
 
