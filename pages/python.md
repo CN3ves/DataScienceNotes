@@ -801,6 +801,129 @@ else:
     print("Hey pal, no trying to hack the mainframe login.")
 ```
 Booleans are used for application logic.
+Logical assertions allow us to write conditional logic into our programs, 
+can tell our code to carry out one set of instructions if our assertion is true, 
+and another if it is false.
+
+Actually should probably be in type convertion...
+To explore how Python thinks about truth and falsity, we're going to use the built in bool() function, which is used to convert a value into either True or False.
+```
+# Basics.
+print(bool(True))
+print(bool(False))
+
+# Numbers and strings evaluate to True.
+print(bool(1))
+print(bool(2))
+print(bool(-1))
+print(bool('Hello'))
+print(bool('    '))
+
+# Except for 0 and empty string ''.
+print(bool(0))
+print(bool(''))
+
+# Collections evaluate to True.
+print(bool([1, 2, 3]))
+print(bool({'arms': 2, 'legs': 2, 'sword': None}))
+
+# Except for empty collections.
+print(bool([]))
+print(bool({}))
+
+# `None` acts as you might expect.
+print(bool(None))
+```
+Anything that represents "something" is true. Anything that represents "nothing" is false:
+
+  * False
+  * None
+  * 0
+  * empty string ''
+  * empty list []
+  * empty dictionary {}
+
+If you're working with anything else, it'll be true. That means that negative numbers, strings of whitespace, and objects (which we'll learn about later) all evaluate to True.
+
+### Logical operators 
+(potentially repeated with flow control)
+Logical operators are used to make assertions about two or more statements or values. Let's start with and (logical and), which is used to assert whether or not two statements both evaluate to True. ython evaluates the expression on each side of the and operator. If both expressions evaluate to True it returns True. Well, kind of. When the expressions on both sides of and evaluate to True, the second expression is returned. A similar thing goes on in the background when one of the expressions evaluates to False.Your intuition with and statements will get you a long way. But under the hood this is what's going on:
+The expression x and y first evaluates x. If 'x' is false, x is returned. Otherwise, y is evaluated and y is returned.
+
+```
+# Basics.
+print(False and False)
+print(False and True)
+print(True and False)
+
+# When an `and` expression evaluates to False, what are we
+# actually returning?
+print(True and 0)
+print(None and True)
+print({} and '')
+
+# Can you guess what these values will be before you print them?
+collection = [] and {}
+number = 1 and (0 and 2)
+```
+
+The logical or operator is the complement to and. It tells us whether at least one of the expressions on either side of or evaluates to True.Just like and expressions, or expressions actually return one of the expressions on either side of or
+Let's drill down on or. Let's imagine we have the expression x or y in Python. When this code is executed, first x's Boolean value will be evaluated. If x is "truthy", x will be returned. Otherwise, y's value will be returned (even if y evaluates to False).
+
+```
+# `or` expressions only need one side to be `True`, so if the
+# first expression is true that's what is returned.
+print(1 or 2)
+print(1 or False)
+print('Chocolate' or 'Vanilla')
+
+# If the first expression evaluates to `False` then an `or`
+# expression moves to the second expression and returns that,
+# no matter whether the second value evaluates to `True` or
+# 'False'.
+print(False or "Phew!")
+print(0 or 3)
+print([] or "Hello")
+
+print('' or 0)
+print(0 or [])
+print(None or {})
+
+# Can you guess what's going on here before printing?
+example = False or ("Hmm..." or None)
+name = '' or {} or []
+logged_in = name or 'Guido'
+```
+Finally, we have the logical not operator, which evaluates an expression and gives the boolean opposite.
+Perhaps more intuitively, not always returns a boolean True or False.
+```
+# Here we use `not` to evaulate and return the boolean opposite of
+# some expressions.
+print(not True)
+print(not False)
+print(not "Hello!")
+print(not 0)
+print(not 1)
+```
+### Assigning default values with logical OR
+
+Why all this complication? Wouldn't it be simpler if and and or simply returned a boolean?
+
+```
+# Let's define a function that allows for default behavior.
+def greet(person):
+    # Line 4 is where the magic happens.
+    person = person or 'world'
+    return "Hello " + person
+
+# Can you guess what the values below are before printing them?
+greeting_1 = greet('Guido')
+greeting_2 = greet('')
+greeting_3 = greet(None)
+```
+In the first line of the function body, we reassign the value of person using an or operator. If the function is called with a value like Guido which evaluates to True, then person gets the same value again. However, if the function is called with a value like empty string '' or None which evaluates to False, then the default value 'world' is assigned instead.
+
+Discuss lazy evaluation and guardian pattern ?
 
 ## None
 None type value representes the absence of a value.
@@ -1143,6 +1266,8 @@ print("Ok {}, you are a {} {}.".format(hero["name"], hero["species"], hero["prof
 
 # Flow control
 ##### (Patterns for code)
+Control flow dictates how programs execute different sets of instructions based on differing conditions. You might have one branch of code that executes if a condition is true, and another branch that executes if the condition is false. That's control flow, and it's a powerful tool.
+
 ## Sequential
 There are a couple of basic patterns that can be used for a program. The most basic pattern is what's called sequential. This is simply a coding pattern where statements follow one after the other in a sequence of commands that Python will obligatiry execute in order.
 ```
@@ -1173,7 +1298,7 @@ print(3<=3)
 print('Equal' != 'Not Equal)
 ```
 
-Conditional steps always start with the *if* reserved word followed by a condition that must evaluate to True or False and a colon (:). After the colon, the (sequential) conditional statements are in an indented block, which tells Python they are part of the conditional step. To finish the conditional, de-indent the code. 
+Conditional steps always start with the *[if](https://docs.python.org/3.5/reference/compound_stmts.html#if)* reserved word followed by a condition that must evaluate to True or False and a colon (:). After the colon, the (sequential) conditional statements are in an indented block, which tells Python they are part of the conditional step. To finish the conditional, de-indent the code. Below that you indent a block of code to be executed if the condition evaluates to True.
 
 ```
 # Conditional step
@@ -1182,7 +1307,7 @@ if number > 50:
   print('Too big')
 print('Checked number')
 ```
-The *if* statment can be used for simple one-way decisions. However, it is very common that a two-way decision is required, that is, the program should either run one part of the code or the other. The reversed word *else* work as a catch-all step at the end of the conditional block. So, if all the previous conditions evaluates to *False*, the *else* statment always evaluated to *True* running as long as nothing else runs. 
+The *if* statement can be used for simple one-way decisions. However, it is very common that a two-way decision is required, that is, the program should either run one part of the code or the other. The reversed word *else* work as a catch-all step at the end of the conditional block. So, if all the previous conditions evaluates to *False*, the *else* statment always evaluated to *True* running as long as nothing else runs. 
 
 ```
 # If-then-else block: note that else must be de-indented to the level of if
@@ -1193,7 +1318,7 @@ else:
   print('That's a good number')
 print('Checked number')
 ```
-In addition, a conditional block of code can be defined by multiple sequential comparisons using the reverved word *elif* (else if). It is important to keep in mind that only one condition will run, regardeless of how many would evaluated to *True*. The conditions are checked sequentially (not in parallel) and, as soon as one evaluates to *True*, Python exits the conditional block. A conditional block (started by a *if*) will trigger, at most, once.
+In addition, a conditional block of code can be defined by multiple sequential comparisons using the reverved word *elif* (short for else if). The same syntax is used for elif (short for "else if") with the additional requirement that elif statements must follow an if statement. It is important to keep in mind that only one condition will run, regardeless of how many would evaluated to *True*. The conditions are checked sequentially (not in parallel) and, as soon as one evaluates to *True*, Python exits the conditional block. A conditional block (started by a *if*) will trigger, at most, once.
 A multi-comparison conditional block starts with a *if*. If other conditions are to be tested after the first, then the *elif* word is used to indicate that these conditionals depend of the previous that is, will one be checked if and only if the previous evaluated to *False*. Note that both *elif* and *else* are optional and that *elif* can be used multiple times.
 
 ```
@@ -1208,8 +1333,27 @@ elif number < 5:
 else:
   print('That's a good number')
 ```
-  
-  
+The catch-all else statement can follow if and elif statements to end a conditional statement. To use an else statement you just use else: and begin with your indented code block below. The else clause is a catch-all, so you don't include a condition to test. 
+```
+# Here is the full if, elif, else conditional statement.
+def greet_admin(user):
+    if user == "Guido":
+        return "Welcome, Guido."
+    elif user == "Bethany":
+        return "Welcome, Bethany."
+    elif user == "Alex":
+        return "Welcome, Alex."
+    else:
+        return "You are not authorized."
+
+print(greet_admin("Guido"))
+print(greet_admin("Alex"))
+print(greet_admin("Grae"))
+
+# Try inserting additional elif statements and changing the
+# conditions that are being checked and printing the results.
+```
+
 ### Identation
 
 This style of indentation is best practice in most programming languages because it makes programs easier to read, but in Python indentation isn't just a good idea. It's the law. In Python indentation has semantic meaning. 
@@ -1242,10 +1386,11 @@ elif number == 3:
 
 ### Try-except
 
-The last conditional code is what's called the try and except structure. This is a more advanced conditional concept, usually associated with *catching errors* instead of flow control. However, it is in essence a speciallised if-the-else structure. 
+The last conditional code is what's called the try and except structure. This is a more advanced conditional concept, usually associated with *catching errors* instead of flow control.Python gives us try and except statements for dealing with conditional logic in the case of exceptions. These language constructs allow us to specify a block of code to be tried (the try statement). If that block does not succeed, the code in the except block runs.
+However, it is in essence a specialised if-the-else structure. 
 Try and except structure is important to *catch* code that might fail (throw and error), setting up and alternative 
 code to run. It is a structure equivalent to run this code if it does not throw an error, else run this other. This is fundamental to *catch* predictable tracebacks (errors), handling them and prevent Python from quitting. 
-
+If we don't have anything here to "handle" the exception, so our program halts and prints out a stack trace (or traceback) with information about what went wrong.Using a try, except statement instead of an if statement lets us "try" executing code that might raise an exception and run code to "handle" the exception if it does occur. Try / except statements give the added benefit of letting your program continue to run. While unhandled exceptions halt your program with a traceback, handling an exception allows your program to gracefully continue along even when you raise an exception and conditionally run code when an exception does occur.
 ```
 # Try-except
 number = input('Enter a word')
@@ -1256,6 +1401,30 @@ except:
     number = -1
 print('The numebr is', number)
 ```
+
+```
+# Here's another function that expects a number. Let's use a
+# try / except statement to handle situations where we get
+# something weird.
+def modulo_five(num):
+    try:
+        result = num % 5
+        return "{} modulo 5 is {}".format(num, result)
+    except TypeError:
+        return "{} isn't even a number!".format(num)
+    
+
+# Everything works fine when you pass an integer in as expected.
+print(modulo_five(42))
+
+# Floats are fine too.
+print(modulo_five(3.414))
+
+# Yay, we're properly handling exceptions and using them to
+# control which code is executed.
+print(modulo_five("Chaos Monkey"))
+```
+
 One important think to keep in mind is that the try/except block should be kept to a minimun size. If big blocks of code are included in the try statment, the reason for the traceback to occurs is not obvious and, if there is a traceback, it is actually important to know about. Small Try-except blocks are more informative and thus more useful. These blocks allow, for example, for specific information to be given back to the user without crushing the program or to print specific warnings associated with the traceback generated. 
 
 ## Repeat (Iteration)
