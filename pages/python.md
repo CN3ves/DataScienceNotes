@@ -1068,10 +1068,12 @@ Python gives you several great built-in data structures such as lists, dictionar
 
 
 ## List
+When you're working with vanilla Python and dealing with a problem that involves collections of things, chances are good you're going to be dealing with lists. These could be collections of email addresses, numeric data, file names, etc.
+
 ### Definition
-
+Lists are used to store a collection of data in an ordered sequence.
 A **list** is a ordered collection of data which is used to group values together, storing them in a single varaible. Lists can store values (elements) of any type, including any of the basic data types, other lists and even more advanced types, whithin the same variable. Lists instances can be initiated using the **list()** function or, more commonly, square brackets **[]**.
-
+To create a list, we use square brackets ([]). We separate items in the list with commas. It's customary to follow each comma with a space. Lists can be created with zero or more elements.You can also use list() on another iterable such as a string or a range (we'll cover ranges later) to generate lists:
 ```
 # Declaring list with list()
 lst = list('a',1, True)
@@ -1083,6 +1085,14 @@ lst = [1 + 2, "a" * 5, 3]
 print(type(lst))
 ```
 
+```
+list("Hello")
+['H', 'e', 'l', 'l', 'o']
+>>> list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+List items can be of different data types.List items can even be other lists, allowing for multidimensional matrices.
 You can put any value into a list that you like, even another list. Just like the characters in a string, the elements in a list are ordered and can be accessed by index with bracket notation.
 
 ```
@@ -1121,7 +1131,10 @@ Note that a list of lists can be though of as a 2 dimentional matrix. The matrix
 ### Subsetting
 
 To acess the value of a list, Python uses a 0-index bases sytems. This means that, each value within a list is assigned a index value, starting from 0. As such, extracting a value from a list requires passing the index value to a list using square brackets **list[index]**. conviniently, Python additionally allows the using of negative indeces, that is, couting backwards from the last element of the list.
+List contents are accessed by index using bracket notation; just like strings. 
 
+Note in this example that we start counting list items at 0, just like we do with strings. This may still seem strange, but that's simply how we count sequences like lists and strings in Python. ZERO INDEXED
+Similar syntax is used to update an item at a particular index in a list. 
 ```
 x = ["a", "b", "c", "d"]
 # Indexing a list
@@ -1131,7 +1144,19 @@ print(x[-3]) # same result!
 # Using the extracted values for other operation
 print(x[1] + x[3])
 ```
-Apart from *indexing*, that is, extracting a single from a list, multiple values can be selected by *slicing* by specifying a range using a colon **list[start:end]**. Note that, even though the start index is included, the end index is excluded when slicing. If either the start or end arguments are not provided, the slicing occurs from the first, or up to the last, element respectively. 
+```
+>>> all_the_things = ['cats', 'dogs', 42, ['pizza', 'beer'], True]
+>>> first_item = all_the_things[0]
+>>> print("The first thing is '{}'.".format(first_item))
+The first thing is 'cats'.
+>>> all_the_things[0] = 'bears'
+>>> print(all_the_things[0])
+bears
+```
+Apart from *indexing*, that is, extracting a single from a list, multiple values can be selected by *slicing* by specifying a range using a colon **list[start:end]**. Note that, even though the start index is included, the end index is excluded when slicing. If either the start or end arguments are not provided, the slicing occurs from the first, or up to the last, element respectively. Slicing lists
+Earlier when we covered strings you saw that you could access multiple characters in a string with slicing, using bracket notation and two indices separated by a colon :.
+
+
 
 ```
 # Slice a list
@@ -1142,6 +1167,36 @@ x[:2]
 x[2:]
 # Slice all elements (important for copying)
 x[:]
+
+>>> 'Monty Python'[:5]
+'Monty'
+```
+```
+# Here we create a list with square brackets.
+id_numbers = [ 42, 43, 44, 45, 46]
+
+# We can access one item in a list at a time using bracket
+# notation and zero-indexing.
+print(id_numbers[0])
+
+# To access multiple items in a list at a time we create a slice
+# of the list using bracket notation and two indices.
+first_two = id_numbers[0:2]
+middle_three = id_numbers[1:4]
+
+print(first_two)
+print(middle_three)
+
+# Just like with string slicing, you can omit one of the index
+# numbers (or both, if you like to live on the edge) when slicing
+# and Python will provide reasonable defaults from the beginning
+# or end of the list.
+also_first_two = id_numbers[:2]
+fourth_to_end = id_numbers[3:]
+
+print(also_first_two)
+print(fourth_to_end)
+
 ```
 Subsetting unidimentinal lists, require passing only one index  value (or indeces range). Subsetting lists of lists also makes use of square brackets. In this case, the first index referes to the first list, and the second to the second list, that is, each list is subsetted one at a time.
 
@@ -1181,7 +1236,52 @@ To remove elements from your list, the **del** statement can be used. Note that,
 x = ["a", "b", "c", "d"]
 del(x[1])
 ```
+### list methods
+Lists have about a [dozen methods](https://docs.python.org/3.5/tutorial/datastructures.html#more-on-lists). 
+There are use cases for all of them, but here we want to draw your attention to some of the most commonly used methods.
 
+Python has a built-in [len()](https://docs.python.org/3.5/library/functions.html#len) 
+function that will tell you how long a list is by returning the number of items in a list.
+```
+>>> letters = ['a', 'b', 'c', 'd']
+>>> print len(letters)
+4
+```
+The .append() method is used to add, or "append", a value to the end of a list. Methods such as .append() are called by following the list you want to work with by a dot ., then the name of the method, then parentheses ( ) containing the argument(s) you want to pass in.
+
+The .insert() method is used to insert a new value at any position in a list, including the beginning, middle, or end. You call it with two arguments: the index you want to insert at and the value you want to insert:
+
+The .pop() method is the opposite of .append(): it removes and returns the final item in a list. This is the first list method we've seen that has a return value; .append() and .insert() modify the underlying list but don't themselves have a return value. No arguments are needed with .pop().
+
+The .index() method is used to find out the first index number of a matching list item. There is one required argument (the item you want to match), followed by two optional start and stop index arguments in case you want to limit your search to a particular slice of the list. Like pop() it returns a value: the index number of the first matching element
+
+The .sort() method is used to re-order a list. Like .append(), .sort() has no return value. It directly modifies the list you call it on and does not create and return a new sorted list.You can use optional arguments to change the default sorting behavior, but most often .sort() is called with zero arguments to automatically compare the elements directly as in the examples above.
+
+```
+# Interactive versions of the examples above.
+
+letters = ['a', 'b', 'c', 'd']
+letters.append('e')
+
+numbers = ['one', 'two', 'four']
+numbers.insert(2, 'three')
+
+to_do = ["Conquer world", "Install Linux", "Change light bulb"]
+current_task = to_do.pop()
+
+fowl = ['duck', 'duck', 'goose', 'duck']
+goose_index = fowl.index('goose')
+
+words = ['car', 'boat', 'apple', 'banana']
+words.sort()
+
+ids = [15, 26, 41, 1]
+ids.sort()
+
+# Tinker with these lists and list methods and print things out
+# to assess how well you understand what's going on.
+
+```
 
 
 ### List as pointers/references
@@ -1430,6 +1530,8 @@ One important think to keep in mind is that the try/except block should be kept 
 ## Repeat (Iteration)
 The real power and the real benefit of computers comes when a series of steps needs to be repeated. This repeating code is called a loop or iteration. Loop blocks define parts of the code where a repetitive task is required. In Python, there are two keywords to define a loop: the **while** keyword and the **for** keyword. . A loop is created similarly to a conditional step, starting with the key work, follwed by and expression and a colon (:) which marks the beggining of indented code.
 
+In programming, a loop is a construct that allows you to repeat a set of instructions a specific number of times, or until a specific condition is true. Loops give us a way to write a set of behavior once and then apply that behavior to each item in these collections or apply it a certain number of times. This is a valuable tool to have in our problem solving kit.
+
 ### Indefinite loops
 
 The **while** loop functions like an if statement where it evaluates a conditional statment. As for conditional steps, if the statment evaluetes to *True*, the indented code is run, if it evalutates to *False* it is skipped. However, once the loop ends (de-indented code), the program goes back and re-evaluates the conditional statement, instead of terminating the while block, reapeating the code until the conditional evaluates to *False*. Indefinitife loops do not define the number of iterations to do at their start, depending solely on the evaluation of the conditional statment. If this statment neve evaluates to *False*, then the loop does not terminat. This is an **infinite loop**, which will run forever blocking (crashing) program until it is forced to quit. To prevent this from happening, **iteration variables** are used to ensure that the loop will evaluate to false.  These are variables that change with each iteration (repetition) of a loop. Iteration variables are used to control how long the iterations run and when the iterations stop, often corresponding to a sequence of numbers (count down to end). So an infinite loop is generally generated when the iteration vriable is not set up (updating) correctly. As opposed to the the infinite loops, 
@@ -1461,8 +1563,57 @@ while True: # infinite loop
         break
     print(n)
 ```
+[while loops](https://docs.python.org/3.5/reference/compound_stmts.html#the-while-statement) are another, less common way to loop. We said that for loops execute a block of instructions a specific number of times. while loops are useful when you aren't sure how many times you need to loop and will continue to iterate as long as the logical condition you provide is true.
+```
+# Here we'll see a while loop in action.
+n = 24
+while n % 2 == 0:
+    print(n)
+    n = n // 2
+
+# Now that our loop is done, let's see the result.
+message = "After removing factors of two, the number is {}"
+print(message.format(n))
+
+while True:
+    password = input("what is the password")
+    if password == 'break':
+        print("Yup.")
+        break
+```
+To write a while loop you start with the while keyword, followed by an expression that evaluates to True or False. In the example above that expression is n % 2 == 0. If the condition evaluates to True, the loop will run; if not, it won't and execution of the program will continue on below.
+
+Conceptually, while loops are meant to be used where the looped behavior does not have a known number of iterations, but instead a known logical condition where it should terminate. One common use is to gather and validate user input.
+
+```
+# We'll use the built-in input() function to get input from a
+# user, repeating until we get a valid integer as input.
+
+age = None
+while not isinstance(age, int):
+    try:
+        age = int(input("What is your age?"))
+    except ValueError:
+        print("Sorry, we were expecting an integer. Try again.")
+    
+print("Fantastic, thank you!")
+```
+
+There's another common, but potentially confusing, use of the while loop you should be familiar with that uses the 
+[break](https://docs.python.org/3.5/reference/simple_stmts.html#break) keyword:
+Since the while condition here is True, which always evaluates to True, you might think that this loop would run forever. And that's exactly what would happen if you removed the break statement. Using break will terminate the enclosing loop, allowing the program to continue executing code further down. In the example above break is executed once the number grows larger than 32, then program execution continues on with the print() statement.
+```
+>>> n = 1
+>>> while True:
+>>>     n = n * 2
+>>>     if n > 32:
+>>>         break
+>>> print(n)
+64
+```
 
 ### Definite loops
+
 Sometimes it's a little tricky to make sure that the while loop will terminate, because these are indefinite loops. Definite loop, efined by the **for** reserved word explicetely define how many times the loop will run, not being dependent on the evaluatio of a conditional statmente. The *for loop* does not evaluate a conditional, but instead evaluates the idented code using a group of values provided (collection). These values are directly assigned one by one to an **iterator variable** that changes at each run (iteration) of the loop, until all values have been used. Definite loops have explicit iteration variables as parte of the syntax. to define the iteration variable, the reserved word **in** is used. The *for loop* will assigned each value of the collection to the iteration variable in order and run the loop. Unlike *while loops*, a *for loop* controls when to stop and what the value of the iteration variabe is automatically. However, any loop can be written as a definite or indefinite loop, as there are equivalent versions of both types. 
 
 ```
@@ -1481,6 +1632,68 @@ while i < len(friends):
     print('Hello', friends[i])
     i += 1
 ```
+
+for loops are used to run through a block of instructions a specific number of times. As you can see, this code will loop over the list we assign to names and repeat the code inside the for loop once for each item in the list.
+
+Let's dig into the syntax of this loop. First off you begin with for, which signals that you're starting a loop and indicates which kind of loop it is. Then we follow with the variable name we'd like to give to each item in the list. In our example the entire list is called names and we're calling each string inside the list name. Next use the in keyword followed by the collection you're iterating over. We end the line with a colon :, which indicates that we're ready to begin our indented block of code that will be executed each time the loop iterates.Using a plural name for a list and the singular of that name in a loop like this is very common. You might have a list of "area_codes" use a for loop that looks like for area_code in area_codes:, or a list of "users" and use a for loop like for user in users:. This style of naming is a useful convention, not a requirement.
+```
+>>> names = ["Bethany", "Alex", "Grae"]
+>>> for name in names:
+>>>     greeting = "Hello " + name
+>>>     print(greeting)
+Hello Bethany
+Hello Alex
+Hello Grae
+```
+Inside the indented code block we can run any code we like. The example above accesses and uses each item we're iterating over, but that doesn't need to be the case.
+```
+>>> names = ["Bethany", "Alex", "Grae"]
+>>> for name in names:
+...     print("There's no place like home.")
+There's no place like home.
+There's no place like home.
+There's no place like home.
+```
+```
+# Let's try for loops with other sequences and collections. Some
+# of these may be new to you.
+
+# Strings.
+for character in "Howdy":
+    print(character)
+    
+# Ranges.
+for n in range(10):
+    print("n is: {}".format(n))
+    
+# Dictionaries (more on these later).
+user = {
+    "name": "Grae",
+    "role": "admin",
+    "age": 35
+}
+
+for property in user:
+    print(property)
+    
+# We can also do more than just print things.
+even_numbers = []
+odd_squares = []
+
+for n in range(10):
+    if n % 2 == 0:
+        even_numbers.append(n)
+    else:
+        odd_squares.append(n ** 2)
+
+print(even_numbers)
+print(odd_squares)
+```
+se for loops whenever there is a block of operations that you want to perform on each value in a set of values, or when you want to perform a specific number of times. You'll find that happens very frequently.
+If you're coming from another language with a C-like syntax for for loops that requires you to think about the index variable and looks like this: for (i = 0; i < list.length; i++) {} then it might feel weird to iterate without having to think about the index. While the more "Pythonic" solution to most problems usually doesn't require it, you can use the built-in 
+[enumerate()](https://docs.python.org/3.5/library/functions.html#enumerate) 
+function if you need to see which index you're working on inside the loop.
+
 
 ### Loop idioms
 What if we're looking for the largest value or checking to see if 42 is a member of a set or something? Or looking for the largest letter, like the max function? And so we're going to construct loops sort of with an idea of doing something to each value in the set that we're iterating through. And then coming up with some kind of result. And the pattern that we're going to do is we're going to write a for loop. And actually, in this next two segments, I'm going to do the exact same for loop. But we're going to do something before the loop starts, set some variables to initial values. And then we're going to do something to every one of the values in our list. And then, we don't know what the largest value is while the loop is running. And our goal is, when the loop finally finishes, that we have something. Whether it's the maximum, the minimum, the average, the total, how many things there are, how many things match. And so, the iterations are getting us closer to knowing the answer. But they don't instantly know the answer, so we we have to work towards the answer. By setting something and then sort of checking it a bunch of times. And then we have sort of have absolute, the truth comes out at the bottom. 
