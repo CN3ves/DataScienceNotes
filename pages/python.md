@@ -1320,13 +1320,51 @@ print(x); print(y); print(z)
 Dictionaries are another way to collect several pieces of data together.
 While a list stores that data as an ordered sequence, dictionaries store that data as an unordered 
 collection of key-value pairs.
+Dictionaries are a common and useful data structure that allow you to store data as an unordered collection of key: value pairs.
 
-To create a dictionary, wrap key-value pairs in curly braces, with each key is separated from its value by a colon :, and each key-value pair is separated from other pairs with a comma ,.
+While lists make sense for collecting inherently sequenced data and are designed to simplify accessing items by index number, dictionaries make sense for data you reference by name, or "key", rather than by position, or "index".
+```
+greetings = {
+    "english": "hello",
+    "japanese": "こんにちは",
+    "german": "hallo",
+    "hindi": "नमस्ते",
+    "leet": "h3ll0",
+}
+
+word_counts = {
+    "the": 4,
+    "and": 2,
+    "word": 3,
+    "beginning": 1,
+    "god": 2,
+    "in": 1,
+    "with": 1,
+    "was": 3,
+}
+```
+Python dictionaries are known in other languages as "associative arrays" or "hash tables" (or "objects" in JavaScript :P), so if you've programmed in another language you likely know a lot about dictionaries.
+
+ictionaries may initially be less intuitive to you than lists, and you might wonder why you'd want to use a dictionary when you could hack a list (or maybe a multidimensional list) into doing the job instead. There are two big reasons dictionaries might be the right tool for the job:
+
+    Looking up or setting values by key rather than by index has incredibly different performance implications, and
+    Writing code that refers to data by name rather than by index number can be much clearer and easier to understand.
+
+The first point, about performance, will almost certainly come up during your technical interview process, and, if you're writing programs with large inputs, the performance differences between lists and dictionaries can mean the difference between code that executes in less than a second versus code that will keep running for days or years.
+
+### Creating, accessing, and modifying
+To create a dictionary, wrap key-value pairs in curly braces {}, with each key is separated from its value by a colon :, and each key-value pair is separated from other pairs with a comma ,.
 ```
 adventurer = {"name": "grae", "profession": "magician"}
 ```
-Just like lists, you can use bracket notation to access the data in a dictionary. Unlike lists, where you use an index number, with dictionaries you look up data using a particular key.
 
+A key: value pair together are called an item. Each item is separated from the next with a comma. You'll find that you're generally using strings for your keys, though you may use any [immutable object](https://docs.python.org/3.5/reference/datamodel.html) as a key.
+
+
+
+Just like lists, you can use bracket notation to access the data in a dictionary. Unlike lists, where you use an index number, with dictionaries you look up data using a particular key.
+Dictionary values are accessed using bracket notation, just like with lists and strings, except that instead of using an index number you use a key. Updating the value associated with a key looks very much like assigning a value to a variable:
+In fact, creating a new key: value pair looks the same as well. You specify the key using bracket notation and assign a value with the = operator.
 ```
 # Here's a super simple dictionary:
 person = {"name": "grae", "profession": "magician"}
@@ -1362,7 +1400,122 @@ print(hero["favorite_color"])
 
 print("Ok {}, you are a {} {}.".format(hero["name"], hero["species"], hero["profession"]))
 ```
+```
+>>> stock = {"apples": 5, "oranges": 2}
+>>> stock["apples"] = 20
+>>> stock["oranges"] += 1
+>>> stock["apples"]
+20
+>>> stock["oranges"]
+3
+```
 
+You can delete items from a dictionary with the delkeyword, removing the key: value pair entirely.
+```
+>>> stock["pears"] = 10
+stock["pears"]
+10
+>>> del stock["pears"]
+>>> stock["pears"]
+Traceback...
+KeyError: 'pears'
+```
+### Boolean operations
+
+You can use the key to get the value of a dictionary item with bracket notation, but what if you just want to know whether a key is in a dictionary at all? For that you can use the in and not in operators.As you saw above when we tried to check stock["pears"] after deleting it, trying to look up the value for a key that isn't in the dictionary will raise a KeyError. These boolean operations are useful for working with dictionaries without raising KeyErrors.
+
+```
+# As you read through the code below think about how the
+# value of dictionary items might be changing, then check
+# your understanding by printing the values out.
+
+# Populate an initial dictionary.
+stock = {
+  "apples": 5,
+  "oranges": 2,
+  "pears": 10,
+}
+
+# Sell some apples.
+stock["apples"] -= 2
+
+# Use statements like print(stock["apples"]) to check
+# the value of dictionary items along the way.
+
+# Recieve a new shipment topping up your oranges.
+stock["oranges"] = 20
+
+# Begin carrying kale.
+stock["kale"] = 20
+
+# Stop carrying pears.
+del stock["pears"]
+
+# Check to see whether you carry pizzas
+"pizza" in stock
+
+# Spend a few minutes modifying the `stock` dictionary
+# and printing out the results below.
+
+```
+
+### Methods and looping
+
+There are three important dictionary methods you should know that map onto the three main concepts of dictionaries: keys, values, and items.
+
+The .keys() dictionary method will return all the keys in a dictionary.
+
+The .values() method will return all the values in a dictionary.
+
+The .items() method will return all the key: value pairs (or "items") in a dictionary.
+```
+# Create an intial dictionary.
+greetings = {
+    "english": "hello",
+    "japanese": "こんにちは",
+    "german": "hallo",
+    "hindi": "नमस्ते",
+    "leet": "h3ll0",
+}
+
+# Use the `.keys()` method to create a list of each key.
+languages = greetings.keys()
+print(languages)
+
+# Use the `.values()` method to create a list of each value.
+translations = greetings.values()
+print(translations)
+
+# Use the `.items()` method to create a list of each key: value pair.
+pairs = greetings.items()
+print(pairs)
+
+```
+
+Each of these methods returns a dictionary view object that looks and acts a lot like a list but is actually a different kind of object. There are just two points we'll cover about view objects right now. First, you can easily convert them into real lists with the built-in list() function if you need a list.
+```
+>>> stock = {"apples": 5, "oranges": 2}
+>>> list(stock.keys())
+["apples", "oranges"]
+```
+And second, view objects provide a dynamic view of the underlying dictionary, so if you update the dictionary then the view object will show you the updated data:
+```
+>>> stock = {"apples": 5, "oranges": 2}
+>>> items_for_sale = stock.keys()
+>>> stock["pears"] = 10
+>>> items_for_sale
+dict_keys(['pears', 'oranges', 'apples'])
+```
+For more information on dictionary view objects check out the 
+[Python documentation](https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects) or see this Stack Overflow question for a discussion of the difference between these dictionary methods in [Python 2 and Python 3](https://stackoverflow.com/questions/8957750/what-are-dictionary-view-objects).
+
+
+It's important to say again that dictionaries and their view objects are unordered. None of the items come before or after any of the other items. Printing out a dictionary or view objects will display the items in an essentially arbitrary order, and even in a different order when you print it different times. The same is true of the values generated by .keys(), .values(), and .items() above: the elements can come out in an arbitrary order. You won't know and shouldn't rely on them being in a particular order. If you need to look at collection of keys, values, or items use the built-in sorted() function on your relevant view object to create an ordered list:
+```
+>>> stock = {"apples": 5, "oranges": 2, "bananas": 4}
+>>> list(sorted(stock.keys()))
+["apples", "bananas", "oranges"]
+```
 
 # Flow control
 ##### (Patterns for code)
