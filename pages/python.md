@@ -55,7 +55,12 @@ The Zen of Python, poem comes from [PEP 20](https://www.python.org/dev/peps/pep-
 Each PEP as well as the [Python documentation](https://docs.python.org/3.5/library/) is hosted on python.org. For the last several years the Python development community has been moving over from Python 2 to Python 3. There's still a lot of Python 2 in production so it's good to be aware that it's around. As such, there are two versions of Python, [2.7](https://docs.python.org/2.7/library/) and 3.5. They are pretty similar appart from some syntactical differences, and support for version 2 will fade overtime. 
 
 ## Install/Start Python
- Python 3 can be installed from [python.org](https://www.python.org/downloads)
+Python 3 can be installed from [python.org](https://www.python.org/downloads)
+
+#### Installing Python 3 on a Mac.
+If you have a mac you almost certainly have Python 2 pre-installed on your machine. You can check your version of Python by opening your terminal and running the command `$ python --version`
+
+
 In adidtion, there a number of Python distibutions that may be relevant, like the Anaconda distribution, which includes many science and data analysis libraries. OTHERS ?
 
 Once installed, Python files will be reconise by their extension *.py*. There are many ways to  to run Python. The pasic Python distribution already provides the IDLE Python Shell and other integrated development environments (IDE) such as Spyder (included with the Anaconda distribution) can be obtained. However, the basic way to use Python is by running the command line (see [command line](pages/bash.md) to learn how to use it). Python files can be run by entering `python3 file_name.py` (simply python for Python2). The Python will be run, if it is in the current directory, otherwise, it will not be found. On Windows, typing the file name on it's own will also run Python, as all files with .py are expected to be Python and it knows the Python interpreter where to run. . To check the Python version, enter `python3 --version`.
@@ -2370,6 +2375,48 @@ a module you'll use heavily as a data scientist. We'll install and dig into Pand
 
 As Packages are not included in the basic Python distributions, they have to be installed. Package installation is performed by pip, a package maintenance system for python. To install pip, download [get-pip.py](http://pip.readthedocs.org/en/stable/installing) and run the script from the terminal `python3 get-pip.py`. Once pip is installed, packages can be installed with `pip3 install package_name`. Now that the package is installed, it can be used in any python script. 
 
+When you installed Python 3 you also got pip, the
+[package manager for Python](https://en.wikipedia.org/wiki/Pip_%28package_manager%29), for free. 
+You'll use pip frequently in your career to download and manage Python tools.
+Let's confirm your install `$ pip --version`
+
+#### NumPy
+
+NumPy is the fundamental scientific computing package. Most other Python data science tools are built on top of NumPy and treat it as a dependency. You should be able to install NumPy with:
+
+$ python -m pip install numpy
+
+Numpy is big and may take a while to install. As of mid 2016 NumPy should also install successfully on Windows machines with the above command. Confirm your successful install by running pip freeze at your command prompt. This will list out all of the Python packages you've installed and should include NumPy.
+#### Pandas
+
+Pandas is the Python library for data manipulation. It gives you custom objects (particularly the data frame) that you'll use every day.
+
+$ python -m pip install pandas
+
+Run pip freeze to confirm your install.
+#### Matplotlib
+
+Matplotlib is the 2D plotting library you'll use to produce many of your visualizations. You'll use it both for data exploration and for presentation.
+
+python -m pip install matplotlib
+
+Confirm your install with pip freeze.
+#### SciPy
+
+SciPy adds algorithms, convenience functions, and is the basis for many other packages you'll install in the future.
+
+python -m pip install scipy
+
+Brrr, it's getting cold in here from all this pip freeze.
+#### Install Jupyter Notebooks
+
+Jupyter notebooks allow you to write, execute, and visualize Python interactively. You'll use Jupyter notebooks as your primary IDE for writing Python in the bootcamp.
+
+python -m pip install jupyter
+
+One last pip freeze for good measure.
+
+To use Jupyter notebooks, run $ jupyter notebook from your command line. This will start the Jupyter server and open a browser tab that hits the server. You can kill the server by closing the terminal window it's running in or with control + c on a mac. If you close your browser but the server's still running you can open a new tab to the server at the address listed in your terminal that starts with http://localhost:8888/?token=.
 ## Importing package
 
 However, it is still required that the packages are imported by Python (otherwise it doesn't know it has to use it). There are various ways to import a package into Python. The simplest way is to include the line `import package_name` at the top of the script. With the package imported, every function, method or object from that package can be used, but not directly. Python need to know that the function called belongs to an external package so it can find it. This can be done with the **. notation** as for methods. In this case, the function *belongs to* the package.
