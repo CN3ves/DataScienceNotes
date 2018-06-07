@@ -2163,6 +2163,59 @@ Some function may accept different types of arguments, such as `max(iterable, *[
 
 LIST MORE AND ADD A LINK TO THE PYTHON PAGE.
 
+# Objects
+t's time to talk about something you've been using every time you write Python, but that you may not have been thinking about: objects.
+
+You've been using objects all along because everything in Python is an object. 
+Objects and "object-oriented programming" are deep topics that cut to the core of Python and computer science. But as a practical matter, data science isn't a very object-oriented discipline.
+
+### What are objects?
+
+Of course, saying "everything in Python is an object" doesn't tell you much about what an object actually is
+Python objects are collections of attributes. Each attribute has a name and a value. You might be thinking that attributes of an object seem a lot like the items of a dictionary
+In addition to attributes, each object has a unique id, which you can access with the 
+built-in [id() function](https://docs.python.org/3/library/functions.html#id), 
+and a type, which you can access with the built-in 
+[type()](https://docs.python.org/3/library/functions.html#type) function.
+We can get a list of the names for each attribute of an object by passing the object into the built-in dir() function
+
+```
+# Let's peer beneath the surface of integers with `dir()`.
+print(dir(1))
+
+# Try swapping out the integer above with a string, boolean, list, function, or any
+# other object to see what attributes it has. Then try printing the results in
+# an easier to read format by using a for loop to print each one out at a time.
+
+```
+### Accessing and using attributes
+
+You can access object attributes using dot notation: follow the object with a . and then the name of the attribute you want to access. Let's try this with a string. If we call dir() on a string we see one of the attributes is upper.
+```
+"hello".upper
+<built-in method upper of str object at 0x1015715e0>
+"hello".upper()
+'HELLO'
+```
+Just as you've been using objects this whole time without necessarily knowing that they've been objects, you've been accessing object attributes by using methods like the string method .upper() and the list method .append() without necessarily knowing that they were attributes of your object. "Method" is in fact just the special name we use for functions that are attached to an object as one of the object's attributes.
+
+Attributes don't have to be functions, though. Sometimes they're other values.
+```
+# We'll store 1 in a variable so we can use dot notation.
+one = 1
+
+# See if 1 has an imaginary component.
+
+print("The imaginary component of 1 is {}.".format(one.imag))
+
+# Nope. Now check the real component.
+print("The real component of 1 is {}.".format(one.real))
+
+# Yup, there it is.
+
+```
+
+
 ## Methods
 
 A number of basic operations such as getting the index of sa sepecific  element in a list of reversing a list. These operations are included in Python but are not built-in functions. It is important ot note that all data structures in Python are objects and that each object has a object type in Python. Besides values, object can also have associated functions, which are called methods. Unlike functions, the call for a method is associated with the data structure with the **. notation** `variable.method(arguments)`, where the method *belongs* to the object. Again, `help(object_type)` contains more documentation on available methods. 
@@ -2200,9 +2253,118 @@ print(areas)
 
 ```
 
-# Packages
+
+### Classes, types, and inheritance
+Let's think about abstraction for a moment. Consider the statement 1 + 2 and the statement 1 + 'pizza'. We expect the first statement to work because both operands are numbers, and we (rightly) expect the second statement to fail because you can't add a number and a string. The operands in the second example aren't the same type of thing.
+
+What do we mean when we say a number and a string aren't "the same type"? Similarly, what do we mean when we say something like "integers are a type of number"?
+
+In both cases above we're making abstractions. Each integer has a whole bunch of attributes it shares with other integers, attributes it doesn't necessarily share with a string. For example numbers can be even or odd, composite or prime, but those concepts don't even make sense when talking about strings.
+
+Similarly, different types of numbers share some attributes but not others. All integers are divisible by one, but other types of real numbers (like floats) don't have that attribute. "Number" is an abstract class that both integers and floats belong to, even though they're different from one another.
+
+In all of these cases we can intellectually abstract away from specific instances of something (like 1 and 10 and 42) to create a "class" (in this case, integers) where we list out all the attributes that the instances share with one another. Whenever we chose a specific instance of the class you know that the instance inherits all of the properties of the class it belongs to.
+
+All of this talk about abstraction is a bit heady, so let's look at the way Python creates different types of numbers using classes as a concrete example.
+
+Integers and floats are both a type of number. Python has a 
+[numbers class](https://docs.python.org/3/library/numbers.html#numbers.Number) 
+that ints and floats belong to. They inherit the attributes of that class. Rational numbers are another type of number. Integers are rational numbers but floats aren't, so integers inherit the attributes of the 
+[rational class](https://docs.python.org/3/library/numbers.html#numbers.Rational) 
+but floats don't. You can read more detail about this and related numeric classes 
+[here](https://docs.python.org/3/library/numbers.html), but the takeaway is that Python classes give us a way to define a type of object and allow all objects of a certain type to inherit the attributes of their class. All the unexpected attributes you saw on the object 1 above are inherited from the classes it belongs to.
+
+### Custom objects
+
+As a data scientist you can keep on using all of Python's built-in objects and the objects you import from the standard library and other modules (more on importing modules next) without needing to worry too much about making your own custom objects. But seeing how custom objects work will help you understand objects in general, so we'll look at an example of setting up your own custom objects.
+
+Let's say you want to model a bunch of quarks. Each of your quarks will have its own color (red, green, or blue) and flavor (up, down, strange, charm, top, or bottom). All quarks will have the same baryon number (1 / 3) and will have a method to interact with another quark by exchanging colors (modeling the strong interaction).
+
+Before you can start churning out quarks you first define what you mean by quark, or, in Python terms, you need to define the class. 
+
+```
+class Quark(object):
+
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+
+    baryon_number = 1 / 3
+
+    def interact(self, other_quark):
+        self.color, other_quark.color = other_quark.color, self.color
+
+    def __repr__(self):
+        return "{} {} quark".format(self.color, self.flavor)
+
+```
+Let's break down this example piece by piece. In the first line we use the class keyword to start the definition of a new class. This works just like the def keyword when defining new functions. After that comes the name of our new class (Quark). It's customary to use ["CapWords"](https://www.python.org/dev/peps/pep-0008/#class-names) capitalization with custom classes. We follow the class name with parentheses containing the class we want "subclass" from. If you don't have a more specific class you'd like to subclass, the built-in object object has the most basic default attributes you want to inherit.
+
+Inside the class definition we define three methods (__init__(), interact() and __repr__()) and the baryon_number attribute. Each object that we create from this class will inherit these attributes. The interact() method implements the color exchange we set out to do, while __init__() and __repr__() are special double-underscore or "dunder" methods.
+
+The __init__() method is special. Python automatically calls an object's __init__() method when it's created. That means all of the code inside runs as a part of setting up each new object. In our example we're setting two attributes: the quark's color and the flavor.In an object, the self variable is used to refer to the object itself. Every method expects self as the first argument, and whenever you call a method self is passed in behind the scenes without you having to explicitly include it in your method call.
+
+```
+class Quark(object):
+
+    # This method is automatically called whenever we create a new quark.
+    # It sets the color and flavor attributes when we create an instance.
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+
+    # Every quark has the same baryon number, so we set this outside the
+    # init function.
+    baryon_number = 1 / 3
+
+    # This method models the way quarks interact with one another by
+    # exchanging color.
+    def interact(self, other_quark):
+        self.color, other_quark.color = other_quark.color, self.color
+
+    # The repr method controls how the object is represented by the
+    # print() function and other representations of the object.
+    def __repr__(self):
+        return "{} {} quark".format(self.color, self.flavor)
+
+# Now that we have the class set up, let's call Quark() to create two
+# actual instances of quark objects.
+q1 = Quark("red", "up")
+q2 = Quark("blue", "down")
+
+# Print each object to see what they look like.
+print("q1 is a {}".format(q1))
+print("q2 is a {}".format(q2))
+
+# Test our interact() method by having q1 and q2 interact.
+q1.interact(q2)
+
+# Print them out again to see how they changed.
+print("Now q1 is a {}".format(q1))
+print("Now q2 is a {}".format(q2))
+
+# Test how our object deals with the built-in type() function.
+print("q1 is a {} object".format(type(q1)))
+```
+
+Unlike color and flavor, each quark has the same baryon number, so we can set that outside the __init__ function just like we do for the method attributes.
+
+The interact() method is a straightforward function that manipulates both the object calling it and the object passed in as an argument. The __repr__() method is another useful dunder method that tells your object how to play nice with print() and other cases that require a representation of your object.
+
+
+# Packages / Modules
 
 Functions and methods allows for code to be easily transfered and reused. However, adding all functions that may be required to the same Python distribution would mean that most of the code would not be used by most users and it would make the maintenance aof the codebase a huge task. In order to avoid such a messy code, Python uses packages. Packages are, in essence, directories of Python scripts, with each scripts being called a **module**. Eahc module speficies functions, methods and new object types  all  all associated with a particular problem. Whidely used packages include Numpy for efficient work wiyth arrays, matplotlib, for data visualization and scikit-learn for machine learning. 
+
+Your Python installation almost certainly includes the entire 
+["standard library"](https://docs.python.org/3/library/): 
+a library of modules that aren't loaded by default but that are available for you to import whenever you like.
+
+In addition to the standard library, there is a vibrant ecosystem of open-source Python modules that you can download, install, and import into your programs. The best centralized reference for these is the 
+[Python Package Index](https://pypi.org/), 
+or "PyPI". For example, here is the 
+[PyPI page for Pandas](https://pypi.org/project/pandas/0.19.2/), 
+a module you'll use heavily as a data scientist. We'll install and dig into Pandas and other packages soon.
 
 ## Installing packages
 
@@ -2211,13 +2373,50 @@ As Packages are not included in the basic Python distributions, they have to be 
 ## Importing package
 
 However, it is still required that the packages are imported by Python (otherwise it doesn't know it has to use it). There are various ways to import a package into Python. The simplest way is to include the line `import package_name` at the top of the script. With the package imported, every function, method or object from that package can be used, but not directly. Python need to know that the function called belongs to an external package so it can find it. This can be done with the **. notation** as for methods. In this case, the function *belongs to* the package.
+All you need to start using modules is an import statement at the top of your program. Here's how you'd import the built-in math and random modules
+It's customary to put your import statements at the 
+[top of your files](https://www.python.org/dev/peps/pep-0008/#imports).
+
+Once imported, you'll have access to a math module object and a random module object. Just like every object, these contain attributes that you can work with. Some interesting attributes are the 
+[math.pi constant](https://docs.python.org/3/library/math.html#math.pi) 
+and the [random.choice()](https://docs.python.org/3/library/random.html#random.choice) 
+method.
 
 ```
 import numpy
+import math
+import random
 
 array([1,2,3]) # NameError
 numpy.array([1,2,3]) # Array is defined on the numpy workspace (is it a workspace here?)
+
+# Let's import the math and the random modules.
+import math
+import random
+
+# Module attributes are accessed like any other object attribute.
+circumference = math.pi * 2
+print(circumference)
+
+# Module methods are functions and called like any other function.
+secret_number = random.choice([1, 2, 3, 4, 5])
+print(secret_number)
+
+destination = random.choice(["Seattle", "New York", "Leipzig", "San Francisco"])
+print(destination)
 ```
+Other packages are imported just like modules in the standard library once you have them installed in your local Python environment. In this fundamentals course, we'll use the NumPy, Pandas, matplotlib and SciPy packages. You'll notice import statements like this a lot once we start doing real work:
+```
+import numpy as np
+import scipy as sp
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+We'll cover those new conventions later, and we'll cover installation in the next lesson.
+
+
+
+
 Other methods for importing packages include the option refer to the package with a different name, simplifying the function call.
 ```
 import numpy as np
@@ -2251,6 +2450,20 @@ from scipy.linalg import inv as my_inv
 We won't cover it here, but you should know that the Python standard library includes a robust math module that will give you common functions like math.floor() and math.sqrt() and constants like math.pi and math.e. 
 You can read more in the [math module docs](https://docs.python.org/3.5/library/math.html).
 
+### Custom modules
+
+Creating your own modules is easy once you're working with files on your local machine. In fact, every Python file (file with a .py extension) is also a module. The module name is the name of the file minus the .py part, so if you have a file called demo.py you can import it with import demo. All of the variables and functions in your file are available as attributes of the module. 
+
+### Executable scripts
+
+Sometimes you'll want to be able to execute a module from your command line as a script. 
+We won't get into the [details](https://docs.python.org/3/tutorial/modules.html#executing-modules-as-scripts) 
+here, but you can add this code to the end of your module:
+```
+if __name__ == "__main__":
+    # Call functions here that you define above.
+```
+and all of the statements inside the if statement will be run when you call the module from your command line with python [your module name].py
 
 # NumPy
 
