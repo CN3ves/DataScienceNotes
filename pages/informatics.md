@@ -49,3 +49,7 @@ This problem can be broken down into three main questions:
    4. Stop when the sequence has `n` numbers
  
  [implementation](fibonacci.md)
+
+
+
+Launching a notebook creates a kernel?????
