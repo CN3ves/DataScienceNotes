@@ -2461,7 +2461,9 @@ import matplotlib.pyplot as plt
 ```
 We'll cover those new conventions later, and we'll cover installation in the next lesson.
 
-
+Import statements will work at any point in a script or any cell in a notebook. However, 
+[Python style](https://www.python.org/dev/peps/pep-0008/#imports) 
+requires they should always appear at the beginning of the script or in the first cell (most notebooks will use the first cell just for this purpose). This allows for easy validation if the necessary packages are installed and keeps track of them in a single place.
 
 
 Other methods for importing packages include the option refer to the package with a different name, simplifying the function call.
