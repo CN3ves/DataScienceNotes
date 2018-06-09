@@ -412,13 +412,102 @@ You should generally prefer CSV for outputting your data frames into files, but 
 
 >>> df.to_json('my_data.json')
 
-The more common use case is to send JSON data over the web. For that we'd call to_json() without a path argument to create a JSON string that we'd later process and send:
+The more common use case is to send JSON data over the web. For that we'd call to_json() 
+without a path argument to create a JSON string that we'd later process and send:
 
 >>> serialized_purchases = df.to_json()
 
-We'll cover networking and using JSON like this in the bootcamp. If you'd like a preview of that check out the Requests module, the only Non-GMO HTTP library for Python.
+We'll cover networking and using JSON like this in the bootcamp. If you'd like a preview of that check out the 
+Requests module, the only [Non-GMO HTTP library for Python](http://docs.python-requests.org/en/master/).
 XML
 
-XML, or "eXtensible Markup Language", like JSON, is a hierarchical semi-structured data format. They are both widely used to transfer data over the web, but the newer JSON format is more common these days than the older and clunkier XML format. If you've worked with HTML then the XML syntax of opening and closing tags wrapping, or "marking up", data will be familiar. Here's an XML file with our purchases data: purchases.xml.
+XML, or "eXtensible Markup Language", like JSON, is a hierarchical semi-structured data format. They are both widely used to transfer data over the web, but the newer JSON format is more common these days than the older and clunkier XML format. If you've worked with HTML then the XML syntax of opening and closing tags wrapping, or "marking up", data will be familiar. Here's an XML file with our purchases data: [purchases.xml](https://gist.githubusercontent.com/Grae-Drake/89c19c54077b818ea69d314e74bb6fbf/raw/a0b46f7f996dd0c5e6a7bfdd9af192108f3f3060/purchases.xml).
 
 Pandas doesn't have an XML equivalent to read_csv() and read_json, so we'll use the xml module from the Python standard library to read in XML files and convert them to an element tree. Once we have an element tree we'll manually process it into a list that we can feed into Pandas.
+```
+# Import Pandas and a part of the xml module.
+import pandas
+import xml.etree.ElementTree as ET
+
+
+# Load and parse the XML file into a tree.
+tree = ET.parse('purchases.xml')
+
+# Find the root of the tree. This is the node of the tree where we'll
+# start our iteration.
+root = tree.getroot()
+
+# Define a custom function to loop over our tree, extract values, and
+# return a two-dimensional list.
+def xml_to_list(root):
+    result = []
+    for row in root:
+        row_list = []
+        for column in row:
+            row_list.append(column.text)
+        result.append(row_list)
+    return result
+    
+# Feed our two-dimensional list into Pandas.
+df = pandas.DataFrame(xml_to_list(root))
+print(df)
+
+```
+The custom xml_to_list() function above is designed for the specific XML file we're working with. If you're working with differently structured XML then you'll need to iterate over your XML tree differently.
+
+We aren't going to go into detail here about element trees and iterating over tree objects.
+You can read more at the official 
+[xml.etree.ElementTree tutorial](https://docs.python.org/3.6/library/xml.etree.elementtree.html) 
+if you like. If you find yourself working with XML in any detail you'll want to check out the 
+[lxml package](http://lxml.de/index.html), 
+a fast and useful collection of tools for working with XML.
+
+As a data scientist you frequently don't get to choose the format of data files you're given, which is why we're covering XML here. When generating data files you should probably avoid XML because it can take more work to process. CSV's are the top choice for writing data to a file. If you need a semi-structured format, prefer JSON over XML.
+
+Python open()
+
+Each of the file loading techniques we covered above are package-specific ways to open and load files of one particular type (CSV, JSON, XML). Python offers a more general-purpose way to open any files you like with the built-in open() function. Here's a simple text file for you to play with if you don't already have it: [poem.txt](https://gist.githubusercontent.com/Grae-Drake/89c19c54077b818ea69d314e74bb6fbf/raw/27aba85593a688b47ec141d0d6e7f60a9e9d33a9/poem.txt)
+
+```
+# Let's open the poem.txt file, create a file object, and print out the
+# file text line by line.
+# Note the poem.txt tab above.
+with open('poem.txt') as poem_file:
+    text = poem_file.readlines()
+    print("This file is {} lines long".format(len(text)))
+    for line in text:
+        print(line)
+
+# Try loading and printing the purchases.csv file line by line just
+# just like we did for poem.txt.
+
+
+
+```
+In the example above we use the [open()](https://docs.python.org/3/library/functions.html#open) 
+function to create a file object that we can then work with. We then use the .readlines() method of the file object to create list of strings, where each element of the list is a line of text from our input file. You can read more about .readlines() and other file object methods in the [I/O documentation](https://docs.python.org/3/library/io.html#i-o-base-classes).
+
+Opening a file with open() will leave it open until you close it. The .close() file object method will close a file. It's super easy to forget to manually close files, which can keep resources tied up and cause unexpected trouble. 
+Luckily, Python gives us the [with](https://docs.python.org/3/reference/compound_stmts.html#with) statement you see used above so we don't have to remember to use .close(), because files opened in a with statement will automatically be closed once the with statement exits. Using with when manually opening files is best practice and you should plan on doing that each time you use open() unless you have a compelling reason not to.
+
+Almost all of the data files you produce as a data scientist will be CSV or JSON files, so we won't cover using built-in Python I/O to write to files. If you'd like additional resources on any of these topics check out the 
+[reading and writing files](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files) section of the official Python tutorial.
+
+A word about encoding
+
+All of the files you've worked with seem to be made of human-readable characters, but when you get down to it everything is stored as bits, collections of ones and zeros. Which of course raises the questions: how do you know which characters you can use, and how do you translate the ones and zeros into those particular characters?
+
+Today there is a clear answer: Unicode and UTF-8. All strings in Python 3 are Unicode strings, and 
+[UTF-8](https://en.wikipedia.org/wiki/UTF-8) is the default encoding Python uses whenever possible. However, you're certain to run across files created with different encodings, whether that's because the files are old, the software used to create them is old, or because the 
+[proprietary software used to create your CSV files](https://stackoverflow.com/questions/508558/what-charset-does-microsoft-excel-use-when-saving-files) 
+is mired in legacy cruft. Unfortunately, it's not possible to automatically determine a file's encoding and then decode it correctly. When encountering encoding errors you'll need to make educated guesses about the likely encoding and use trial and error to test.
+
+As hinted above, Microsoft Windows is a big culprit here. 
+English-language versions of Windows use the[ cp1252](https://en.wikipedia.org/wiki/Windows-1252) encoding, 
+Cyrillic versions of Windows use [cp1251](https://en.wikipedia.org/wiki/Windows-1251), and so on. 
+Here is a full reference list of [Windows "Code Pages"](https://en.wikipedia.org/wiki/Windows_code_page), 
+and here is a larger list of [historical encodings](http://unicodebook.readthedocs.io/historical_encodings.html). 
+If you're unable to manually determine the encoding of your file you can attempt a statistical detection with 
+[Chardet](https://pypi.python.org/pypi/chardet).
+
+Unicode is a deep topic that's closely tied to the history of computing. If you're interested in a quick practical and historical overview the [Unicode HOWTO in the Python documentation](https://docs.python.org/3/howto/unicode.html) makes for excellent reading.
