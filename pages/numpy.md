@@ -1,3 +1,4 @@
+In the previous lesson, we introduced NumPy and pandas. Those two packages actually represent two components of a larger suite of tools known as the Scientific Python Toolkit. iPython (Jupyter), which we've used as an environment, is also a part of that toolkit.
 
 # NumPy
 [NumPy](https://docs.scipy.org/doc/numpy/reference/) 
