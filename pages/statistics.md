@@ -638,24 +638,6 @@ $$\begin{equation}
   \end{array}\right.
 \end{equation}$$
 
-$\text{S}_1(N) = \sum_{p=1}^N \text{E}(p)$
-
-\[
-  f(k;p) =
-  \begin{cases}
-    p     & \text{if $k = 1$}, \\
-    1 - p & \text{if $k = 0$}.
-  \end{cases}
-\]
-
-$$\[
-  f(k;p) =
-  \begin{cases}
-    p     & \text{if $k = 1$}, \\
-    1 - p & \text{if $k = 0$}.
-  \end{cases}
-\]$$
-
 Note that when a distribution is discrete (only takes integers), it has a probability mass function, while a continuous distribution has a probability density function.
 
 import numpy as np
