@@ -451,6 +451,8 @@ Data is described as "normal," or "normally distributed," if most values cluster
 f(x|μ,σ2)=12σ2π⎯⎯⎯⎯⎯⎯⎯⎯√e−(x−μ)22σ2
 f(x|μ,σ2)=12σ2πe−(x−μ)22σ2
 
+$$\mbox{Pr}(a < x < b) = \int_a^b \frac{1}{\sqrt{2\pi}s} \exp\left\{-\frac{1}{2}\left( \frac{x-m}{s} \right)^2\right\} \, dx$$
+
 e is [Euler’s number](http://mathforum.org/dr.math/faq/faq.e.html) (e=2.71828…), a mathematical constant.
 
 While you don’t need to memorize the probability density function to work with normally distributed variables, it is good to be able to recognize it if you come across it while reading about other statistical concepts.
