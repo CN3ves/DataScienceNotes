@@ -104,7 +104,8 @@ Say I go shopping on two occasions, and I buy apples and bananas,
 and the first time I buy two apples and three bananas and they cost eight Euros.
 And the second time I buy say, ten apples and one banana, and the cost is 13 Euros.
 
-$2a + 3b = 8$
+$2a + 3b = 8$  
+
 $10a + 1b = 13$
 
 And the As and the Bs here,
@@ -123,17 +124,17 @@ that is if I think about a vector [a,b],
 that describes the prices of apples and bananas.
 Then this gets translated into a cost by
 
-$begin{vmatrix} 1\\3 & 10\\1 end{vmatix}
+$\begin{bmatrix} 2 & 3 \\10 & 1 \end{bmatrix} x 
+\begin{bmatrix} a \\ b \end{bmatrix} = 
+\begin{bmatrix} 8 \\ 13 \end{bmatrix}$
 
-and then these are then matrices,
-that's a matrix then,
-and these are vectors,
+and then these are then matrices and vectors,
 and what we're going to do over the course of modules one to three, is build up,
 Looking at these different types of mathematical objects,
 and understanding what they are and how to work with them,
 these vectors and these matrices.
-And then, we'll come back and figure out how to solve this problem in the general case.
-Another type of problem we might be interested in is fitting an equation to some data.
+
+  * Another type of problem we might be interested in is fitting an equation to some data.
 In fact, with neural networks and machine learning,
 we want the computer in effect not only to fit the equation,
 but to figure out what equation to use.
@@ -141,9 +142,7 @@ That's a highly inexact description really of what's going on,
 but it gives the right sort of flavor.
 But let's say, we have some data like this histogram here.
 This looks like a population with an average and some variation here, some width.
-Another type of problem we might want to solve,
-as well as the apples and bananas problem,
-is how to find the optimal value of the parameters in the equation describing this line.
+How to find the optimal value of the parameters in the equation describing this line?
 The ones that fit the data in the histogram best.
 That might be really handy, then using that equation we'd have
 an easy portable description of the population we could carry around,
@@ -151,13 +150,4 @@ without needing all the original data which would free us,
 for example, from privacy concerns.
 Now, we can plot how good the fit was in terms of the parameters,
 and that's what we'll look at in the next video.
-In this video, we've set up two problems in this first module on Linear Algebra.
-First, the problem of apples and bananas,
-of solving simultaneous equations.
-And secondly, the optimization problem of
-fitting some data with an equation with some fitting parameters,
-and these problems we'll go on to look at and motivates our work
-right through the course on Linear Algebra,
-and it's partner of multivariate calculus.
-
-
+I
